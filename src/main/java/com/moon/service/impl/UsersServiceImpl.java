@@ -6,8 +6,7 @@ import com.moon.model.entity.UsersDO;
 import com.moon.repository.UsersRepository;
 import com.moon.service.UsersService;
 import com.moon.utils.BeanCopierUtil;
-import com.moon.utils.MoonUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.moon.utils.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,13 +19,16 @@ import java.util.List;
 @Service
 public class UsersServiceImpl implements UsersService {
 
-    @Autowired
-    private UsersRepository usersRepository;
+    private final UsersRepository usersRepository;
+
+    public UsersServiceImpl(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
 
     @Override
     public UsersDTO findAll() {
         List<UsersDO> all = usersRepository.findAll();
-        if (MoonUtil.isNotNullList(all) && all.size() != 1) {
+        if (all.size() < 1) {
             throw new ServiceException("请检查数据库是否有用户信息");
         }
         UsersDTO usersDTO = new UsersDTO();
