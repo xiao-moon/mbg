@@ -33,7 +33,7 @@ public class BeanCopierUtil {
             if (value instanceof Boolean) {
                 return booleanToString(value, target);
             }
-            if (value != null && value instanceof PhotosDO) {
+            if (value instanceof PhotosDO) {
                 PhotosDTO photosDTO = new PhotosDTO();
                 transDOToDTO(value, photosDTO);
                 return photosDTO;
@@ -46,7 +46,7 @@ public class BeanCopierUtil {
     }
 
 
-    private static String timestampToString(Object value, Class target) {
+    private static String timestampToString(Object value, Class<?> target) {
         if ("String".equals(target.getSimpleName())) {
             return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(value);
         }
@@ -58,7 +58,7 @@ public class BeanCopierUtil {
         return null;
     }
 
-    private static String longToString(Object value, Class target) {
+    private static String longToString(Object value, Class<?> target) {
         if ("String".equals(target.getSimpleName())) {
             return (Long) value + "";
         }
@@ -70,7 +70,7 @@ public class BeanCopierUtil {
         return null;
     }
 
-    private static String integerToString(Object value, Class target) {
+    private static String integerToString(Object value, Class<?> target) {
         if ("String".equals(target.getSimpleName())) {
             return (Integer) value + "";
         }
@@ -82,7 +82,7 @@ public class BeanCopierUtil {
         return null;
     }
 
-    private static String booleanToString(Object value, Class target) {
+    private static String booleanToString(Object value, Class<?> target) {
         if ("String".equals(target.getSimpleName())) {
             return Boolean.toString((Boolean) value);
         }

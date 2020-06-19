@@ -1,13 +1,12 @@
 package com.moon.repository;
 
-import com.moon.model.dto.PostsDTO;
+import com.moon.model.entity.PostsDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+
 import java.io.Serializable;
 import java.util.List;
-
-import com.moon.model.entity.PostsDO;
-import org.springframework.data.jpa.repository.Query;
 
 /**
  * 描述: PostsRepository
@@ -16,7 +15,10 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface PostsRepository extends JpaRepository<PostsDO, Long>, JpaSpecificationExecutor<PostsDO>, Serializable {
 
-    @Query(nativeQuery = true,value = "SELECT p.* , ph.* from posts p left join photos ph on p.photo_id = ph.id ORDER BY p.update_time desc")
-    List<PostsDO> findAllByPage();
+	@Query(nativeQuery = true, value = "SELECT p.* , ph.* " +
+			"from posts p " +
+			"left join photos ph on p.photo_id = ph.id " +
+			"ORDER BY p.update_time desc")
+	List<PostsDO> findAllByPage();
 }
 
