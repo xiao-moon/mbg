@@ -8,7 +8,7 @@
     <artifactId>mbg</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>blog</name>
-    <description>小月的个人博客</description>
+    <description>个人博客</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
