@@ -60,7 +60,7 @@ public class BeanCopierUtil {
 
     private static String longToString(Object value, Class<?> target) {
         if ("String".equals(target.getSimpleName())) {
-            return (Long) value + "";
+            return value + "";
         }
         try {
             throw new BeanCopierException("longToString:转换异常");
@@ -72,7 +72,7 @@ public class BeanCopierUtil {
 
     private static String integerToString(Object value, Class<?> target) {
         if ("String".equals(target.getSimpleName())) {
-            return (Integer) value + "";
+            return value + "";
         }
         try {
             throw new BeanCopierException("integerToString:转换异常");
