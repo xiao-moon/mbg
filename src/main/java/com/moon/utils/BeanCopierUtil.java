@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
  * 描述: 领域模型转换
  * 创建人: 小月
  * 创建时间: 2020/6/1 1:38
- **/
+ */
 public class BeanCopierUtil {
 
     public static void transDOToDTO(Object DO, Object DTO) {

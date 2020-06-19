@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ import java.util.List;
  * 创建人: 小月
  * 创建时间: 2020-06-17 02:00:46
  */
-public interface PostsRepository extends JpaRepository<PostsDO, Long>, JpaSpecificationExecutor<PostsDO>, Serializable {
+public interface PostsRepository extends JpaRepository<PostsDO, Long>, JpaSpecificationExecutor<PostsDO> {
 
 	@Query(nativeQuery = true, value = "SELECT p.* , ph.* " +
 			"from posts p " +
