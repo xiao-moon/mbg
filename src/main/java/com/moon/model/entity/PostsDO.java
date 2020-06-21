@@ -3,8 +3,12 @@ package com.moon.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
+import javax.persistence.Table;
+import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
@@ -40,7 +44,7 @@ public class PostsDO implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name ="id")
-    private Long postsId;
+    private Long id;
 
     /**
      * 创建时间
@@ -163,14 +167,8 @@ public class PostsDO implements Serializable {
     private Long visits;
 
     /**
-     * 图片ID
+     * 访客数量
      */
     @Column(name ="photo_id")
     private Long photoId;
-
-//    @OneToOne
-//    @JoinColumn(name = "photo_id" , referencedColumnName = "id")
-//    private PhotosDO photosDO;
-
-
 }

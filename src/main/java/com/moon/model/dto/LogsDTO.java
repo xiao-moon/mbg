@@ -1,6 +1,7 @@
 package com.moon.model.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import io.swagger.annotations.ApiModel;
@@ -14,6 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @ApiModel(description = "LogsDTO")
 public class LogsDTO {
 

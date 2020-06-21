@@ -50,7 +50,7 @@ public class PostsServiceImpl implements PostsService {
         List<PostsDTO> collect = jpaQueryFactory
                 .select(
                         postsDO.title,
-                        postsDO.postsId,
+                        postsDO.id,
                         photosDO.id,
                         photosDO.description,
                         photosDO.name
@@ -62,7 +62,7 @@ public class PostsServiceImpl implements PostsService {
                 .stream()
                 .map(tuple -> PostsDTO.builder()
                         .title(tuple.get(postsDO.title))
-                        .postsId(String.valueOf(tuple.get(postsDO.postsId)))
+                        .id(String.valueOf(tuple.get(postsDO.id)))
                         .photosDTO(PhotosDTO.builder()
                                 .id(String.valueOf(tuple.get(photosDO.id)))
                                 .description(tuple.get(photosDO.description))

@@ -46,6 +46,11 @@
             <artifactId>querydsl-jpa</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>6.4.3</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
@@ -107,6 +112,13 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>6.4.3</version>
+            </plugin>
+
         </plugins>
     </build>
 

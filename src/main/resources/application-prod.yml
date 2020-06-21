@@ -3,7 +3,7 @@ server:
 
 spring:
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5Dialect #org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
     properties:
       hibernate:
@@ -12,8 +12,14 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: none
-  datasource:
-    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    datasource:
+    url: jdbc:h2:file:~/.blog/db
     username: root
     password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        web-allow-others: true

@@ -29,7 +29,7 @@ public class PostsDTO {
      * ID主键自增
      */
     @ApiModelProperty(value = "ID主键自增")
-    private String postsId;
+    private String id;
 
     /**
      * 创建时间

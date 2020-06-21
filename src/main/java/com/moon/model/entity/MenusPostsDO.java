@@ -21,7 +21,7 @@ import java.lang.Integer;
 import java.lang.Long;
 
 /**
- * 描述: MenusDO实体类
+ * 描述: MenusPostsDO实体类
  * 创建人: 小月
  * 创建时间: 2020-06-17 02:00:33
  */
@@ -29,8 +29,8 @@ import java.lang.Long;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "menus")
-public class MenusDO implements Serializable {
+@Table(name = "menus_posts")
+public class MenusPostsDO implements Serializable {
 
     /**
      * ID主键自增
@@ -53,52 +53,16 @@ public class MenusDO implements Serializable {
     private Timestamp updateTime;
 
     /**
-     * 图标
+     * 菜单ID
      */
-    @Column(name ="icon")
-    private String icon;
+    @Column(name ="menu_id")
+    private Long menuId;
 
     /**
-     * 名称
+     * 文章ID
      */
-    @Column(name ="name")
-    private String name;
-
-    /**
-     * 父ID
-     */
-    @Column(name ="parent_id")
-    private Long parentId;
-
-    /**
-     * 位置
-     */
-    @Column(name ="priority")
-    private Long priority;
-
-    /**
-     * 打开方式
-     */
-    @Column(name ="target")
-    private String target;
-
-    /**
-     * 团队
-     */
-    @Column(name ="team")
-    private String team;
-
-    /**
-     * 地址
-     */
-    @Column(name ="url")
-    private String url;
-
-    /**
-     * 是否显示
-     */
-    @Column(name ="is_show")
-    private Integer isShow;
+    @Column(name ="post_id")
+    private Long postId;
 
 
 }
