@@ -3,6 +3,7 @@ package com.moon.model.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @ApiModel(description = "PostsDTO")
 public class PostsDTO {
 
@@ -155,7 +157,7 @@ public class PostsDTO {
     @ApiModelProperty(value = "图片ID")
     private String photoId;
 
-    private PhotosDTO photosDO;
+    private PhotosDTO photosDTO;
 
 
 }

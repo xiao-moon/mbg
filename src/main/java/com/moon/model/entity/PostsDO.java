@@ -168,9 +168,9 @@ public class PostsDO implements Serializable {
     @Column(name ="photo_id")
     private Long photoId;
 
-    @OneToOne
-    @JoinColumn(name = "id")
-    private PhotosDO photosDO;
+//    @OneToOne
+//    @JoinColumn(name = "photo_id" , referencedColumnName = "id")
+//    private PhotosDO photosDO;
 
 
 }

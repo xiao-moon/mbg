@@ -12,4 +12,5 @@ import java.util.List;
 public interface PostsService {
 
     List<PostsDTO> findAllByPage();
+    List<PostsDTO> findAllByPageTest();
 }

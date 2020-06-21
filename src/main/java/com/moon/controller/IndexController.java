@@ -52,7 +52,7 @@ public class IndexController {
     @PostMapping("/posts")
     @ApiOperation(value = "获取文章", notes = "获取文章", produces = "application/json")
     public Object getPosts() {
-        List<PostsDTO> allByPage = postsServiceImpl.findAllByPage();
+        List<PostsDTO> allByPage = postsServiceImpl.findAllByPageTest();
         return new SimpleResponse(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg(), allByPage);
     }
 

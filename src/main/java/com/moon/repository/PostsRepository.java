@@ -19,5 +19,6 @@ public interface PostsRepository extends JpaRepository<PostsDO, Long>, JpaSpecif
 			"left join photos ph on p.photo_id = ph.id " +
 			"ORDER BY p.update_time desc")
 	List<PostsDO> findAllByPage();
+
 }
 
