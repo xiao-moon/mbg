@@ -1,4 +1,4 @@
-package com.moon.controller;
+package com.moon.controller.content;
 
 import com.moon.model.SimpleResponse;
 import com.moon.model.enums.ResponseEnum;
