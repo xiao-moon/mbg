@@ -1,7 +1,6 @@
 package com.moon.model.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import io.swagger.annotations.ApiModel;
@@ -10,12 +9,11 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * 描述: JournalsDTO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-17 02:00:46
+ * 创建时间: 2020-06-24 00:55:52
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @ApiModel(description = "JournalsDTO")
 public class JournalsDTO {
 
@@ -24,6 +22,12 @@ public class JournalsDTO {
      */
     @ApiModelProperty(value = "ID主键自增")
     private String id;
+
+    /**
+     * 内容
+     */
+    @ApiModelProperty(value = "内容")
+    private String content;
 
     /**
      * 创建时间
@@ -38,28 +42,10 @@ public class JournalsDTO {
     private String updateTime;
 
     /**
-     * 内容
+     * 点赞数量
      */
-    @ApiModelProperty(value = "内容")
-    private String content;
-
-    /**
-     * likes
-     */
-    @ApiModelProperty(value = "likes")
+    @ApiModelProperty(value = "点赞数量")
     private String likes;
-
-    /**
-     * source_content
-     */
-    @ApiModelProperty(value = "source_content")
-    private String sourceContent;
-
-    /**
-     * 类型
-     */
-    @ApiModelProperty(value = "类型")
-    private String type;
 
 
 }

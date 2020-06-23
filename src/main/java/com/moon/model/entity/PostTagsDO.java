@@ -23,7 +23,7 @@ import java.lang.Long;
 /**
  * 描述: PostTagsDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-17 02:00:33
+ * 创建时间: 2020-06-24 00:45:01
  */
 @Data
 @AllArgsConstructor
@@ -41,18 +41,6 @@ public class PostTagsDO implements Serializable {
     private Long id;
 
     /**
-     * 创建时间
-     */
-    @Column(name ="create_time")
-    private Timestamp createTime;
-
-    /**
-     * 更新时间
-     */
-    @Column(name ="update_time")
-    private Timestamp updateTime;
-
-    /**
      * 文章ID
      */
     @Column(name ="post_id")
@@ -63,6 +51,24 @@ public class PostTagsDO implements Serializable {
      */
     @Column(name ="tag_id")
     private Long tagId;
+
+    /**
+     * 标签排序,越小排序位置越靠前
+     */
+    @Column(name ="priority")
+    private Long priority;
+
+    /**
+     * 创建时间
+     */
+    @Column(name ="create_time")
+    private Timestamp createTime;
+
+    /**
+     * 更新时间
+     */
+    @Column(name ="update_time")
+    private Timestamp updateTime;
 
 
 }

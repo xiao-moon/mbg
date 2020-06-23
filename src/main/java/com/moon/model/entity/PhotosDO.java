@@ -23,7 +23,7 @@ import java.lang.Long;
 /**
  * 描述: PhotosDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-17 02:00:33
+ * 创建时间: 2020-06-24 00:45:01
  */
 @Data
 @AllArgsConstructor
@@ -41,16 +41,10 @@ public class PhotosDO implements Serializable {
     private Long id;
 
     /**
-     * 创建时间
+     * 名称
      */
-    @Column(name ="create_time")
-    private Timestamp createTime;
-
-    /**
-     * 更新时间
-     */
-    @Column(name ="update_time")
-    private Timestamp updateTime;
+    @Column(name ="name")
+    private String name;
 
     /**
      * 描述
@@ -65,40 +59,34 @@ public class PhotosDO implements Serializable {
     private String location;
 
     /**
-     * 名称
-     */
-    @Column(name ="name")
-    private String name;
-
-    /**
-     * take_time
-     */
-    @Column(name ="take_time")
-    private Timestamp takeTime;
-
-    /**
-     * 团队
-     */
-    @Column(name ="team")
-    private String team;
-
-    /**
-     * 缩略图
-     */
-    @Column(name ="thumbnail")
-    private String thumbnail;
-
-    /**
      * 地址
      */
     @Column(name ="url")
     private String url;
 
     /**
-     * 图片分类ID
+     * 状态:0正常;1停用
      */
-    @Column(name ="categories_id")
-    private Long categoriesId;
+    @Column(name ="status")
+    private Long status;
+
+    /**
+     * 删除标志:0正常;1删除
+     */
+    @Column(name ="del_flag")
+    private Long delFlag;
+
+    /**
+     * 创建时间
+     */
+    @Column(name ="create_time")
+    private Timestamp createTime;
+
+    /**
+     * 更新时间
+     */
+    @Column(name ="update_time")
+    private Timestamp updateTime;
 
 
 }

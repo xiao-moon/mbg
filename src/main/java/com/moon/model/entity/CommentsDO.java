@@ -23,7 +23,7 @@ import java.lang.Long;
 /**
  * 描述: CommentsDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-17 02:00:33
+ * 创建时间: 2020-06-24 00:45:01
  */
 @Data
 @AllArgsConstructor
@@ -33,18 +33,90 @@ import java.lang.Long;
 public class CommentsDO implements Serializable {
 
     /**
-     * 类型
-     */
-    @Column(name ="type")
-    private Long type;
-
-    /**
      * ID
      */
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name ="id")
     private Long id;
+
+    /**
+     * 父ID
+     */
+    @Column(name ="parent_id")
+    private Long parentId;
+
+    /**
+     * 回复给的人的ID
+     */
+    @Column(name ="response_id")
+    private Long responseId;
+
+    /**
+     * 评价人
+     */
+    @Column(name ="author")
+    private String author;
+
+    /**
+     * 评价人个人站点URL
+     */
+    @Column(name ="author_url")
+    private String authorUrl;
+
+    /**
+     * 评价内容
+     */
+    @Column(name ="content")
+    private String content;
+
+    /**
+     * email
+     */
+    @Column(name ="email")
+    private String email;
+
+    /**
+     * ip地址
+     */
+    @Column(name ="ip_address")
+    private String ipAddress;
+
+    /**
+     * 是否管理员:0是;1不是
+     */
+    @Column(name ="is_admin")
+    private Long isAdmin;
+
+    /**
+     * 文章ID
+     */
+    @Column(name ="post_id")
+    private Long postId;
+
+    /**
+     * 置顶,值越小越靠前
+     */
+    @Column(name ="top_priority")
+    private Long topPriority;
+
+    /**
+     * 浏览器信息
+     */
+    @Column(name ="user_agent")
+    private String userAgent;
+
+    /**
+     * 允许通知:0允许;1不允许
+     */
+    @Column(name ="allow_notification")
+    private Long allowNotification;
+
+    /**
+     * 删除标志:0正常;1删除
+     */
+    @Column(name ="del_flag")
+    private Long delFlag;
 
     /**
      * 创建时间
@@ -57,84 +129,6 @@ public class CommentsDO implements Serializable {
      */
     @Column(name ="update_time")
     private Timestamp updateTime;
-
-    /**
-     * 允许通知
-     */
-    @Column(name ="allow_notification")
-    private Boolean allowNotification;
-
-    /**
-     * 评价人
-     */
-    @Column(name ="author")
-    private String author;
-
-    /**
-     * 评价人地址
-     */
-    @Column(name ="author_url")
-    private String authorUrl;
-
-    /**
-     * 内容
-     */
-    @Column(name ="content")
-    private String content;
-
-    /**
-     * email
-     */
-    @Column(name ="email")
-    private String email;
-
-    /**
-     * gravatar_md5
-     */
-    @Column(name ="gravatar_md5")
-    private String gravatarMd5;
-
-    /**
-     * ip地址
-     */
-    @Column(name ="ip_address")
-    private String ipAddress;
-
-    /**
-     * 是否管理员
-     */
-    @Column(name ="is_admin")
-    private Boolean isAdmin;
-
-    /**
-     * 父ID
-     */
-    @Column(name ="parent_id")
-    private Long parentId;
-
-    /**
-     * 文章ID
-     */
-    @Column(name ="post_id")
-    private Long postId;
-
-    /**
-     * 状态
-     */
-    @Column(name ="status")
-    private Long status;
-
-    /**
-     * top_priority
-     */
-    @Column(name ="top_priority")
-    private Long topPriority;
-
-    /**
-     * 浏览器信息
-     */
-    @Column(name ="user_agent")
-    private String userAgent;
 
 
 }

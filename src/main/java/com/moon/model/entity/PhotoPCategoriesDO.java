@@ -21,16 +21,16 @@ import java.lang.Integer;
 import java.lang.Long;
 
 /**
- * 描述: OptionsDO实体类
+ * 描述: PhotoPCategoriesDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-17 02:00:33
+ * 创建时间: 2020-06-24 00:45:01
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "options")
-public class OptionsDO implements Serializable {
+@Table(name = "photo_p_categories")
+public class PhotoPCategoriesDO implements Serializable {
 
     /**
      * ID主键自增
@@ -39,6 +39,18 @@ public class OptionsDO implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name ="id")
     private Long id;
+
+    /**
+     * 图片ID
+     */
+    @Column(name ="photo_id")
+    private Long photoId;
+
+    /**
+     * 分类ID
+     */
+    @Column(name ="p_categories_id")
+    private Long pCategoriesId;
 
     /**
      * 创建时间
@@ -51,24 +63,6 @@ public class OptionsDO implements Serializable {
      */
     @Column(name ="update_time")
     private Timestamp updateTime;
-
-    /**
-     * 操作的key
-     */
-    @Column(name ="option_key")
-    private String optionKey;
-
-    /**
-     * 类型
-     */
-    @Column(name ="type")
-    private Long type;
-
-    /**
-     * 操作的value
-     */
-    @Column(name ="option_value")
-    private String optionValue;
 
 
 }

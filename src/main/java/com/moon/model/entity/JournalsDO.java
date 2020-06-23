@@ -23,7 +23,7 @@ import java.lang.Long;
 /**
  * 描述: JournalsDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-17 02:00:33
+ * 创建时间: 2020-06-24 00:45:01
  */
 @Data
 @AllArgsConstructor
@@ -41,6 +41,12 @@ public class JournalsDO implements Serializable {
     private Long id;
 
     /**
+     * 内容
+     */
+    @Column(name ="content")
+    private String content;
+
+    /**
      * 创建时间
      */
     @Column(name ="create_time")
@@ -53,28 +59,10 @@ public class JournalsDO implements Serializable {
     private Timestamp updateTime;
 
     /**
-     * 内容
-     */
-    @Column(name ="content")
-    private String content;
-
-    /**
-     * likes
+     * 点赞数量
      */
     @Column(name ="likes")
     private Long likes;
-
-    /**
-     * source_content
-     */
-    @Column(name ="source_content")
-    private String sourceContent;
-
-    /**
-     * 类型
-     */
-    @Column(name ="type")
-    private Long type;
 
 
 }

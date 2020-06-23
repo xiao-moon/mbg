@@ -1,7 +1,6 @@
 package com.moon.model.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import io.swagger.annotations.ApiModel;
@@ -10,12 +9,11 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * 描述: PhotosDTO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-17 02:00:46
+ * 创建时间: 2020-06-24 00:55:52
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @ApiModel(description = "PhotosDTO")
 public class PhotosDTO {
 
@@ -26,16 +24,10 @@ public class PhotosDTO {
     private String id;
 
     /**
-     * 创建时间
+     * 名称
      */
-    @ApiModelProperty(value = "创建时间")
-    private String createTime;
-
-    /**
-     * 更新时间
-     */
-    @ApiModelProperty(value = "更新时间")
-    private String updateTime;
+    @ApiModelProperty(value = "名称")
+    private String name;
 
     /**
      * 描述
@@ -50,40 +42,34 @@ public class PhotosDTO {
     private String location;
 
     /**
-     * 名称
-     */
-    @ApiModelProperty(value = "名称")
-    private String name;
-
-    /**
-     * take_time
-     */
-    @ApiModelProperty(value = "take_time")
-    private String takeTime;
-
-    /**
-     * 团队
-     */
-    @ApiModelProperty(value = "团队")
-    private String team;
-
-    /**
-     * 缩略图
-     */
-    @ApiModelProperty(value = "缩略图")
-    private String thumbnail;
-
-    /**
      * 地址
      */
     @ApiModelProperty(value = "地址")
     private String url;
 
     /**
-     * 图片分类ID
+     * 状态:0正常;1停用
      */
-    @ApiModelProperty(value = "图片分类ID")
-    private String categoriesId;
+    @ApiModelProperty(value = "状态:0正常;1停用")
+    private String status;
+
+    /**
+     * 删除标志:0正常;1删除
+     */
+    @ApiModelProperty(value = "删除标志:0正常;1删除")
+    private String delFlag;
+
+    /**
+     * 创建时间
+     */
+    @ApiModelProperty(value = "创建时间")
+    private String createTime;
+
+    /**
+     * 更新时间
+     */
+    @ApiModelProperty(value = "更新时间")
+    private String updateTime;
 
 
 }

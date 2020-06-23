@@ -23,7 +23,7 @@ import java.lang.Long;
 /**
  * 描述: CategoriesDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-17 02:00:33
+ * 创建时间: 2020-06-24 00:45:01
  */
 @Data
 @AllArgsConstructor
@@ -41,6 +41,30 @@ public class CategoriesDO implements Serializable {
     private Long id;
 
     /**
+     * 父ID
+     */
+    @Column(name ="parent_id")
+    private Long parentId;
+
+    /**
+     * 分类名称
+     */
+    @Column(name ="name")
+    private String name;
+
+    /**
+     * 状态:0正常;1停用
+     */
+    @Column(name ="status")
+    private Long status;
+
+    /**
+     * 删除标志:0正常;1删除
+     */
+    @Column(name ="del_flag")
+    private Long delFlag;
+
+    /**
      * 创建时间
      */
     @Column(name ="create_time")
@@ -51,12 +75,6 @@ public class CategoriesDO implements Serializable {
      */
     @Column(name ="update_time")
     private Timestamp updateTime;
-
-    /**
-     * 图片分类ID
-     */
-    @Column(name ="categories_id")
-    private Long categoriesId;
 
 
 }

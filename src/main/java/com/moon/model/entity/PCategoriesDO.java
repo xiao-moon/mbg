@@ -21,16 +21,16 @@ import java.lang.Integer;
 import java.lang.Long;
 
 /**
- * 描述: MenusDO实体类
+ * 描述: PCategoriesDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-17 02:00:33
+ * 创建时间: 2020-06-24 00:45:01
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "menus")
-public class MenusDO implements Serializable {
+@Table(name = "p_categories")
+public class PCategoriesDO implements Serializable {
 
     /**
      * ID主键自增
@@ -39,6 +39,24 @@ public class MenusDO implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name ="id")
     private Long id;
+
+    /**
+     * 分类名称
+     */
+    @Column(name ="name")
+    private String name;
+
+    /**
+     * 状态:0正常;1停用
+     */
+    @Column(name ="status")
+    private Long status;
+
+    /**
+     * 删除标志:0正常;1删除
+     */
+    @Column(name ="del_flag")
+    private Long delFlag;
 
     /**
      * 创建时间
@@ -51,54 +69,6 @@ public class MenusDO implements Serializable {
      */
     @Column(name ="update_time")
     private Timestamp updateTime;
-
-    /**
-     * 图标
-     */
-    @Column(name ="icon")
-    private String icon;
-
-    /**
-     * 名称
-     */
-    @Column(name ="name")
-    private String name;
-
-    /**
-     * 父ID
-     */
-    @Column(name ="parent_id")
-    private Long parentId;
-
-    /**
-     * 位置
-     */
-    @Column(name ="priority")
-    private Long priority;
-
-    /**
-     * 打开方式
-     */
-    @Column(name ="target")
-    private String target;
-
-    /**
-     * 团队
-     */
-    @Column(name ="team")
-    private String team;
-
-    /**
-     * 地址
-     */
-    @Column(name ="url")
-    private String url;
-
-    /**
-     * 是否显示
-     */
-    @Column(name ="is_show")
-    private Integer isShow;
 
 
 }

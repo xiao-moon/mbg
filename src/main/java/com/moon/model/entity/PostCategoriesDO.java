@@ -23,7 +23,7 @@ import java.lang.Long;
 /**
  * 描述: PostCategoriesDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-17 01:15:20
+ * 创建时间: 2020-06-24 00:45:01
  */
 @Data
 @AllArgsConstructor
@@ -33,19 +33,7 @@ import java.lang.Long;
 public class PostCategoriesDO implements Serializable {
 
     /**
-     * 
-     */
-    @Column(name ="update_time")
-    private Timestamp updateTime;
-
-    /**
-     * 
-     */
-    @Column(name ="category_id")
-    private Long categoryId;
-
-    /**
-     * 
+     * ID主键自增
      */
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -53,16 +41,28 @@ public class PostCategoriesDO implements Serializable {
     private Long id;
 
     /**
-     * 
+     * 文章分类ID
+     */
+    @Column(name ="categories_id")
+    private Long categoriesId;
+
+    /**
+     * 文章ID
+     */
+    @Column(name ="post_id")
+    private Long postId;
+
+    /**
+     * 创建时间
      */
     @Column(name ="create_time")
     private Timestamp createTime;
 
     /**
-     * 
+     * 更新时间
      */
-    @Column(name ="post_id")
-    private Long postId;
+    @Column(name ="update_time")
+    private Timestamp updateTime;
 
 
 }

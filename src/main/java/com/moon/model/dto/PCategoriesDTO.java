@@ -7,15 +7,15 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 描述: PostCategoriesDTO实体类
+ * 描述: PCategoriesDTO实体类
  * 创建人: 小月
  * 创建时间: 2020-06-24 00:55:52
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "PostCategoriesDTO")
-public class PostCategoriesDTO {
+@ApiModel(description = "PCategoriesDTO")
+public class PCategoriesDTO {
 
     /**
      * ID主键自增
@@ -24,16 +24,22 @@ public class PostCategoriesDTO {
     private String id;
 
     /**
-     * 文章分类ID
+     * 分类名称
      */
-    @ApiModelProperty(value = "文章分类ID")
-    private String categoriesId;
+    @ApiModelProperty(value = "分类名称")
+    private String name;
 
     /**
-     * 文章ID
+     * 状态:0正常;1停用
      */
-    @ApiModelProperty(value = "文章ID")
-    private String postId;
+    @ApiModelProperty(value = "状态:0正常;1停用")
+    private String status;
+
+    /**
+     * 删除标志:0正常;1删除
+     */
+    @ApiModelProperty(value = "删除标志:0正常;1删除")
+    private String delFlag;
 
     /**
      * 创建时间
