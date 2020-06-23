@@ -296,3 +296,33 @@ CREATE TABLE `attachments`  (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for menus
+-- ----------------------------
+DROP TABLE IF EXISTS `menus`;
+CREATE TABLE `menus`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
+  `icon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '图标',
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '名称',
+  `parent_id` int(11) DEFAULT 0 COMMENT '父ID',
+  `priority` int(11) DEFAULT 0 COMMENT '位置',
+  `target` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '_self' COMMENT '打开方式',
+  `url` varchar(1023) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '地址',
+  `status` int(1) DEFAULT 0 COMMENT '状态:0正常;1停用',
+  `del_flag` int(1) DEFAULT 0 COMMENT '删除标志:0正常;1删除',
+  `categories_flag` int(1) DEFAULT 1 COMMENT '关联文章分类标志:0关联;1不关联',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `menus_parent_id`(`parent_id`) USING BTREE,
+  INDEX `menus_name`(`name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of menus
+-- ----------------------------
+
+INSERT INTO `menus` VALUES (1, NULL, '首页', 0, 1, DEFAULT, '/', 0, 0, 1, '2020-05-17 10:43:01', '2020-05-17 10:43:01');
+INSERT INTO `menus` VALUES (2, NULL, '文章分类', 0, 2, DEFAULT, '/categories', 0, 0, 0, '2020-05-17 10:43:01', '2020-05-17 10:43:01');
+
