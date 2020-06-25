@@ -1,10 +1,14 @@
 package com.moon.controller.content;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.moon.model.SimpleResponse;
+import com.moon.model.dto.UsersDTO;
 import com.moon.model.enums.ResponseEnum;
+import com.moon.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,5 +25,14 @@ import java.util.List;
 @RequestMapping("/index")
 public class IndexController {
 
+    @Autowired
+    private UserService userService;
+
+    @JsonView(UsersDTO.SimpleUserInfo.class)
+    @GetMapping("/userinfo")
+    public Object indexInfo() {
+        UsersDTO userInfo = userService.findUserInfo();
+        return userInfo;
+    }
 
 }

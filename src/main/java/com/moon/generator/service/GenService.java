@@ -70,7 +70,7 @@ public class GenService {
 
         //生成entity实体类
         this.genTableDO(tables, doPath);
-        this.genTableDTO(tables,dtoPath);
+        this.genTableDTO(tables, dtoPath);
         log.info("SUCCESS!!!");
 
     }
@@ -78,7 +78,7 @@ public class GenService {
     /**
      * 从数据库查到表信息
      */
-    private List<GenTableColumn> selectTableInfos(){
+    private List<GenTableColumn> selectTableInfos() {
         QGenTableColumn genTableColumn = QGenTableColumn.genTableColumn;
         List<GenTableColumn> genTableColumns = jpaQueryFactory
                 .select(
@@ -194,7 +194,7 @@ public class GenService {
                     bw.write("    /**\n");
                     bw.write("     * " + (column.getColumnComment() == null ? "" : column.getColumnComment()) + "\n");
                     bw.write("     */\n");
-                    if (column.getExtra()!=null && column.getColumnKey()!=null &&
+                    if (column.getExtra() != null && column.getColumnKey() != null &&
                             column.getExtra().equalsIgnoreCase("auto_increment") &&
                             column.getColumnKey().equalsIgnoreCase("PRI")) {
                         bw.write("    @Id\n");
@@ -240,6 +240,7 @@ public class GenService {
                 bw.write(DTO_PACKAGE_LOCATION + "\n");
                 bw.write("\n");
                 bw.write("import lombok.AllArgsConstructor;\n");
+                bw.write("import lombok.Builder;\n");
                 bw.write("import lombok.Data;\n");
                 bw.write("import lombok.NoArgsConstructor;\n");
                 bw.write("import io.swagger.annotations.ApiModel;\n");
@@ -255,15 +256,16 @@ public class GenService {
                 bw.write("@Data\n");
                 bw.write("@AllArgsConstructor\n");
                 bw.write("@NoArgsConstructor\n");
-                bw.write("@ApiModel(description = \""+firstUpperTableName+"DTO\")\n");
+                bw.write("@Builder\n");
+                bw.write("@ApiModel(description = \"" + firstUpperTableName + "DTO\")\n");
                 bw.write("public class " + firstUpperTableName + "DTO {\n");
                 bw.write("\n");
 
                 for (GenTableColumn column : genTableList) {
                     bw.write("    /**\n");
-                    bw.write("     * "+(column.getColumnComment()==null?GenUtil.firstLower(column.getColumnName().split("_")):column.getColumnComment())+"\n");
+                    bw.write("     * " + (column.getColumnComment() == null ? GenUtil.firstLower(column.getColumnName().split("_")) : column.getColumnComment()) + "\n");
                     bw.write("     */\n");
-                    bw.write("    @ApiModelProperty(value = \""+(column.getColumnComment()==null?GenUtil.firstLower(column.getColumnName().split("_")):column.getColumnComment())+"\")\n");
+                    bw.write("    @ApiModelProperty(value = \"" + (column.getColumnComment() == null ? GenUtil.firstLower(column.getColumnName().split("_")) : column.getColumnComment()) + "\")\n");
                     bw.write("    private String " + GenUtil.firstLower(column.getColumnName().split("_")) + ";\n");
                     bw.write("\n");
                 }

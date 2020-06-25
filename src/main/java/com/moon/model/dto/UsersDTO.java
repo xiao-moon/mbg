@@ -1,6 +1,9 @@
 package com.moon.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.moon.model.supports.SimpleView;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import io.swagger.annotations.ApiModel;
@@ -14,8 +17,11 @@ import io.swagger.annotations.ApiModelProperty;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @ApiModel(description = "UsersDTO")
 public class UsersDTO {
+
+    public interface SimpleUserInfo extends SimpleView.ReturnDataView {}
 
     /**
      * ID主键自增
@@ -32,6 +38,7 @@ public class UsersDTO {
     /**
      * 描述
      */
+    @JsonView(SimpleUserInfo.class)
     @ApiModelProperty(value = "描述")
     private String description;
 
@@ -50,6 +57,7 @@ public class UsersDTO {
     /**
      * 昵称
      */
+    @JsonView(SimpleUserInfo.class)
     @ApiModelProperty(value = "昵称")
     private String nickname;
 
