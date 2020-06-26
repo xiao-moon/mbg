@@ -10,9 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.math.BigDecimal;
 import java.lang.Double;
 import java.lang.Float;
@@ -23,7 +22,7 @@ import java.lang.Long;
 /**
  * 描述: PhotoPCategoriesDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-24 00:45:01
+ * 创建时间: 2020-06-26 01:28:14
  */
 @Data
 @AllArgsConstructor
@@ -31,6 +30,12 @@ import java.lang.Long;
 @Entity
 @Table(name = "photo_p_categories")
 public class PhotoPCategoriesDO implements Serializable {
+
+    /**
+     * 创建时间
+     */
+    @Column(name ="create_time")
+    private Date createTime;
 
     /**
      * ID主键自增
@@ -41,28 +46,22 @@ public class PhotoPCategoriesDO implements Serializable {
     private Long id;
 
     /**
-     * 图片ID
-     */
-    @Column(name ="photo_id")
-    private Long photoId;
-
-    /**
      * 分类ID
      */
     @Column(name ="p_categories_id")
     private Long pCategoriesId;
 
     /**
-     * 创建时间
+     * 图片ID
      */
-    @Column(name ="create_time")
-    private Timestamp createTime;
+    @Column(name ="photo_id")
+    private Long photoId;
 
     /**
      * 更新时间
      */
     @Column(name ="update_time")
-    private Timestamp updateTime;
+    private Date updateTime;
 
 
 }

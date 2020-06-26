@@ -28,8 +28,9 @@ public class IndexController {
     @Autowired
     private UserService userService;
 
-    @JsonView(UsersDTO.SimpleUserInfo.class)
-    @GetMapping("/userinfo")
+    @JsonView({UsersDTO.SimpleUserInfo.class})
+    @GetMapping("/indexInfo")
+    @ApiOperation(value = "获取基础信息", notes="获取菜单及用户信息")
     public Object indexInfo() {
         UsersDTO userInfo = userService.findUserInfo();
         return userInfo;

@@ -1,10 +1,13 @@
 package com.moon.model.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.util.List;
 
 /**
  * 描述: MenusDTO实体类
@@ -14,6 +17,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @ApiModel(description = "MenusDTO")
 public class MenusDTO {
 
@@ -88,6 +92,8 @@ public class MenusDTO {
      */
     @ApiModelProperty(value = "更新时间")
     private String updateTime;
+
+    private List<MenusDTO> menusDTOList;
 
 
 }

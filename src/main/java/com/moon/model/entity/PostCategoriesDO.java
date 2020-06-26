@@ -10,9 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.math.BigDecimal;
 import java.lang.Double;
 import java.lang.Float;
@@ -23,7 +22,7 @@ import java.lang.Long;
 /**
  * 描述: PostCategoriesDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-24 00:45:01
+ * 创建时间: 2020-06-26 01:28:14
  */
 @Data
 @AllArgsConstructor
@@ -31,6 +30,18 @@ import java.lang.Long;
 @Entity
 @Table(name = "post_categories")
 public class PostCategoriesDO implements Serializable {
+
+    /**
+     * 文章分类ID
+     */
+    @Column(name ="categories_id")
+    private Long categoriesId;
+
+    /**
+     * 创建时间
+     */
+    @Column(name ="create_time")
+    private Date createTime;
 
     /**
      * ID主键自增
@@ -41,28 +52,16 @@ public class PostCategoriesDO implements Serializable {
     private Long id;
 
     /**
-     * 文章分类ID
-     */
-    @Column(name ="categories_id")
-    private Long categoriesId;
-
-    /**
      * 文章ID
      */
     @Column(name ="post_id")
     private Long postId;
 
     /**
-     * 创建时间
-     */
-    @Column(name ="create_time")
-    private Timestamp createTime;
-
-    /**
      * 更新时间
      */
     @Column(name ="update_time")
-    private Timestamp updateTime;
+    private Date updateTime;
 
 
 }

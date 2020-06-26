@@ -10,9 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.math.BigDecimal;
 import java.lang.Double;
 import java.lang.Float;
@@ -23,7 +22,7 @@ import java.lang.Long;
 /**
  * 描述: JournalsDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-24 00:45:01
+ * 创建时间: 2020-06-26 01:28:14
  */
 @Data
 @AllArgsConstructor
@@ -31,14 +30,6 @@ import java.lang.Long;
 @Entity
 @Table(name = "journals")
 public class JournalsDO implements Serializable {
-
-    /**
-     * ID主键自增
-     */
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name ="id")
-    private Long id;
 
     /**
      * 内容
@@ -50,19 +41,27 @@ public class JournalsDO implements Serializable {
      * 创建时间
      */
     @Column(name ="create_time")
-    private Timestamp createTime;
+    private Date createTime;
 
     /**
-     * 更新时间
+     * ID主键自增
      */
-    @Column(name ="update_time")
-    private Timestamp updateTime;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name ="id")
+    private Long id;
 
     /**
      * 点赞数量
      */
     @Column(name ="likes")
     private Long likes;
+
+    /**
+     * 更新时间
+     */
+    @Column(name ="update_time")
+    private Date updateTime;
 
 
 }

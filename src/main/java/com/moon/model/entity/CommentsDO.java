@@ -10,9 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.math.BigDecimal;
 import java.lang.Double;
 import java.lang.Float;
@@ -23,7 +22,7 @@ import java.lang.Long;
 /**
  * 描述: CommentsDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-24 00:45:01
+ * 创建时间: 2020-06-26 01:28:14
  */
 @Data
 @AllArgsConstructor
@@ -33,24 +32,10 @@ import java.lang.Long;
 public class CommentsDO implements Serializable {
 
     /**
-     * ID
+     * 允许通知:0允许;1不允许
      */
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name ="id")
-    private Long id;
-
-    /**
-     * 父ID
-     */
-    @Column(name ="parent_id")
-    private Long parentId;
-
-    /**
-     * 回复给的人的ID
-     */
-    @Column(name ="response_id")
-    private Long responseId;
+    @Column(name ="allow_notification")
+    private Long allowNotification;
 
     /**
      * 评价人
@@ -71,10 +56,30 @@ public class CommentsDO implements Serializable {
     private String content;
 
     /**
+     * 创建时间
+     */
+    @Column(name ="create_time")
+    private Date createTime;
+
+    /**
+     * 删除标志:0正常;1删除
+     */
+    @Column(name ="del_flag")
+    private Long delFlag;
+
+    /**
      * email
      */
     @Column(name ="email")
     private String email;
+
+    /**
+     * ID
+     */
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name ="id")
+    private Long id;
 
     /**
      * ip地址
@@ -89,10 +94,22 @@ public class CommentsDO implements Serializable {
     private Long isAdmin;
 
     /**
+     * 父ID
+     */
+    @Column(name ="parent_id")
+    private Long parentId;
+
+    /**
      * 文章ID
      */
     @Column(name ="post_id")
     private Long postId;
+
+    /**
+     * 回复给的人的ID
+     */
+    @Column(name ="response_id")
+    private Long responseId;
 
     /**
      * 置顶,值越小越靠前
@@ -101,34 +118,16 @@ public class CommentsDO implements Serializable {
     private Long topPriority;
 
     /**
+     * 更新时间
+     */
+    @Column(name ="update_time")
+    private Date updateTime;
+
+    /**
      * 浏览器信息
      */
     @Column(name ="user_agent")
     private String userAgent;
-
-    /**
-     * 允许通知:0允许;1不允许
-     */
-    @Column(name ="allow_notification")
-    private Long allowNotification;
-
-    /**
-     * 删除标志:0正常;1删除
-     */
-    @Column(name ="del_flag")
-    private Long delFlag;
-
-    /**
-     * 创建时间
-     */
-    @Column(name ="create_time")
-    private Timestamp createTime;
-
-    /**
-     * 更新时间
-     */
-    @Column(name ="update_time")
-    private Timestamp updateTime;
 
 
 }

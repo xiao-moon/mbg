@@ -165,9 +165,8 @@ public class GenService {
                 bw.write("import javax.persistence.Column;\n");
                 bw.write("import javax.persistence.Id;\n");
                 bw.write("import java.io.Serializable;\n");
-                bw.write("import java.sql.Date;\n");
                 bw.write("import java.sql.Time;\n");
-                bw.write("import java.sql.Timestamp;\n");
+                bw.write("import java.util.Date;\n");
                 bw.write("import java.math.BigDecimal;\n");
                 bw.write("import java.lang.Double;\n");
                 bw.write("import java.lang.Float;\n");

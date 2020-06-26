@@ -10,9 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.math.BigDecimal;
 import java.lang.Double;
 import java.lang.Float;
@@ -23,7 +22,7 @@ import java.lang.Long;
 /**
  * 描述: PostsDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-24 00:45:01
+ * 创建时间: 2020-06-26 01:28:14
  */
 @Data
 @AllArgsConstructor
@@ -33,12 +32,46 @@ import java.lang.Long;
 public class PostsDO implements Serializable {
 
     /**
-     * ID主键自增
+     * 创建发布时间
      */
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name ="id")
-    private Long id;
+    @Column(name ="create_time")
+    private Date createTime;
+
+    /**
+     * 删除标志:0正常;1删除
+     */
+    @Column(name ="del_flag")
+    private Long delFlag;
+
+    /**
+     * 不允许评论:0允许;1不允许
+     */
+    @Column(name ="disallow_comment")
+    private Long disallowComment;
+
+    /**
+     * 首次编辑时间
+     */
+    @Column(name ="edit_time")
+    private Date editTime;
+
+    /**
+     * 编辑类型:0markdown;1富文本
+     */
+    @Column(name ="editor_type")
+    private Long editorType;
+
+    /**
+     * 导出文章顺序
+     */
+    @Column(name ="export_priority")
+    private Long exportPriority;
+
+    /**
+     * 导出文章标题
+     */
+    @Column(name ="export_title")
+    private String exportTitle;
 
     /**
      * 格式化后的文章
@@ -47,10 +80,12 @@ public class PostsDO implements Serializable {
     private String formatContent;
 
     /**
-     * 原始的文章
+     * ID主键自增
      */
-    @Column(name ="original_content")
-    private String originalContent;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name ="id")
+    private Long id;
 
     /**
      * 点赞数量
@@ -71,34 +106,28 @@ public class PostsDO implements Serializable {
     private String metaKeywords;
 
     /**
+     * 原始的文章
+     */
+    @Column(name ="original_content")
+    private String originalContent;
+
+    /**
      * 文章加密密码
      */
     @Column(name ="password")
     private String password;
 
     /**
+     * 状态:0正常;1草稿,2停用
+     */
+    @Column(name ="status")
+    private Long status;
+
+    /**
      * SEO优化:文章标题
      */
     @Column(name ="title")
     private String title;
-
-    /**
-     * 导出文章标题
-     */
-    @Column(name ="export_title")
-    private String exportTitle;
-
-    /**
-     * 导出文章顺序
-     */
-    @Column(name ="export_priority")
-    private Long exportPriority;
-
-    /**
-     * 访客数量
-     */
-    @Column(name ="visits")
-    private Long visits;
 
     /**
      * 是否置顶:0不置顶;1置顶
@@ -113,46 +142,16 @@ public class PostsDO implements Serializable {
     private Long topPriority;
 
     /**
-     * 编辑类型:0markdown;1富文本
-     */
-    @Column(name ="editor_type")
-    private Long editorType;
-
-    /**
-     * 不允许评论:0允许;1不允许
-     */
-    @Column(name ="disallow_comment")
-    private Long disallowComment;
-
-    /**
-     * 状态:0正常;1草稿,2停用
-     */
-    @Column(name ="status")
-    private Long status;
-
-    /**
-     * 删除标志:0正常;1删除
-     */
-    @Column(name ="del_flag")
-    private Long delFlag;
-
-    /**
-     * 首次编辑时间
-     */
-    @Column(name ="edit_time")
-    private Timestamp editTime;
-
-    /**
-     * 创建发布时间
-     */
-    @Column(name ="create_time")
-    private Timestamp createTime;
-
-    /**
      * 最近一次更新修改时间
      */
     @Column(name ="update_time")
-    private Timestamp updateTime;
+    private Date updateTime;
+
+    /**
+     * 访客数量
+     */
+    @Column(name ="visits")
+    private Long visits;
 
 
 }

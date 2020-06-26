@@ -88,9 +88,9 @@ public class GenUtil {
             case "TIME":
                 return "Time";
             case "DATETIME":
-                return "Timestamp";
+                return "Date";
             case "TIMESTAMP":
-                return "Timestamp";
+                return "Date";
             case "YEAR":
                 return "Date";
         }

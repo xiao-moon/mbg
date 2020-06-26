@@ -10,9 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.math.BigDecimal;
 import java.lang.Double;
 import java.lang.Float;
@@ -23,7 +22,7 @@ import java.lang.Long;
 /**
  * 描述: PCategoriesDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-24 00:45:01
+ * 创建时间: 2020-06-26 01:28:14
  */
 @Data
 @AllArgsConstructor
@@ -31,6 +30,18 @@ import java.lang.Long;
 @Entity
 @Table(name = "p_categories")
 public class PCategoriesDO implements Serializable {
+
+    /**
+     * 创建时间
+     */
+    @Column(name ="create_time")
+    private Date createTime;
+
+    /**
+     * 删除标志:0正常;1删除
+     */
+    @Column(name ="del_flag")
+    private Long delFlag;
 
     /**
      * ID主键自增
@@ -53,22 +64,10 @@ public class PCategoriesDO implements Serializable {
     private Long status;
 
     /**
-     * 删除标志:0正常;1删除
-     */
-    @Column(name ="del_flag")
-    private Long delFlag;
-
-    /**
-     * 创建时间
-     */
-    @Column(name ="create_time")
-    private Timestamp createTime;
-
-    /**
      * 更新时间
      */
     @Column(name ="update_time")
-    private Timestamp updateTime;
+    private Date updateTime;
 
 
 }

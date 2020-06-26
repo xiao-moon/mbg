@@ -10,9 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.math.BigDecimal;
 import java.lang.Double;
 import java.lang.Float;
@@ -23,7 +22,7 @@ import java.lang.Long;
 /**
  * 描述: PostTagsDO实体类
  * 创建人: 小月
- * 创建时间: 2020-06-24 00:45:01
+ * 创建时间: 2020-06-26 01:28:14
  */
 @Data
 @AllArgsConstructor
@@ -31,6 +30,12 @@ import java.lang.Long;
 @Entity
 @Table(name = "post_tags")
 public class PostTagsDO implements Serializable {
+
+    /**
+     * 创建时间
+     */
+    @Column(name ="create_time")
+    private Date createTime;
 
     /**
      * ID主键自增
@@ -47,28 +52,22 @@ public class PostTagsDO implements Serializable {
     private Long postId;
 
     /**
-     * 标签ID
-     */
-    @Column(name ="tag_id")
-    private Long tagId;
-
-    /**
      * 标签排序,越小排序位置越靠前
      */
     @Column(name ="priority")
     private Long priority;
 
     /**
-     * 创建时间
+     * 标签ID
      */
-    @Column(name ="create_time")
-    private Timestamp createTime;
+    @Column(name ="tag_id")
+    private Long tagId;
 
     /**
      * 更新时间
      */
     @Column(name ="update_time")
-    private Timestamp updateTime;
+    private Date updateTime;
 
 
 }

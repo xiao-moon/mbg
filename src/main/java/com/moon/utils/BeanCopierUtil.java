@@ -5,8 +5,8 @@ import com.moon.model.dto.PhotosDTO;
 import com.moon.model.entity.PhotosDO;
 import org.springframework.cglib.beans.BeanCopier;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 描述: 领域模型转换
@@ -21,8 +21,8 @@ public class BeanCopierUtil {
         // 转换对象，自定义转换器处理特殊字段
         beanCopier.copy(DO, DTO, (value, target, context) -> {
             // 原始数据value是Date类型，目标类型target是String
-            if (value instanceof Timestamp) {
-                return timestampToString(value, target);
+            if (value instanceof Date) {
+                return dateToString(value, target);
             }
             if (value instanceof Long) {
                 return longToString(value, target);
@@ -46,7 +46,7 @@ public class BeanCopierUtil {
     }
 
 
-    private static String timestampToString(Object value, Class<?> target) {
+    private static String dateToString(Object value, Class<?> target) {
         if ("String".equals(target.getSimpleName())) {
             return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(value);
         }

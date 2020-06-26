@@ -4,7 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import java.nio.charset.Charset;
@@ -18,13 +20,13 @@ import java.util.List;
 @Configuration
 public class SpringWebConfig extends WebMvcConfigurationSupport {
 
-//    /** 请求url忽略大小写 */
-//    @Override
-//    public void configurePathMatch(PathMatchConfigurer configurer) {
-//        AntPathMatcher pathMatcher = new AntPathMatcher();
-//        pathMatcher.setCaseSensitive(false);
-//        configurer.setPathMatcher(pathMatcher);
-//    }
+    /** 请求url忽略大小写 */
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        AntPathMatcher pathMatcher = new AntPathMatcher();
+        pathMatcher.setCaseSensitive(false);
+        configurer.setPathMatcher(pathMatcher);
+    }
 
     /** utf-8编码 */
     @Bean
