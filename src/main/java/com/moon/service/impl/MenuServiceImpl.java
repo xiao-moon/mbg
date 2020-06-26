@@ -24,7 +24,7 @@ public class MenuServiceImpl implements MenuService {
     public List<MenusDTO> findMenus() {
         QMenusDO mainMenusDO = QMenusDO.menusDO;
         QMenusDO subMenusDO = QMenusDO.menusDO;
-        jpaQueryFactory
+        List<MenusDTO> list = jpaQueryFactory
                 .select(mainMenusDO,subMenusDO)
                 .from(mainMenusDO)
                 .innerJoin(subMenusDO)
@@ -50,6 +50,6 @@ public class MenuServiceImpl implements MenuService {
                         .updateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(tuple.get(subMenusDO.updateTime)))
                         .build()
                 ).collect(Collectors.toList());
-        return null;
+        return list;
     }
 }
