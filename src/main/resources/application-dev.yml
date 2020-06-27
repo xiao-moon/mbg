@@ -17,3 +17,7 @@ spring:
   #不要为我们工程中的资源文件建立映射##注意:使用
 #  resources:
 #    add-mappings: false
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -133,87 +133,7 @@
 //        return map;
 //    }
 //
-//    /**
-//     * 生成DO实体类
-//     */
-//    private void genTableDO(Map<String, List<GenTableColumn>> genTables, String parentFilePath) throws Exception {
-//        if (genTables != null && genTables.size() > 0) {
-//            for (List<GenTableColumn> genTableList : genTables.values()) {
-//                String tableName = genTableList.get(0).getTableName();
-//                String[] s = tableName.split("_");
-//                String firstUpperTableName = GenUtil.firstUpper(s);
-//                String firstLowerTableName = GenUtil.firstLower(s);
-//                String filePath = parentFilePath + "\\" + firstUpperTableName + "DO.java";
-//                File file = new File(filePath);
-//                this.createFile(file);
-//                FileOutputStream fos = new FileOutputStream(file);
-//                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-//                //获取当前时间
-//                LocalDateTime time = LocalDateTime.now(Clock.system(ZoneId.of("Asia/Shanghai")));
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//                String nowTime = time.format(formatter);
-//
-//                bw.write(MODEL_PACKAGE_LOCATION + "\n");
-//                bw.write("\n");
-//                bw.write("import lombok.AllArgsConstructor;\n");
-//                bw.write("import lombok.Data;\n");
-//                bw.write("import lombok.NoArgsConstructor;\n");
-//                bw.write("import javax.persistence.Table;\n");
-//                bw.write("import javax.persistence.GenerationType;\n");
-//                bw.write("import javax.persistence.GeneratedValue;\n");
-//                bw.write("import javax.persistence.Entity;\n");
-//                bw.write("import javax.persistence.Column;\n");
-//                bw.write("import javax.persistence.Id;\n");
-//                bw.write("import java.io.Serializable;\n");
-//                bw.write("import java.sql.Time;\n");
-//                bw.write("import java.util.Date;\n");
-//                bw.write("import java.math.BigDecimal;\n");
-//                bw.write("import java.lang.Double;\n");
-//                bw.write("import java.lang.Float;\n");
-//                bw.write("import java.lang.Boolean;\n");
-//                bw.write("import java.lang.Integer;\n");
-//                bw.write("import java.lang.Long;\n");
-////                bw.write("import java.lang.byte[];\n");
-//                bw.write("\n");
-//                bw.write("/**\n");
-//                bw.write(" * 描述: " + firstUpperTableName + "DO实体类\n");
-//                bw.write(" * 创建人: 小月\n");
-//                bw.write(" * 创建时间: " + nowTime + "\n");
-//                bw.write(" */\n");
-//
-//                bw.write("@Data\n");
-//                bw.write("@AllArgsConstructor\n");
-//                bw.write("@NoArgsConstructor\n");
-//                bw.write("@Entity\n");
-//                bw.write("@Table(name = \"" + tableName + "\")\n");
-//                bw.write("public class " + firstUpperTableName + "DO implements Serializable {\n");
-//                bw.write("\n");
-//
-//                for (GenTableColumn column : genTableList) {
-//                    bw.write("    /**\n");
-//                    bw.write("     * " + (column.getColumnComment() == null ? "" : column.getColumnComment()) + "\n");
-//                    bw.write("     */\n");
-//                    if (column.getExtra() != null && column.getColumnKey() != null &&
-//                            column.getExtra().equalsIgnoreCase("auto_increment") &&
-//                            column.getColumnKey().equalsIgnoreCase("PRI")) {
-//                        bw.write("    @Id\n");
-//                        bw.write("    @GeneratedValue(strategy=GenerationType.IDENTITY)\n");
-//                        bw.write("    @Column(name =\"" + column.getColumnName() + "\")\n");
-//                    } else {
-//                        bw.write("    @Column(name =\"" + column.getColumnName() + "\")\n");
-//                    }
-//                    bw.write("    private " + GenUtil.matchDataType(column.getDataType()) + " " + GenUtil.firstLower(column.getColumnName().split("_")) + ";\n");
-//                    bw.write("\n");
-//                }
-//
-//                bw.write("\n");
-//                bw.write("}\n");
-//
-//                bw.close();
-//                fos.close();
-//            }
-//        }
-//    }
+
 //
 //
 //    /**
@@ -278,13 +198,6 @@
 //        }
 //    }
 //
-//    private void createFile(File file) {
-//        if (!file.getParentFile().exists()) {
-//            file.getParentFile().mkdirs();
-//        }
-//        if (file.exists()) {
-//            file.delete();
-//        }
-//    }
+
 //
 //}

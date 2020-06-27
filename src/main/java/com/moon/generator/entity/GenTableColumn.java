@@ -1,6 +1,7 @@
 package com.moon.generator.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +27,7 @@ public class GenTableColumn implements Serializable {
     /**
      * 字段值永远是def
      */
+    @TableId
     @TableField("TABLE_CATALOG")
     private String tableCatalog;
 

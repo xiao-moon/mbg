@@ -20,9 +20,9 @@ public interface GenMapper extends BaseMapper<GenTableColumn> {
             "T.DATA_TYPE 'dataType' ," +
             "T.EXTRA 'extra' ," +
             "T.COLUMN_COMMENT 'columnComment' ," +
-            "T.COLUMN_KEY 'columnKey' ," +
+            "T.COLUMN_KEY 'columnKey'" +
             "FROM INFORMATION_SCHEMA.COLUMNS T " +
-            "WHERE T.TABLE_NAME = #{0}")
+            "WHERE T.TABLE_SCHEMA = #{tableName}")
     List<GenTableColumn> findAllTableColumn(String tableName);
 
 }

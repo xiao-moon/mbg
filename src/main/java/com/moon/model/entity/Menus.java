@@ -1,4 +1,6 @@
 package com.moon.model.entity;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
@@ -6,14 +8,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 /**
- * <p>
- * 菜单表
- * </p>
- *
  * @author moon
  * @since 2020-06-27
  */
@@ -21,6 +20,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("menus")
+@Builder
 @ApiModel(value="Menus对象", description="菜单表")
 public class Menus implements Serializable {
 
@@ -31,6 +31,7 @@ public class Menus implements Serializable {
     private Integer id;
 
     @ApiModelProperty(value = "图标")
+    @TableField("icon")
     private String icon;
 
     @ApiModelProperty(value = "名称")

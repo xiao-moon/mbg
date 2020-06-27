@@ -1,5 +1,6 @@
 package com.moon.generator.service;
 
+import com.moon.generator.config.GenConfig;
 import com.moon.generator.entity.GenTableColumn;
 import com.moon.generator.mapper.GenMapper;
 import com.moon.generator.properties.GenProperties;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 描述: 获取所有表信息
+ * 描述: 获取所有表信息并转成map
  * 创建人：小月
  * 创建时间：2020-06-27 17:46
  */
@@ -31,14 +32,16 @@ public class TableInfoService {
     @Autowired
     private GenProperties g;
 
-    @Test
-    public  void getTableInfo(){
+    /**
+     * 获取表的原始数据
+     */
+    public Map<String, List<GenTableColumn>> getTableInfo() {
         List<GenTableColumn> tableInfo = this.findTableInfo();
         Map<String, List<GenTableColumn>> mmaps = this.groupByTableName(tableInfo);
-        return;
+        return mmaps;
     }
 
-    private List<GenTableColumn> findTableInfo(){
+    private List<GenTableColumn> findTableInfo() {
         String schema = g.parseUrl();
         List<GenTableColumn> allTableColumn = genMapper.findAllTableColumn(schema);
         return allTableColumn;
@@ -69,9 +72,6 @@ public class TableInfoService {
         }
         return map;
     }
-
-
-
 
 
 }

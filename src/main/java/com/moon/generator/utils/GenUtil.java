@@ -12,7 +12,8 @@ public class GenUtil {
     /**
      * 首字母大写
      */
-    public static String firstUpper(String[] s) {
+    public static String firstUpper(String name) {
+        String[] s = name.split("_");
         String firstUpper = "";
         for (int i = 0; i < s.length; i++) {
             firstUpper = firstUpper + s[i].substring(0, 1).toUpperCase() + s[i].substring(1, s[i].length()).toLowerCase();
@@ -23,7 +24,8 @@ public class GenUtil {
     /**
      * 首字母小写
      */
-    public static String firstLower(String[] s) {
+    public static String firstLower(String name) {
+        String[] s = name.split("_");
         String firstLower = "";
         for (int i = 0; i < s.length; i++) {
             if (i == 0) {
@@ -62,7 +64,7 @@ public class GenUtil {
             case "INT":
                 return "Long";
             case "INTEGER":
-                return "Long";
+                return "Integer";
             case "TINYINT":
                 return "Integer";
             case "SMALLINT":
