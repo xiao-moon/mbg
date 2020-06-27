@@ -22,8 +22,6 @@ import java.util.Map;
  * 创建时间：2020-06-27 17:46
  */
 @Service
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class TableInfoService {
 
     @Autowired

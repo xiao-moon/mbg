@@ -14,21 +14,24 @@ public class GenConfig {
     public static String serviceReference = "com.moon.service";//service包路径
     public static String serviceImplReference = "com.moon.service.impl";//serviceImpl包路径
     public static String controllerReference = "com.moon.controller.content";//controller包路径
+    public static String mapperXMLPath = "mybatis/mapper/";//mapper.xml包路径
 
 
     /*全局配置*/
-    private static String rootPath = System.getProperty("user.dir").replace("\\\\","/");
-    public static String baseJavaPath = rootPath + "/src/main/"+"java/";//获取项目java根路径
+    private static String rootPath = System.getProperty("user.dir").replace("\\\\", "/");
+    public static String baseJavaPath = rootPath + "/src/main/" + "java/";//获取项目java根路径
     public static String baseResourcesPath = rootPath + "/src/main/" + "resources/";//获取项目resources根路径
+    public static boolean isMybatisPlus = true;//是否使用mybatis-plus 否表示使用原生mybatis
 
     /*DO配置*/
     public static boolean genDo = true;//是否生成DO层
-    public static boolean lombokBuilder = true;//是否生成lombok builder注解
     public static boolean lombokData = true;//是否生成lombok data all no 注解
+    public static boolean lombokBuilder = true;//是否生成lombok builder注解
+    @Deprecated
     public static boolean autoImport = true;//是否注入其他表
     public static boolean coverDo = false;//是否覆盖原DO层
 
-    /*Service配置*/
+    /*Mapper配置*/
     public static boolean genMapper = true;//是否生成Service层
     public static boolean coverMapper = false;//是否覆盖原Mapper层
 
@@ -47,7 +50,7 @@ public class GenConfig {
     public static boolean isRestController = true;//是否生成RestController
     public static boolean coverController = false;//是否覆盖原DTO层
 
-    /*mapper.xml配置*/
+    /*Mapper.xml配置*/
     public static boolean genMapperXML = true;//是否生成mapper.xml
     public static boolean coverMapperXML = false;//是否覆盖原Mapper.xml
 }

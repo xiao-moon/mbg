@@ -11,11 +11,10 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * 代码生成业务字段表 gen_table_column
- * 基于mybatis-plus
- *
- * @author moon
- */
+ * 描述:
+ * 创建人: 小月
+ * 创建时间: 2020/6/28 3:54
+ **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -154,5 +153,24 @@ public class GenTableColumn implements Serializable {
     @TableField("PRIVILEGES")
     private String privileges;
 
+    /**
+     * 变量名
+     */
+    private String fieldName;
+
+    /**
+     * 首字母大写
+     */
+    private String fieldNameUpper;
+
+    /**
+     * 变量类型
+     */
+    private String fieldType;
+
+    /**
+     * 变量类型import
+     */
+    private String fieldImport;
 
 }
