@@ -2,9 +2,8 @@ package com.moon.controller.content;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.moon.model.SimpleResponse;
-import com.moon.model.dto.UsersDTO;
+import com.moon.model.dto.MenusDTO;
 import com.moon.model.enums.ResponseEnum;
-import com.moon.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +24,10 @@ import java.util.List;
 @RequestMapping("/index")
 public class IndexController {
 
-    @Autowired
-    private UserService userService;
-
-    @JsonView({UsersDTO.SimpleUserInfo.class})
     @GetMapping("/indexInfo")
     @ApiOperation(value = "获取基础信息", notes="获取菜单及用户信息")
     public Object indexInfo() {
-        UsersDTO userInfo = userService.findUserInfo();
-        return userInfo;
+        return null;
     }
 
 }

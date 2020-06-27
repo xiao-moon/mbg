@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moon.mapper.MenusMapper">
+  <!--Author:moon，Date:2020-06-27，xml的结果映射配置，由mybatis-plus-generator-ui自动生成-->
+  <resultMap id="MenusDTOMap" type="com.moon.model.dto.MenusDTO">
+ 
+    <result column="id" property="id"/>
+    <result column="icon" property="icon"/>
+    <result column="name" property="name"/>
+    <result column="parent_id" property="parentId"/>
+    <result column="priority" property="priority"/>
+    <result column="target" property="target"/>
+    <result column="url" property="url"/>
+    <result column="status" property="status"/>
+    <result column="del_flag" property="delFlag"/>
+    <result column="categories_flag" property="categoriesFlag"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="id" property="id"/>
+    <result column="icon" property="icon"/>
+    <result column="name" property="name"/>
+    <result column="parent_id" property="parentId"/>
+    <result column="priority" property="priority"/>
+    <result column="target" property="target"/>
+    <result column="url" property="url"/>
+    <result column="status" property="status"/>
+    <result column="del_flag" property="delFlag"/>
+    <result column="categories_flag" property="categoriesFlag"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+
+  </resultMap>
+
+ 
+  <!--Author:moon，Date:2020-06-27,由mybatis-plus-generator-ui自动生成-->
+  <select id="xml" resultMap="MenusDTOMap">
+    SELECT *
+FROM menus m
+	LEFT JOIN menus mm
+	ON m.id = mm.parent_id
+		AND mm.del_flag = 0
+		AND mm.status = 0
+WHERE m.del_flag = 0
+	AND m.status = 0
+</select>
+</mapper>

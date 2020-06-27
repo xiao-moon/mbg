@@ -2,18 +2,8 @@ server:
   port: 8088
 
 spring:
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL5Dialect #org.hibernate.dialect.H2Dialect
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-    hibernate:
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: none
   datasource:
-    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CTT
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -21,6 +11,9 @@ spring:
   #出现错误时, 直接抛出异常
   mvc:
     throw-exception-if-no-handler-found: true
-  #不要为我们工程中的资源文件建立映射
-  resources:
-    add-mappings: false
+    view:
+      prefix: /
+      suffix: .html
+  #不要为我们工程中的资源文件建立映射##注意:使用
+#  resources:
+#    add-mappings: false
