@@ -15,7 +15,7 @@ import javax.sql.DataSource;
  * 创建时间: 2020-06-27 01:26
  */
 @Configuration
-@MapperScan("com.moon.mapper")
+@MapperScan({"com.moon.mapper","com.moon.generator.mapper"})
 public class MybatisPlusConfig {
 
     @Bean

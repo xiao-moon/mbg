@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moon.mapper.PhotoPCategoriesMapper">
+    
+    <resultMap type="PhotoPCategories" id="PhotoPCategoriesResult">
+        <result property="id"    column="id"    />
+        <result property="photoId"    column="photo_id"    />
+        <result property="pCategoriesId"    column="p_categories_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectPhotoPCategoriesVo">
+        select id, photo_id, p_categories_id, create_time, update_time from photo_p_categories
+    </sql>
+
+    <select id="selectPhotoPCategoriesList" parameterType="PhotoPCategories" resultMap="PhotoPCategoriesResult">
+        <include refid="selectPhotoPCategoriesVo"/>
+        <where>  
+        </where>
+    </select>
+    
+    <select id="selectPhotoPCategoriesById" parameterType="Integer" resultMap="PhotoPCategoriesResult">
+        <include refid="selectPhotoPCategoriesVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPhotoPCategories" parameterType="PhotoPCategories">
+        insert into photo_p_categories
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">id,</if>
+            <if test="photoId != null ">photo_id,</if>
+            <if test="pCategoriesId != null ">p_categories_id,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id},</if>
+            <if test="photoId != null ">#{photoId},</if>
+            <if test="pCategoriesId != null ">#{pCategoriesId},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePhotoPCategories" parameterType="PhotoPCategories">
+        update photo_p_categories
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="photoId != null ">photo_id = #{photoId},</if>
+            <if test="pCategoriesId != null ">p_categories_id = #{pCategoriesId},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePhotoPCategoriesById" parameterType="Integer">
+        delete from photo_p_categories where id = #{id}
+    </delete>
+
+    <delete id="deletePhotoPCategoriesByIds" parameterType="String">
+        delete from photo_p_categories where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

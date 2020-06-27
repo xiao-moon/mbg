@@ -2,95 +2,83 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.moon.mapper.MenusMapper">
+<mapper namespace="com.moon.mapper.PhotosMapper">
     
-    <resultMap type="Menus" id="MenusResult">
+    <resultMap type="Photos" id="PhotosResult">
         <result property="id"    column="id"    />
-        <result property="icon"    column="icon"    />
         <result property="name"    column="name"    />
-        <result property="parentId"    column="parent_id"    />
-        <result property="priority"    column="priority"    />
-        <result property="target"    column="target"    />
+        <result property="description"    column="description"    />
+        <result property="location"    column="location"    />
         <result property="url"    column="url"    />
         <result property="status"    column="status"    />
         <result property="delFlag"    column="del_flag"    />
-        <result property="categoriesFlag"    column="categories_flag"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
-    <sql id="selectMenusVo">
-        select id, icon, name, parent_id, priority, target, url, status, del_flag, categories_flag, create_time, update_time from menus
+    <sql id="selectPhotosVo">
+        select id, name, description, location, url, status, del_flag, create_time, update_time from photos
     </sql>
 
-    <select id="selectMenusList" parameterType="Menus" resultMap="MenusResult">
-        <include refid="selectMenusVo"/>
+    <select id="selectPhotosList" parameterType="Photos" resultMap="PhotosResult">
+        <include refid="selectPhotosVo"/>
         <where>  
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
         </where>
     </select>
     
-    <select id="selectMenusById" parameterType="Integer" resultMap="MenusResult">
-        <include refid="selectMenusVo"/>
+    <select id="selectPhotosById" parameterType="Integer" resultMap="PhotosResult">
+        <include refid="selectPhotosVo"/>
         where id = #{id}
     </select>
         
-    <insert id="insertMenus" parameterType="Menus">
-        insert into menus
+    <insert id="insertPhotos" parameterType="Photos">
+        insert into photos
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null ">id,</if>
-            <if test="icon != null  and icon != ''">icon,</if>
             <if test="name != null  and name != ''">name,</if>
-            <if test="parentId != null ">parent_id,</if>
-            <if test="priority != null ">priority,</if>
-            <if test="target != null  and target != ''">target,</if>
+            <if test="description != null  and description != ''">description,</if>
+            <if test="location != null  and location != ''">location,</if>
             <if test="url != null  and url != ''">url,</if>
             <if test="status != null ">status,</if>
             <if test="delFlag != null ">del_flag,</if>
-            <if test="categoriesFlag != null ">categories_flag,</if>
             <if test="createTime != null ">create_time,</if>
             <if test="updateTime != null ">update_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null ">#{id},</if>
-            <if test="icon != null  and icon != ''">#{icon},</if>
             <if test="name != null  and name != ''">#{name},</if>
-            <if test="parentId != null ">#{parentId},</if>
-            <if test="priority != null ">#{priority},</if>
-            <if test="target != null  and target != ''">#{target},</if>
+            <if test="description != null  and description != ''">#{description},</if>
+            <if test="location != null  and location != ''">#{location},</if>
             <if test="url != null  and url != ''">#{url},</if>
             <if test="status != null ">#{status},</if>
             <if test="delFlag != null ">#{delFlag},</if>
-            <if test="categoriesFlag != null ">#{categoriesFlag},</if>
             <if test="createTime != null ">#{createTime},</if>
             <if test="updateTime != null ">#{updateTime},</if>
          </trim>
     </insert>
 
-    <update id="updateMenus" parameterType="Menus">
-        update menus
+    <update id="updatePhotos" parameterType="Photos">
+        update photos
         <trim prefix="SET" suffixOverrides=",">
-            <if test="icon != null  and icon != ''">icon = #{icon},</if>
             <if test="name != null  and name != ''">name = #{name},</if>
-            <if test="parentId != null ">parent_id = #{parentId},</if>
-            <if test="priority != null ">priority = #{priority},</if>
-            <if test="target != null  and target != ''">target = #{target},</if>
+            <if test="description != null  and description != ''">description = #{description},</if>
+            <if test="location != null  and location != ''">location = #{location},</if>
             <if test="url != null  and url != ''">url = #{url},</if>
             <if test="status != null ">status = #{status},</if>
             <if test="delFlag != null ">del_flag = #{delFlag},</if>
-            <if test="categoriesFlag != null ">categories_flag = #{categoriesFlag},</if>
             <if test="createTime != null ">create_time = #{createTime},</if>
             <if test="updateTime != null ">update_time = #{updateTime},</if>
         </trim>
         where id = #{id}
     </update>
 
-    <delete id="deleteMenusById" parameterType="Integer">
-        delete from menus where id = #{id}
+    <delete id="deletePhotosById" parameterType="Integer">
+        delete from photos where id = #{id}
     </delete>
 
-    <delete id="deleteMenusByIds" parameterType="String">
-        delete from menus where id in 
+    <delete id="deletePhotosByIds" parameterType="String">
+        delete from photos where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

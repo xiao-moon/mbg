@@ -1,6 +1,5 @@
 package com.moon.controller.content;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.moon.model.SimpleResponse;
 import com.moon.model.dto.MenusDTO;
 import com.moon.model.enums.ResponseEnum;
