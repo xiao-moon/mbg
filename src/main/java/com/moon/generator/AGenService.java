@@ -1,7 +1,9 @@
-package com.moon.generator.service;
+package com.moon.generator;
 
 import com.moon.BlogApplication;
 import com.moon.generator.entity.GenTableColumn;
+import com.moon.generator.service.TableInfoService;
+import com.moon.generator.service.VelocityService;
 import lombok.extern.java.Log;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 描述:
+ * 描述: 生成器启动类
  * 创建人: 小月
  * 创建时间: 2020-06-23 23:34
  */

@@ -19,8 +19,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@TableName("menus")
-public class Menus implements Serializable{
+@TableName("attachments")
+public class Attachments implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -32,40 +32,58 @@ public class Menus implements Serializable{
     private Integer id;
 
     /**
-     * 图标
-     */
-    @TableField("icon")
-    private String icon;
-
-    /**
      * 名称
      */
     @TableField("name")
     private String name;
 
     /**
-     * 父ID
+     * 媒体类型
      */
-    @TableField("parent_id")
-    private Integer parentId;
+    @TableField("media_type")
+    private String mediaType;
 
     /**
-     * 位置
+     * 后缀
      */
-    @TableField("priority")
-    private Integer priority;
+    @TableField("suffix")
+    private String suffix;
 
     /**
-     * 打开方式
+     * 文件绝对路径
      */
-    @TableField("target")
-    private String target;
+    @TableField("absolute_file_path")
+    private String absoluteFilePath;
 
     /**
-     * 地址
+     * 文件相对路径--访问路径
      */
-    @TableField("url")
-    private String url;
+    @TableField("relative_file_path")
+    private String relativeFilePath;
+
+    /**
+     * 文件大小;单位KB
+     */
+    @TableField("size")
+    private Integer size;
+
+    /**
+     * 高度:只有图片才有
+     */
+    @TableField("height")
+    private Integer height;
+
+    /**
+     * 宽度:只有图片才有
+     */
+    @TableField("width")
+    private Integer width;
+
+    /**
+     * 文件类型:0图片,1其他
+     */
+    @TableField("type")
+    private Integer type;
 
     /**
      * 状态:0正常;1停用
@@ -80,12 +98,6 @@ public class Menus implements Serializable{
     private Integer delFlag;
 
     /**
-     * 关联文章分类标志:0关联;1不关联
-     */
-    @TableField("categories_flag")
-    private Integer categoriesFlag;
-
-    /**
      * 创建时间
      */
     @TableField("create_time")
@@ -96,6 +108,10 @@ public class Menus implements Serializable{
      */
     @TableField("update_time")
     private Date updateTime;
+
+
+
+
 
 
 

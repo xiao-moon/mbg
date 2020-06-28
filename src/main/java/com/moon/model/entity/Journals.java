@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.*;
 import java.util.Date;
 import java.util.Date;
-import java.util.Date;
 
 import java.io.Serializable;
 
@@ -20,8 +19,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@TableName("users")
-public class Users implements Serializable{
+@TableName("journals")
+public class Journals implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -33,46 +32,10 @@ public class Users implements Serializable{
     private Integer id;
 
     /**
-     * 头像地址
+     * 内容
      */
-    @TableField("avatar")
-    private String avatar;
-
-    /**
-     * 描述
-     */
-    @TableField("description")
-    private String description;
-
-    /**
-     * email
-     */
-    @TableField("email")
-    private String email;
-
-    /**
-     * 过期时间
-     */
-    @TableField("expire_time")
-    private Date expireTime;
-
-    /**
-     * 昵称
-     */
-    @TableField("nickname")
-    private String nickname;
-
-    /**
-     * 密码
-     */
-    @TableField("password")
-    private String password;
-
-    /**
-     * 登录名
-     */
-    @TableField("username")
-    private String username;
+    @TableField("content")
+    private String content;
 
     /**
      * 创建时间
@@ -86,15 +49,11 @@ public class Users implements Serializable{
     @TableField("update_time")
     private Date updateTime;
 
-
-
-
-
-
-
-
-
-
+    /**
+     * 点赞数量
+     */
+    @TableField("likes")
+    private Integer likes;
 
 
 

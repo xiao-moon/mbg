@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.*;
 #end
 #foreach (${column} in ${columns})
-#if(!${column.fieldImport})
+#if($!column.fieldImport)
 import ${column.fieldImport};
 #end
 #end
@@ -18,7 +18,7 @@ import ${column.fieldImport};
 import java.io.Serializable;
 
 /**
-* 描述:
+* 描述: ${clazzName}
 * 创建人: ${iAuthor}
 * 创建时间: ${nowTime}
 **/
@@ -64,6 +64,4 @@ public class ${clazzName} implements Serializable{
     #end
 
 #end
-
-
 }

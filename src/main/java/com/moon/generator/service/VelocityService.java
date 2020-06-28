@@ -85,7 +85,6 @@ public class VelocityService {
         vc.put("genDo", GenConfig.genDo);
         vc.put("lombokBuilder", GenConfig.lombokBuilder);
         vc.put("lombokData", GenConfig.lombokData);
-        vc.put("autoImport", GenConfig.autoImport);
         vc.put("coverDo", GenConfig.coverDo);
         vc.put("genMapper", GenConfig.genMapper);
         vc.put("coverMapper", GenConfig.coverMapper);

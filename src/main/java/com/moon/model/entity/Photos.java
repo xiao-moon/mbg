@@ -19,8 +19,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@TableName("menus")
-public class Menus implements Serializable{
+@TableName("photos")
+public class Photos implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -32,34 +32,22 @@ public class Menus implements Serializable{
     private Integer id;
 
     /**
-     * 图标
-     */
-    @TableField("icon")
-    private String icon;
-
-    /**
      * 名称
      */
     @TableField("name")
     private String name;
 
     /**
-     * 父ID
+     * 描述
      */
-    @TableField("parent_id")
-    private Integer parentId;
+    @TableField("description")
+    private String description;
 
     /**
-     * 位置
+     * 存储的位置--本地OR远程
      */
-    @TableField("priority")
-    private Integer priority;
-
-    /**
-     * 打开方式
-     */
-    @TableField("target")
-    private String target;
+    @TableField("location")
+    private String location;
 
     /**
      * 地址
@@ -80,12 +68,6 @@ public class Menus implements Serializable{
     private Integer delFlag;
 
     /**
-     * 关联文章分类标志:0关联;1不关联
-     */
-    @TableField("categories_flag")
-    private Integer categoriesFlag;
-
-    /**
      * 创建时间
      */
     @TableField("create_time")
@@ -96,12 +78,6 @@ public class Menus implements Serializable{
      */
     @TableField("update_time")
     private Date updateTime;
-
-
-
-
-
-
 
 
 
