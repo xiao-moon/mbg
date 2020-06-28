@@ -87,6 +87,7 @@ public class VelocityService {
         vc.put("iAuthor", GenConfig.iAuthor);
         vc.put("doReference", GenConfig.doReference);
         vc.put("dtoReference", GenConfig.dtoReference);
+        vc.put("voReference", GenConfig.voReference);
         vc.put("mapperReference", GenConfig.mapperReference);
         vc.put("serviceReference", GenConfig.serviceReference);
         vc.put("serviceImplReference", GenConfig.serviceImplReference);
@@ -148,6 +149,14 @@ public class VelocityService {
             map.put("prefixPath", GenConfig.baseJavaPath + GenConfig.dtoReference.replace(".", "/") + "/");
             map.put("suffixPath", "DTO.java");
             map.put("type", "DTO");
+            templates.add(map);
+        }
+        if (GenConfig.genVo) {
+            Map<String, String> map = new HashMap<>();
+            map.put("template", "vm/vo.vm");
+            map.put("prefixPath", GenConfig.baseJavaPath + GenConfig.voReference.replace(".", "/") + "/");
+            map.put("suffixPath", "VO.java");
+            map.put("type", "VO");
             templates.add(map);
         }
         if (GenConfig.genMapper) {
@@ -225,6 +234,7 @@ public class VelocityService {
         Map<String, Boolean> map = new HashMap<>();
         map.put("DO", GenConfig.coverDo);
         map.put("DTO", GenConfig.coverDto);
+        map.put("VO", GenConfig.coverVo);
         map.put("MAPPER", GenConfig.coverMapper);
         map.put("SERVICE", GenConfig.coverService);
         map.put("SERVICEIMPL", GenConfig.coverService);

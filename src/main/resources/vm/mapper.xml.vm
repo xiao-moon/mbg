@@ -16,10 +16,10 @@
     <!--查询单个-->
     #foreach ($column in $columns)
         #if(${column.extra}=='auto_increment')
-        <select id="select${clazzName}ById" parameterType="${column.fieldType}" resultMap="${clazzName}Result">
-            <include refid="select${clazzName}Vo"/>
-            where ${column.columnName} = #{${column.fieldName}}
-        </select>
+    <select id="select${clazzName}ById" parameterType="${column.fieldType}" resultMap="${clazzName}Result">
+        <include refid="select${clazzName}Vo"/>
+        where ${column.columnName} = #{${column.fieldName}}
+    </select>
         #end
     #end
 

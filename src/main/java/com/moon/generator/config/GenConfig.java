@@ -10,6 +10,7 @@ public class GenConfig {
     public static String iAuthor = "小月";//作者
     public static String doReference = "com.moon.model.entity";//DO包路径
     public static String dtoReference = "com.moon.model.dto";//DTO包路径
+    public static String voReference = "com.moon.model.vo";//DTO包路径
     public static String mapperReference = "com.moon.mapper";//mapper包路径
     public static String serviceReference = "com.moon.service";//service包路径
     public static String serviceImplReference = "com.moon.service.impl";//serviceImpl包路径
@@ -33,8 +34,12 @@ public class GenConfig {
 
     /*DTO配置*/
     public static boolean genDto = false;//是否生成DTO层
-    public static boolean swagger2 = true;//是否生成swagger2注解
     public static boolean coverDto = false;//是否覆盖原DTO层
+
+    /*VO配置*/
+    public static boolean genVo = true;//是否生成VO层
+    public static boolean swagger2 = true;//是否生成swagger2注解
+    public static boolean coverVo = false;//是否覆盖原VO层
 
     /*Service配置*/
     public static boolean genService = false;//是否生成Service层

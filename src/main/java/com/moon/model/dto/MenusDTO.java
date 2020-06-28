@@ -1,21 +1,30 @@
 package com.moon.model.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
+
 /**
- * 该代码由mybatis-plus-generator-ui自动生成
- *
- * @author moon
- * @since 2020-06-27
- */
+ * 描述: MenusDTO
+ * 创建人: 小月
+ * 创建时间: 2020/6/28 22:54
+ **/
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ApiModel("Menus")
 public class MenusDTO {
 
+    /**
+     * 主键自增
+     */
+    @ApiModelProperty("主键自增")
     private Integer id;
 
     private String icon;

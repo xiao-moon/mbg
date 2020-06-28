@@ -3,6 +3,7 @@ package com.moon.controller.content;
 import com.moon.model.SimpleResponse;
 import com.moon.model.dto.MenusDTO;
 import com.moon.model.enums.ResponseEnum;
+import com.moon.service.UsersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,13 @@ import java.util.List;
 @RequestMapping("/index")
 public class IndexController {
 
+    @Autowired
+    private UsersService usersService;
+
     @GetMapping("/indexInfo")
     @ApiOperation(value = "获取基础信息", notes="获取菜单及用户信息")
     public Object indexInfo() {
-        return null;
+        return usersService.findUser();
     }
 
 }

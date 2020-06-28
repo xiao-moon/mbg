@@ -21,10 +21,10 @@
     </sql>
 
     <!--查询单个-->
-        <select id="selectUsersById" parameterType="Integer" resultMap="UsersResult">
-            <include refid="selectUsersVo"/>
-            where id = #{id}
-        </select>
+    <select id="selectUsersById" parameterType="Integer" resultMap="UsersResult">
+        <include refid="selectUsersVo"/>
+        where id = #{id}
+    </select>
 
     <!--查询列表-->
     <select id="selectUsersList" parameterType="Users" resultMap="UsersResult">

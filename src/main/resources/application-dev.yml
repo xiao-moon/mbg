@@ -21,3 +21,5 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapperLocations: classpath:mybatis/mapper/*.xml
+  typeAliasesPackage: com.moon.model.entity
