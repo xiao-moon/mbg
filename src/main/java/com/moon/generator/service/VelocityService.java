@@ -26,14 +26,15 @@ public class VelocityService {
     /**
      * 生成
      */
-    public void velocity(Map<String, List<GenTableColumn>> genTables) {
+    public void velocity(Map<String, List<GenTableColumn>> mmaps) {
         //初始化Velocity
         VelocityEngine ve = initVE();
-
+        //排除不需要的表
+        removeTable(mmaps);
         //遍历模板列表
         List<Map<String, String>> maps = templatesList();
         for (Map<String, String> map : maps) {
-            for (String tableName : genTables.keySet()) {
+            for (String tableName : mmaps.keySet()) {
                 String clazzName = GenUtil.firstUpper(tableName);
                 String path = map.get("prefixPath") + clazzName + map.get("suffixPath");
                 //判断是否需要往下执行
@@ -43,7 +44,7 @@ public class VelocityService {
                 }
                 Template t = ve.getTemplate(map.get("template"));
                 //存入变量
-                VelocityContext vc = velocityContext(tableName, genTables.get(tableName));
+                VelocityContext vc = velocityContext(tableName, mmaps.get(tableName));
                 StringWriter writer = new StringWriter();
                 t.merge(vc, writer);
                 String attachContent = writer.toString();
@@ -51,6 +52,18 @@ public class VelocityService {
             }
 
         }
+    }
+
+    public void removeTable(Map<String, List<GenTableColumn>> map) {
+        String[] excludeTable = GenConfig.excludeTable;
+        for (String table : excludeTable) {
+            if (map.containsKey(table)) {
+                map.remove(table);
+            } else {
+                System.out.println("需要排除的表不存在:"+table);
+            }
+        }
+
     }
 
     private VelocityEngine initVE() {
@@ -100,12 +113,17 @@ public class VelocityService {
         vc.put("coverMapperXML", GenConfig.coverMapperXML);
         vc.put("tableName", tableName);
         vc.put("clazzName", GenUtil.firstUpper(tableName));
+        vc.put("clazzNameLower", GenUtil.firstLower(tableName));
+        vc.put("pkColumn",null);
         for (GenTableColumn column : columns) {
             column.setFieldName(GenUtil.firstLower(column.getColumnName()));
             column.setFieldNameUpper(GenUtil.firstUpper(column.getColumnName()));
             column.setFieldType(GenUtil.matchDataType(column.getDataType()));
             column.setFieldImport(GenUtil.matchDataTypeImport(column.getDataType()));
-
+            column.setQueryType("EQ");
+            if(column.getExtra().equalsIgnoreCase("auto_increment")){
+                vc.put("pkColumn",column);
+            }
         }
         vc.put("columns", columns);
         return vc;

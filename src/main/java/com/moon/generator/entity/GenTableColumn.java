@@ -173,4 +173,9 @@ public class GenTableColumn implements Serializable {
      */
     private String fieldImport;
 
+    /**
+     * 查询方式 like = 不等于...
+     */
+    private String queryType;
+
 }

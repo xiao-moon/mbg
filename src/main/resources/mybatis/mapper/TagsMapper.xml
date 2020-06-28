@@ -2,38 +2,32 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.moon.mapper.PhotosMapper">
-    <resultMap type="com.moon.model.entity.Photos" id="PhotosResult">
+<mapper namespace="com.moon.mapper.TagsMapper">
+    <resultMap type="com.moon.model.entity.Tags" id="TagsResult">
         <result property="id"    column="id"    />
         <result property="name"    column="name"    />
-        <result property="description"    column="description"    />
-        <result property="location"    column="location"    />
-        <result property="url"    column="url"    />
         <result property="status"    column="status"    />
         <result property="delFlag"    column="del_flag"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
-    <sql id="selectPhotosVo">
-        select id, name, description, location, url, status, del_flag, create_time, update_time, from photos
+    <sql id="selectTagsVo">
+        select id, name, status, del_flag, create_time, update_time, from tags
     </sql>
 
     <!--查询单个-->
-        <select id="selectPhotosById" parameterType="Integer" resultMap="PhotosResult">
-            <include refid="selectPhotosVo"/>
+        <select id="selectTagsById" parameterType="Integer" resultMap="TagsResult">
+            <include refid="selectTagsVo"/>
             where id = #{id}
         </select>
 
     <!--查询列表-->
-    <select id="selectPhotosList" parameterType="Photos" resultMap="PhotosResult">
-        <include refid="selectPhotosVo"/>
+    <select id="selectTagsList" parameterType="Tags" resultMap="TagsResult">
+        <include refid="selectTagsVo"/>
         <where>
             <if test="id != null "> and id = #{id}</if>
             <if test="name != null  and name != ''"> and name = #{name}</if>
-            <if test="description != null  and description != ''"> and description = #{description}</if>
-            <if test="location != null  and location != ''"> and location = #{location}</if>
-            <if test="url != null  and url != ''"> and url = #{url}</if>
             <if test="status != null "> and status = #{status}</if>
             <if test="delFlag != null "> and del_flag = #{delFlag}</if>
             <if test="createTime != null "> and create_time = #{createTime}</if>
@@ -42,13 +36,10 @@
     </select>
 
     <!--新增-->
-    <insert id="insertPhotos" parameterType="Photos" useGeneratedKeys="true" keyProperty="id">
-        insert into photos
+    <insert id="insertTags" parameterType="Tags" useGeneratedKeys="true" keyProperty="id">
+        insert into tags
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null  and name != ''">name,</if>
-            <if test="description != null  and description != ''">description,</if>
-            <if test="location != null  and location != ''">location,</if>
-            <if test="url != null  and url != ''">url,</if>
             <if test="status != null ">status,</if>
             <if test="delFlag != null ">del_flag,</if>
             <if test="createTime != null ">create_time,</if>
@@ -56,9 +47,6 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null  and name != ''">#{name},</if>
-            <if test="description != null  and description != ''">#{description},</if>
-            <if test="location != null  and location != ''">#{location},</if>
-            <if test="url != null  and url != ''">#{url},</if>
             <if test="status != null ">#{status},</if>
             <if test="delFlag != null ">#{delFlag},</if>
             <if test="createTime != null ">#{createTime},</if>
@@ -67,13 +55,10 @@
     </insert>
 
     <!--修改-->
-    <update id="updatePhotos" parameterType="Photos">
-        update photos
+    <update id="updateTags" parameterType="Tags">
+        update tags
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null  and name != ''">name = #{name},</if>
-            <if test="description != null  and description != ''">description = #{description},</if>
-            <if test="location != null  and location != ''">location = #{location},</if>
-            <if test="url != null  and url != ''">url = #{url},</if>
             <if test="status != null ">status = #{status},</if>
             <if test="delFlag != null ">del_flag = #{delFlag},</if>
             <if test="createTime != null ">create_time = #{createTime},</if>
@@ -83,13 +68,13 @@
     </update>
 
     <!--删除-->
-    <delete id="deletePhotosById" parameterType="Integer">
-        delete from photos where id = #{id}
+    <delete id="deleteTagsById" parameterType="Integer">
+        delete from tags where id = #{id}
     </delete>
 
     <!--批量删除-->
-    <delete id="deletePhotosByIds" parameterType="String">
-        delete from photos where id in
+    <delete id="deleteTagsByIds" parameterType="String">
+        delete from tags where id in
         <foreach item="${pkColumn.javaField}" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.moon.mapper.PCategoriesMapper">
-    
-    <resultMap type="PCategories" id="PCategoriesResult">
+    <resultMap type="com.moon.model.entity.PCategories" id="PCategoriesResult">
         <result property="id"    column="id"    />
         <result property="name"    column="name"    />
         <result property="status"    column="status"    />
@@ -14,41 +13,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectPCategoriesVo">
-        select id, name, status, del_flag, create_time, update_time from p_categories
+        select id, name, status, del_flag, create_time, update_time, from p_categories
     </sql>
 
+    <!--查询单个-->
+        <select id="selectPCategoriesById" parameterType="Integer" resultMap="PCategoriesResult">
+            <include refid="selectPCategoriesVo"/>
+            where id = #{id}
+        </select>
+
+    <!--查询列表-->
     <select id="selectPCategoriesList" parameterType="PCategories" resultMap="PCategoriesResult">
         <include refid="selectPCategoriesVo"/>
-        <where>  
-            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        <where>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="name != null  and name != ''"> and name = #{name}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="delFlag != null "> and del_flag = #{delFlag}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
         </where>
     </select>
-    
-    <select id="selectPCategoriesById" parameterType="Integer" resultMap="PCategoriesResult">
-        <include refid="selectPCategoriesVo"/>
-        where id = #{id}
-    </select>
-        
-    <insert id="insertPCategories" parameterType="PCategories">
+
+    <!--新增-->
+    <insert id="insertPCategories" parameterType="PCategories" useGeneratedKeys="true" keyProperty="id">
         insert into p_categories
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null ">id,</if>
             <if test="name != null  and name != ''">name,</if>
             <if test="status != null ">status,</if>
             <if test="delFlag != null ">del_flag,</if>
             <if test="createTime != null ">create_time,</if>
             <if test="updateTime != null ">update_time,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null ">#{id},</if>
             <if test="name != null  and name != ''">#{name},</if>
             <if test="status != null ">#{status},</if>
             <if test="delFlag != null ">#{delFlag},</if>
             <if test="createTime != null ">#{createTime},</if>
             <if test="updateTime != null ">#{updateTime},</if>
-         </trim>
+        </trim>
     </insert>
 
+    <!--修改-->
     <update id="updatePCategories" parameterType="PCategories">
         update p_categories
         <trim prefix="SET" suffixOverrides=",">
@@ -61,15 +67,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
+    <!--删除-->
     <delete id="deletePCategoriesById" parameterType="Integer">
         delete from p_categories where id = #{id}
     </delete>
 
+    <!--批量删除-->
     <delete id="deletePCategoriesByIds" parameterType="String">
-        delete from p_categories where id in 
-        <foreach item="id" collection="array" open="(" separator="," close=")">
+        delete from p_categories where id in
+        <foreach item="${pkColumn.javaField}" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
-    
+
 </mapper>

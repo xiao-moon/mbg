@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.moon.mapper.MenusMapper">
-    
-    <resultMap type="Menus" id="MenusResult">
+    <resultMap type="com.moon.model.entity.Menus" id="MenusResult">
         <result property="id"    column="id"    />
         <result property="icon"    column="icon"    />
         <result property="name"    column="name"    />
@@ -20,25 +19,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectMenusVo">
-        select id, icon, name, parent_id, priority, target, url, status, del_flag, categories_flag, create_time, update_time from menus
+        select id, icon, name, parent_id, priority, target, url, status, del_flag, categories_flag, create_time, update_time, from menus
     </sql>
 
+    <!--查询单个-->
+        <select id="selectMenusById" parameterType="Integer" resultMap="MenusResult">
+            <include refid="selectMenusVo"/>
+            where id = #{id}
+        </select>
+
+    <!--查询列表-->
     <select id="selectMenusList" parameterType="Menus" resultMap="MenusResult">
         <include refid="selectMenusVo"/>
-        <where>  
-            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        <where>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="icon != null  and icon != ''"> and icon = #{icon}</if>
+            <if test="name != null  and name != ''"> and name = #{name}</if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="priority != null "> and priority = #{priority}</if>
+            <if test="target != null  and target != ''"> and target = #{target}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="delFlag != null "> and del_flag = #{delFlag}</if>
+            <if test="categoriesFlag != null "> and categories_flag = #{categoriesFlag}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
         </where>
     </select>
-    
-    <select id="selectMenusById" parameterType="Integer" resultMap="MenusResult">
-        <include refid="selectMenusVo"/>
-        where id = #{id}
-    </select>
-        
-    <insert id="insertMenus" parameterType="Menus">
+
+    <!--新增-->
+    <insert id="insertMenus" parameterType="Menus" useGeneratedKeys="true" keyProperty="id">
         insert into menus
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null ">id,</if>
             <if test="icon != null  and icon != ''">icon,</if>
             <if test="name != null  and name != ''">name,</if>
             <if test="parentId != null ">parent_id,</if>
@@ -50,9 +62,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="categoriesFlag != null ">categories_flag,</if>
             <if test="createTime != null ">create_time,</if>
             <if test="updateTime != null ">update_time,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null ">#{id},</if>
             <if test="icon != null  and icon != ''">#{icon},</if>
             <if test="name != null  and name != ''">#{name},</if>
             <if test="parentId != null ">#{parentId},</if>
@@ -64,9 +75,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="categoriesFlag != null ">#{categoriesFlag},</if>
             <if test="createTime != null ">#{createTime},</if>
             <if test="updateTime != null ">#{updateTime},</if>
-         </trim>
+        </trim>
     </insert>
 
+    <!--修改-->
     <update id="updateMenus" parameterType="Menus">
         update menus
         <trim prefix="SET" suffixOverrides=",">
@@ -85,15 +97,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
+    <!--删除-->
     <delete id="deleteMenusById" parameterType="Integer">
         delete from menus where id = #{id}
     </delete>
 
+    <!--批量删除-->
     <delete id="deleteMenusByIds" parameterType="String">
-        delete from menus where id in 
-        <foreach item="id" collection="array" open="(" separator="," close=")">
+        delete from menus where id in
+        <foreach item="${pkColumn.javaField}" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
-    
+
 </mapper>

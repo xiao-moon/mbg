@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.moon.mapper.CommentsMapper">
-    
-    <resultMap type="Comments" id="CommentsResult">
+    <resultMap type="com.moon.model.entity.Comments" id="CommentsResult">
         <result property="id"    column="id"    />
         <result property="parentId"    column="parent_id"    />
         <result property="responseId"    column="response_id"    />
@@ -24,24 +23,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectCommentsVo">
-        select id, parent_id, response_id, author, author_url, content, email, ip_address, is_admin, post_id, top_priority, user_agent, allow_notification, del_flag, create_time, update_time from comments
+        select id, parent_id, response_id, author, author_url, content, email, ip_address, is_admin, post_id, top_priority, user_agent, allow_notification, del_flag, create_time, update_time, from comments
     </sql>
 
+    <!--查询单个-->
+        <select id="selectCommentsById" parameterType="Integer" resultMap="CommentsResult">
+            <include refid="selectCommentsVo"/>
+            where id = #{id}
+        </select>
+
+    <!--查询列表-->
     <select id="selectCommentsList" parameterType="Comments" resultMap="CommentsResult">
         <include refid="selectCommentsVo"/>
-        <where>  
+        <where>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="responseId != null "> and response_id = #{responseId}</if>
+            <if test="author != null  and author != ''"> and author = #{author}</if>
+            <if test="authorUrl != null  and authorUrl != ''"> and author_url = #{authorUrl}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="ipAddress != null  and ipAddress != ''"> and ip_address = #{ipAddress}</if>
+            <if test="isAdmin != null "> and is_admin = #{isAdmin}</if>
+            <if test="postId != null "> and post_id = #{postId}</if>
+            <if test="topPriority != null "> and top_priority = #{topPriority}</if>
+            <if test="userAgent != null  and userAgent != ''"> and user_agent = #{userAgent}</if>
+            <if test="allowNotification != null "> and allow_notification = #{allowNotification}</if>
+            <if test="delFlag != null "> and del_flag = #{delFlag}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
         </where>
     </select>
-    
-    <select id="selectCommentsById" parameterType="Integer" resultMap="CommentsResult">
-        <include refid="selectCommentsVo"/>
-        where id = #{id}
-    </select>
-        
-    <insert id="insertComments" parameterType="Comments">
+
+    <!--新增-->
+    <insert id="insertComments" parameterType="Comments" useGeneratedKeys="true" keyProperty="id">
         insert into comments
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null ">id,</if>
             <if test="parentId != null ">parent_id,</if>
             <if test="responseId != null ">response_id,</if>
             <if test="author != null  and author != ''">author,</if>
@@ -57,9 +74,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="delFlag != null ">del_flag,</if>
             <if test="createTime != null ">create_time,</if>
             <if test="updateTime != null ">update_time,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null ">#{id},</if>
             <if test="parentId != null ">#{parentId},</if>
             <if test="responseId != null ">#{responseId},</if>
             <if test="author != null  and author != ''">#{author},</if>
@@ -75,9 +91,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="delFlag != null ">#{delFlag},</if>
             <if test="createTime != null ">#{createTime},</if>
             <if test="updateTime != null ">#{updateTime},</if>
-         </trim>
+        </trim>
     </insert>
 
+    <!--修改-->
     <update id="updateComments" parameterType="Comments">
         update comments
         <trim prefix="SET" suffixOverrides=",">
@@ -100,15 +117,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
+    <!--删除-->
     <delete id="deleteCommentsById" parameterType="Integer">
         delete from comments where id = #{id}
     </delete>
 
+    <!--批量删除-->
     <delete id="deleteCommentsByIds" parameterType="String">
-        delete from comments where id in 
-        <foreach item="id" collection="array" open="(" separator="," close=")">
+        delete from comments where id in
+        <foreach item="${pkColumn.javaField}" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
-    
+
 </mapper>

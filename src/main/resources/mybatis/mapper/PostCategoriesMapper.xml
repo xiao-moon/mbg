@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moon.mapper.PostCategoriesMapper">
+    <resultMap type="com.moon.model.entity.PostCategories" id="PostCategoriesResult">
+        <result property="id"    column="id"    />
+        <result property="categoriesId"    column="categories_id"    />
+        <result property="postId"    column="post_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectPostCategoriesVo">
+        select id, categories_id, post_id, create_time, update_time, from post_categories
+    </sql>
+
+    <!--查询单个-->
+        <select id="selectPostCategoriesById" parameterType="Integer" resultMap="PostCategoriesResult">
+            <include refid="selectPostCategoriesVo"/>
+            where id = #{id}
+        </select>
+
+    <!--查询列表-->
+    <select id="selectPostCategoriesList" parameterType="PostCategories" resultMap="PostCategoriesResult">
+        <include refid="selectPostCategoriesVo"/>
+        <where>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="categoriesId != null "> and categories_id = #{categoriesId}</if>
+            <if test="postId != null "> and post_id = #{postId}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+        </where>
+    </select>
+
+    <!--新增-->
+    <insert id="insertPostCategories" parameterType="PostCategories" useGeneratedKeys="true" keyProperty="id">
+        insert into post_categories
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoriesId != null ">categories_id,</if>
+            <if test="postId != null ">post_id,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoriesId != null ">#{categoriesId},</if>
+            <if test="postId != null ">#{postId},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <!--修改-->
+    <update id="updatePostCategories" parameterType="PostCategories">
+        update post_categories
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="categoriesId != null ">categories_id = #{categoriesId},</if>
+            <if test="postId != null ">post_id = #{postId},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <!--删除-->
+    <delete id="deletePostCategoriesById" parameterType="Integer">
+        delete from post_categories where id = #{id}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="deletePostCategoriesByIds" parameterType="String">
+        delete from post_categories where id in
+        <foreach item="${pkColumn.javaField}" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

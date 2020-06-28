@@ -1,0 +1,54 @@
+package ${mapperReference};
+
+import ${doReference}.${clazzName};
+import java.util.List;
+#if($isMybatisPlus)
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+#end
+
+/**
+* 描述: ${clazzName}Mapper
+* 创建人: ${iAuthor}
+* 创建时间: ${nowTime}
+**/
+#if($isMybatisPlus)
+public interface ${clazzName}Mapper extends BaseMapper<${clazzName}> {
+#else
+public interface ${clazzName}Mapper{
+#end
+
+    #if($!{pkColumn})
+    /**
+    * 查询单个
+    */
+    public ${clazzName} select${clazzName}ById(${pkColumn.fieldType} ${pkColumn.fieldName});
+    #end
+
+
+    /**
+    * 查询列表
+    */
+    public List<${clazzName}> select${clazzName}List(${clazzName} ${clazzNameLower});
+
+    /**
+    * 新增
+    */
+    public int insert${clazzName}(${clazzName} ${clazzNameLower});
+
+    /**
+    * 修改
+    */
+    public int update${clazzName}(${clazzName} ${clazzNameLower});
+
+    #if($!{pkColumn})
+    /**
+    * 删除
+    */
+    public int delete${clazzName}ById(${pkColumn.fieldType} ${pkColumn.fieldName});
+
+    /**
+    * 批量删除
+    */
+    public int delete${clazzName}ByIds(String[] ${pkColumn.fieldName}s);
+    #end
+}
