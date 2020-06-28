@@ -17,7 +17,7 @@
     </resultMap>
 
     <sql id="selectUsersVo">
-        select id, avatar, description, email, expire_time, nickname, password, username, create_time, update_time, from users
+        select id, avatar, description, email, expire_time, nickname, password, username, create_time, update_time from users
     </sql>
 
     <!--查询单个-->
@@ -27,7 +27,7 @@
     </select>
 
     <!--查询列表-->
-    <select id="selectUsersList" parameterType="Users" resultMap="UsersResult">
+    <select id="selectUsersList" resultMap="UsersResult">
         <include refid="selectUsersVo"/>
         <where>
             <if test="id != null "> and id = #{id}</if>

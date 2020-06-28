@@ -17,10 +17,10 @@
     </sql>
 
     <!--查询单个-->
-        <select id="selectPCategoriesById" parameterType="Integer" resultMap="PCategoriesResult">
-            <include refid="selectPCategoriesVo"/>
-            where id = #{id}
-        </select>
+    <select id="selectPCategoriesById" parameterType="Integer" resultMap="PCategoriesResult">
+        <include refid="selectPCategoriesVo"/>
+        where id = #{id}
+    </select>
 
     <!--查询列表-->
     <select id="selectPCategoriesList" parameterType="PCategories" resultMap="PCategoriesResult">

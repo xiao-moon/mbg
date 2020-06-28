@@ -23,10 +23,10 @@
     </sql>
 
     <!--查询单个-->
-        <select id="selectMenusById" parameterType="Integer" resultMap="MenusResult">
-            <include refid="selectMenusVo"/>
-            where id = #{id}
-        </select>
+    <select id="selectMenusById" parameterType="Integer" resultMap="MenusResult">
+        <include refid="selectMenusVo"/>
+        where id = #{id}
+    </select>
 
     <!--查询列表-->
     <select id="selectMenusList" parameterType="Menus" resultMap="MenusResult">

@@ -2,43 +2,45 @@ package com.moon.mapper;
 
 import com.moon.model.entity.PCategories;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
 * 描述: PCategoriesMapper
 * 创建人: 小月
-* 创建时间: 2020-06-28 22:44:14
+* 创建时间: 2020-06-29 00:36:58
 **/
+@Mapper
 public interface PCategoriesMapper extends BaseMapper<PCategories> {
 
     /**
     * 查询单个
     */
-    public PCategories selectPCategoriesById(Integer id);
+    PCategories selectPCategoriesById(Integer id);
 
 
     /**
     * 查询列表
     */
-    public List<PCategories> selectPCategoriesList(PCategories pCategories);
+    List<PCategories> selectPCategoriesList(PCategories pCategories);
 
     /**
     * 新增
     */
-    public int insertPCategories(PCategories pCategories);
+    int insertPCategories(PCategories pCategories);
 
     /**
     * 修改
     */
-    public int updatePCategories(PCategories pCategories);
+    int updatePCategories(PCategories pCategories);
 
     /**
     * 删除
     */
-    public int deletePCategoriesById(Integer id);
+    int deletePCategoriesById(Integer id);
 
     /**
     * 批量删除
     */
-    public int deletePCategoriesByIds(String[] ids);
+    int deletePCategoriesByIds(String[] ids);
 }

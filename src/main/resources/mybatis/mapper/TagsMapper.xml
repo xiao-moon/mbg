@@ -17,10 +17,10 @@
     </sql>
 
     <!--查询单个-->
-        <select id="selectTagsById" parameterType="Integer" resultMap="TagsResult">
-            <include refid="selectTagsVo"/>
-            where id = #{id}
-        </select>
+    <select id="selectTagsById" parameterType="Integer" resultMap="TagsResult">
+        <include refid="selectTagsVo"/>
+        where id = #{id}
+    </select>
 
     <!--查询列表-->
     <select id="selectTagsList" parameterType="Tags" resultMap="TagsResult">

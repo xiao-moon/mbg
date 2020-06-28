@@ -27,10 +27,10 @@
     </sql>
 
     <!--查询单个-->
-        <select id="selectCommentsById" parameterType="Integer" resultMap="CommentsResult">
-            <include refid="selectCommentsVo"/>
-            where id = #{id}
-        </select>
+    <select id="selectCommentsById" parameterType="Integer" resultMap="CommentsResult">
+        <include refid="selectCommentsVo"/>
+        where id = #{id}
+    </select>
 
     <!--查询列表-->
     <select id="selectCommentsList" parameterType="Comments" resultMap="CommentsResult">

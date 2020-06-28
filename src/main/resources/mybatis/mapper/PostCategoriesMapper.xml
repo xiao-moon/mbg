@@ -16,10 +16,10 @@
     </sql>
 
     <!--查询单个-->
-        <select id="selectPostCategoriesById" parameterType="Integer" resultMap="PostCategoriesResult">
-            <include refid="selectPostCategoriesVo"/>
-            where id = #{id}
-        </select>
+    <select id="selectPostCategoriesById" parameterType="Integer" resultMap="PostCategoriesResult">
+        <include refid="selectPostCategoriesVo"/>
+        where id = #{id}
+    </select>
 
     <!--查询列表-->
     <select id="selectPostCategoriesList" parameterType="PostCategories" resultMap="PostCategoriesResult">

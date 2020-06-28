@@ -31,10 +31,10 @@
     </sql>
 
     <!--查询单个-->
-        <select id="selectPostsById" parameterType="Integer" resultMap="PostsResult">
-            <include refid="selectPostsVo"/>
-            where id = #{id}
-        </select>
+    <select id="selectPostsById" parameterType="Integer" resultMap="PostsResult">
+        <include refid="selectPostsVo"/>
+        where id = #{id}
+    </select>
 
     <!--查询列表-->
     <select id="selectPostsList" parameterType="Posts" resultMap="PostsResult">

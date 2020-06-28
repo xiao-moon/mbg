@@ -16,10 +16,10 @@
     </sql>
 
     <!--查询单个-->
-        <select id="selectJournalsById" parameterType="Integer" resultMap="JournalsResult">
-            <include refid="selectJournalsVo"/>
-            where id = #{id}
-        </select>
+    <select id="selectJournalsById" parameterType="Integer" resultMap="JournalsResult">
+        <include refid="selectJournalsVo"/>
+        where id = #{id}
+    </select>
 
     <!--查询列表-->
     <select id="selectJournalsList" parameterType="Journals" resultMap="JournalsResult">

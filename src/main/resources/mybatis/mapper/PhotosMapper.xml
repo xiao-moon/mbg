@@ -20,10 +20,10 @@
     </sql>
 
     <!--查询单个-->
-        <select id="selectPhotosById" parameterType="Integer" resultMap="PhotosResult">
-            <include refid="selectPhotosVo"/>
-            where id = #{id}
-        </select>
+    <select id="selectPhotosById" parameterType="Integer" resultMap="PhotosResult">
+        <include refid="selectPhotosVo"/>
+        where id = #{id}
+    </select>
 
     <!--查询列表-->
     <select id="selectPhotosList" parameterType="Photos" resultMap="PhotosResult">

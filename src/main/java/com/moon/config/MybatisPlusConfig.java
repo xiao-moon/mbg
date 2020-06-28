@@ -4,10 +4,14 @@ import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.ResourcePatternUtils;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 
 /**
  * 描述: mp配置类
@@ -17,11 +21,14 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan({"com.moon.mapper","com.moon.generator.mapper"})
 public class MybatisPlusConfig {
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     @Bean
-    public MybatisSqlSessionFactoryBean sqlSessionFactory(DataSource dataSource){
+    public MybatisSqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) throws Exception {
         MybatisSqlSessionFactoryBean mybatisSqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
         mybatisSqlSessionFactoryBean.setDataSource(dataSource);
+        //mybatisSqlSessionFactoryBean.setMapperLocations(ResourcePatternUtils.getResourcePatternResolver(resourceLoader).getResources("classpath*:/mybatis/mapper/*.xml"));
         return mybatisSqlSessionFactoryBean;
     }
 

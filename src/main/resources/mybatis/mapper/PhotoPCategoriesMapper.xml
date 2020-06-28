@@ -16,10 +16,10 @@
     </sql>
 
     <!--查询单个-->
-        <select id="selectPhotoPCategoriesById" parameterType="Integer" resultMap="PhotoPCategoriesResult">
-            <include refid="selectPhotoPCategoriesVo"/>
-            where id = #{id}
-        </select>
+    <select id="selectPhotoPCategoriesById" parameterType="Integer" resultMap="PhotoPCategoriesResult">
+        <include refid="selectPhotoPCategoriesVo"/>
+        where id = #{id}
+    </select>
 
     <!--查询列表-->
     <select id="selectPhotoPCategoriesList" parameterType="PhotoPCategories" resultMap="PhotoPCategoriesResult">

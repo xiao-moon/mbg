@@ -1,15 +1,15 @@
 package com.moon.service.impl;
 
 import com.moon.exception.ServiceException;
-import com.moon.model.entity.Users;
 import com.moon.mapper.UsersMapper;
+import com.moon.model.entity.Users;
 import com.moon.model.vo.UsersVO;
 import com.moon.service.UsersService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.moon.utils.BeanCopierUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 public class UsersServiceImpl implements UsersService {
 
-    @Autowired
+    @Resource
     private UsersMapper usersMapper;
 
     @Override

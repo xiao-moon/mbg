@@ -25,10 +25,10 @@
     </sql>
 
     <!--查询单个-->
-        <select id="selectAttachmentsById" parameterType="Integer" resultMap="AttachmentsResult">
-            <include refid="selectAttachmentsVo"/>
-            where id = #{id}
-        </select>
+    <select id="selectAttachmentsById" parameterType="Integer" resultMap="AttachmentsResult">
+        <include refid="selectAttachmentsVo"/>
+        where id = #{id}
+    </select>
 
     <!--查询列表-->
     <select id="selectAttachmentsList" parameterType="Attachments" resultMap="AttachmentsResult">

@@ -18,10 +18,10 @@
     </sql>
 
     <!--查询单个-->
-        <select id="selectCategoriesById" parameterType="Integer" resultMap="CategoriesResult">
-            <include refid="selectCategoriesVo"/>
-            where id = #{id}
-        </select>
+    <select id="selectCategoriesById" parameterType="Integer" resultMap="CategoriesResult">
+        <include refid="selectCategoriesVo"/>
+        where id = #{id}
+    </select>
 
     <!--查询列表-->
     <select id="selectCategoriesList" parameterType="Categories" resultMap="CategoriesResult">
