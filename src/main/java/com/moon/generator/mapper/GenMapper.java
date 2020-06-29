@@ -1,6 +1,5 @@
 package com.moon.generator.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.moon.generator.entity.GenTableColumn;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -13,7 +12,7 @@ import java.util.List;
  * 创建时间：2020-06-27 17:35
  */
 @Mapper
-public interface GenMapper extends BaseMapper<GenTableColumn> {
+public interface GenMapper {
 
     @Select("SELECT T.TABLE_NAME 'tableName' ," +
             "T.COLUMN_NAME 'columnName'," +

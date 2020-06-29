@@ -44,8 +44,9 @@ public class ${clazzName} implements Serializable{
     #if(${isMybatisPlus})
     #if(${column.extra}=='auto_increment')
     @TableId
-    #end
+    #else
     @TableField("${column.columnName}")
+    #end
     #end
     private ${column.fieldType} ${column.fieldName};
 

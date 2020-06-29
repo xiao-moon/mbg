@@ -10,7 +10,7 @@
     </resultMap>
 
     <sql id="select${clazzName}Vo">
-        select#foreach($column in $columns) $column.columnName#if($velocityCount != $columns.size()),#end#end from ${tableName}
+        select#foreach($column in $columns) $column.columnName#if($foreach.count != ${columns.size()}),#end#end from ${tableName}
     </sql>
 
     <!--查询单个-->
@@ -24,7 +24,7 @@
     #end
 
     <!--查询列表-->
-    <select id="select${clazzName}List" parameterType="${clazzName}" resultMap="${clazzName}Result">
+    <select id="select${clazzName}List" parameterType="${doReference}.${clazzName}" resultMap="${clazzName}Result">
         <include refid="select${clazzName}Vo"/>
         <where>
             #foreach($column in $columns)
@@ -48,7 +48,7 @@
     </select>
 
     <!--新增-->
-    <insert id="insert${clazzName}" parameterType="${clazzName}"#if($pkColumn) useGeneratedKeys="true" keyProperty="$pkColumn.fieldName"#end>
+    <insert id="insert${clazzName}" parameterType="${doReference}.${clazzName}"#if($pkColumn) useGeneratedKeys="true" keyProperty="$pkColumn.fieldName"#end>
         insert into ${tableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
     #foreach($column in $columns)
@@ -68,7 +68,7 @@
 
 #if($!pkColumn)
     <!--修改-->
-    <update id="update${clazzName}" parameterType="${clazzName}">
+    <update id="update${clazzName}" parameterType="${doReference}.${clazzName}">
         update ${tableName}
         <trim prefix="SET" suffixOverrides=",">
     #foreach($column in $columns)

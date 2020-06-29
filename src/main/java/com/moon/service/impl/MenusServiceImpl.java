@@ -1,11 +1,7 @@
 package com.moon.service.impl;
 
 import com.moon.model.dto.MenusDTO;
-import com.moon.model.entity.Menus;
-import com.moon.mapper.MenusMapper;
 import com.moon.service.MenusService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +16,8 @@ import java.util.List;
  */
 @Service
 public class MenusServiceImpl implements MenusService {
-    @Autowired
-    private MenusMapper menusMapper;
+//    @Autowired
+//    private MenusMapper menusMapper;
 
     @Override
     public List<MenusDTO> findAll() {

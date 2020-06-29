@@ -6,7 +6,6 @@ import com.moon.model.entity.Users;
 import com.moon.model.vo.UsersVO;
 import com.moon.service.UsersService;
 import com.moon.utils.BeanCopierUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

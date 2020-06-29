@@ -19,7 +19,7 @@ public class GenConfig {
 
 
     /*全局配置*/
-    public static boolean isMybatisPlus = true;//是否使用mybatis-plus 否表示使用原生mybatis
+    public static boolean isMybatisPlus = false;//是否使用mybatis-plus 否表示使用原生mybatis
     public static String[] excludeTable = {"flyway_schema_history"};//排除的表
 
     /*DO配置*/

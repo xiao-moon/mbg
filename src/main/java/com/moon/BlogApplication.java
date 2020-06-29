@@ -1,5 +1,6 @@
 package com.moon;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 创建人: 小月
  * 创建时间: 2020-06-12 19:56
  */
+@MapperScan({"com.moon.mapper","com.moon.generator.mapper"})
 @SpringBootApplication
 public class BlogApplication {
 
