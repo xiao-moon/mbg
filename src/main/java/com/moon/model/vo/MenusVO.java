@@ -1,5 +1,7 @@
 package com.moon.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.moon.model.supports.SimpleView;
 import lombok.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,13 +18,14 @@ import java.io.Serializable;
 @Builder
 @ApiModel("Menus")
 public class MenusVO implements Serializable{
-
     private static final long serialVersionUID = 1L;
 
+    public interface MenusVIew extends SimpleView.ReturnDataView {}
 
     /**
     * ID主键自增
     */
+    @JsonView(MenusVIew.class)
     @ApiModelProperty("ID主键自增")
     private String id;
 
@@ -35,24 +38,28 @@ public class MenusVO implements Serializable{
     /**
     * 名称
     */
+    @JsonView(MenusVIew.class)
     @ApiModelProperty("名称")
     private String name;
 
     /**
     * 父ID
     */
+    @JsonView(MenusVIew.class)
     @ApiModelProperty("父ID")
     private String parentId;
 
     /**
     * 位置
     */
+    @JsonView(MenusVIew.class)
     @ApiModelProperty("位置")
     private String priority;
 
     /**
     * 打开方式
     */
+    @JsonView(MenusVIew.class)
     @ApiModelProperty("打开方式")
     private String target;
 

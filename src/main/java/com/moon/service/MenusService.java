@@ -1,6 +1,7 @@
 package com.moon.service;
 
 import com.moon.model.dto.MenusDTO;
+import com.moon.model.vo.MenusVO;
 
 import java.util.List;
 
@@ -10,5 +11,5 @@ import java.util.List;
  * 创建时间: 2020/6/28 22:51
  **/
 public interface MenusService {
-    List<MenusDTO> findAll();
+    List<MenusVO> findAll();
 }
