@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moon.mapper.PhotosMapper">
+    <resultMap type="com.moon.model.entity.Photos" id="PhotosResult">
+        <result property="createTime"    column="create_time"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="description"    column="description"    />
+        <result property="id"    column="id"    />
+        <result property="location"    column="location"    />
+        <result property="name"    column="name"    />
+        <result property="status"    column="status"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="url"    column="url"    />
+    </resultMap>
+
+    <sql id="selectPhotosVo">
+        select create_time, del_flag, description, id, location, name, status, update_time, url from photos
+    </sql>
+
+    <!--查询单个-->
+    <select id="selectPhotosById" parameterType="Integer" resultMap="PhotosResult">
+        <include refid="selectPhotosVo"/>
+        where id = #{id}
+    </select>
+
+    <!--查询列表-->
+    <select id="selectPhotosList" parameterType="com.moon.model.entity.Photos" resultMap="PhotosResult">
+        <include refid="selectPhotosVo"/>
+        <where>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="delFlag != null "> and del_flag = #{delFlag}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="location != null  and location != ''"> and location = #{location}</if>
+            <if test="name != null  and name != ''"> and name = #{name}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+        </where>
+    </select>
+
+    <!--新增-->
+    <insert id="insertPhotos" parameterType="com.moon.model.entity.Photos" useGeneratedKeys="true" keyProperty="id">
+        insert into photos
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="createTime != null ">create_time,</if>
+            <if test="delFlag != null ">del_flag,</if>
+            <if test="description != null  and description != ''">description,</if>
+            <if test="location != null  and location != ''">location,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="status != null ">status,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="url != null  and url != ''">url,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="delFlag != null ">#{delFlag},</if>
+            <if test="description != null  and description != ''">#{description},</if>
+            <if test="location != null  and location != ''">#{location},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="url != null  and url != ''">#{url},</if>
+        </trim>
+    </insert>
+
+    <!--修改-->
+    <update id="updatePhotos" parameterType="com.moon.model.entity.Photos">
+        update photos
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="delFlag != null ">del_flag = #{delFlag},</if>
+            <if test="description != null  and description != ''">description = #{description},</if>
+            <if test="location != null  and location != ''">location = #{location},</if>
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="url != null  and url != ''">url = #{url},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <!--删除-->
+    <delete id="deletePhotosById" parameterType="Integer">
+        delete from photos where id = #{id}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="deletePhotosByIds" parameterType="String">
+        delete from photos where id in
+        <foreach item="${pkColumn.javaField}" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

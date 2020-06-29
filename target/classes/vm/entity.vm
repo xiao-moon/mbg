@@ -1,0 +1,68 @@
+package ${doReference};
+
+#if(${isMybatisPlus})
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+#end
+#if(${lombokData} || ${lombokBuilder})
+import lombok.*;
+#end
+#foreach (${column} in ${columns})
+#if($!column.fieldImport)
+import ${column.fieldImport};
+#end
+#end
+
+import java.io.Serializable;
+
+/**
+* 描述: ${clazzName}
+* 创建人: ${iAuthor}
+* 创建时间: ${nowTime}
+**/
+#if(${lombokData})
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+#end
+#if(${lombokBuilder})
+@Builder
+#end
+#if(${isMybatisPlus})
+@TableName("${tableName}")
+#end
+public class ${clazzName} implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
+#foreach ($column in $columns)
+    /**
+     * ${column.columnComment}
+     */
+    #if(${isMybatisPlus})
+    #if(${column.extra}=='auto_increment')
+    @TableId
+    #else
+    @TableField("${column.columnName}")
+    #end
+    #end
+    private ${column.fieldType} ${column.fieldName};
+
+#end
+
+#foreach ($column in $columns)
+
+    #if(!${lombokData})
+    public ${column.fieldType} get${column.fieldNameUpper}() {
+        return ${column.fieldName};
+    }
+
+    public void set${column.fieldNameUpper}(${column.fieldType} ${column.fieldName}) {
+        this.${column.fieldName} = ${column.fieldName};
+    }
+    #end
+
+#end
+}

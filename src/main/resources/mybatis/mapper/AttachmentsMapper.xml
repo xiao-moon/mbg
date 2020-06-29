@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moon.mapper.AttachmentsMapper">
+    <resultMap type="com.moon.model.entity.Attachments" id="AttachmentsResult">
+        <result property="absoluteFilePath"    column="absolute_file_path"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="height"    column="height"    />
+        <result property="id"    column="id"    />
+        <result property="mediaType"    column="media_type"    />
+        <result property="name"    column="name"    />
+        <result property="relativeFilePath"    column="relative_file_path"    />
+        <result property="size"    column="size"    />
+        <result property="status"    column="status"    />
+        <result property="suffix"    column="suffix"    />
+        <result property="type"    column="type"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="width"    column="width"    />
+    </resultMap>
+
+    <sql id="selectAttachmentsVo">
+        select absolute_file_path, create_time, del_flag, height, id, media_type, name, relative_file_path, size, status, suffix, type, update_time, width from attachments
+    </sql>
+
+    <!--查询单个-->
+    <select id="selectAttachmentsById" parameterType="Integer" resultMap="AttachmentsResult">
+        <include refid="selectAttachmentsVo"/>
+        where id = #{id}
+    </select>
+
+    <!--查询列表-->
+    <select id="selectAttachmentsList" parameterType="com.moon.model.entity.Attachments" resultMap="AttachmentsResult">
+        <include refid="selectAttachmentsVo"/>
+        <where>
+            <if test="absoluteFilePath != null  and absoluteFilePath != ''"> and absolute_file_path = #{absoluteFilePath}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="delFlag != null "> and del_flag = #{delFlag}</if>
+            <if test="height != null "> and height = #{height}</if>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="mediaType != null  and mediaType != ''"> and media_type = #{mediaType}</if>
+            <if test="name != null  and name != ''"> and name = #{name}</if>
+            <if test="relativeFilePath != null  and relativeFilePath != ''"> and relative_file_path = #{relativeFilePath}</if>
+            <if test="size != null "> and size = #{size}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="suffix != null  and suffix != ''"> and suffix = #{suffix}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="width != null "> and width = #{width}</if>
+        </where>
+    </select>
+
+    <!--新增-->
+    <insert id="insertAttachments" parameterType="com.moon.model.entity.Attachments" useGeneratedKeys="true" keyProperty="id">
+        insert into attachments
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="absoluteFilePath != null  and absoluteFilePath != ''">absolute_file_path,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="delFlag != null ">del_flag,</if>
+            <if test="height != null ">height,</if>
+            <if test="mediaType != null  and mediaType != ''">media_type,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="relativeFilePath != null  and relativeFilePath != ''">relative_file_path,</if>
+            <if test="size != null ">size,</if>
+            <if test="status != null ">status,</if>
+            <if test="suffix != null  and suffix != ''">suffix,</if>
+            <if test="type != null ">type,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="width != null ">width,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="absoluteFilePath != null  and absoluteFilePath != ''">#{absoluteFilePath},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="delFlag != null ">#{delFlag},</if>
+            <if test="height != null ">#{height},</if>
+            <if test="mediaType != null  and mediaType != ''">#{mediaType},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="relativeFilePath != null  and relativeFilePath != ''">#{relativeFilePath},</if>
+            <if test="size != null ">#{size},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="suffix != null  and suffix != ''">#{suffix},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="width != null ">#{width},</if>
+        </trim>
+    </insert>
+
+    <!--修改-->
+    <update id="updateAttachments" parameterType="com.moon.model.entity.Attachments">
+        update attachments
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="absoluteFilePath != null  and absoluteFilePath != ''">absolute_file_path = #{absoluteFilePath},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="delFlag != null ">del_flag = #{delFlag},</if>
+            <if test="height != null ">height = #{height},</if>
+            <if test="mediaType != null  and mediaType != ''">media_type = #{mediaType},</if>
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="relativeFilePath != null  and relativeFilePath != ''">relative_file_path = #{relativeFilePath},</if>
+            <if test="size != null ">size = #{size},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="suffix != null  and suffix != ''">suffix = #{suffix},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="width != null ">width = #{width},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <!--删除-->
+    <delete id="deleteAttachmentsById" parameterType="Integer">
+        delete from attachments where id = #{id}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="deleteAttachmentsByIds" parameterType="String">
+        delete from attachments where id in
+        <foreach item="${pkColumn.javaField}" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

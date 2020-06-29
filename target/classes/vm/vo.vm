@@ -1,0 +1,55 @@
+package ${voReference};
+
+#if(${lombokData} || ${lombokBuilder})
+import lombok.*;
+#end
+#if(${swagger2})
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+#end
+import java.io.Serializable;
+
+/**
+* 描述: ${clazzName}VO
+* 创建人: ${iAuthor}
+* 创建时间: ${nowTime}
+**/
+#if(${lombokData})
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+#end
+#if(${lombokBuilder})
+@Builder
+#end
+#if(${swagger2})
+@ApiModel("${clazzName}")
+#end
+public class ${clazzName}VO implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
+#foreach ($column in $columns)
+
+    /**
+    * ${column.columnComment}
+    */
+#if(${swagger2})
+    @ApiModelProperty("${column.columnComment}")
+#end
+    private String ${column.fieldName};
+#end
+
+#foreach ($column in $columns)
+
+    #if(!${lombokData})
+    public String get${column.fieldNameUpper}() {
+    return ${column.fieldName};
+    }
+
+    public void set${column.fieldNameUpper}(String ${column.fieldName}) {
+    this.${column.fieldName} = ${column.fieldName};
+    }
+    #end
+#end
+}

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${mapperReference}.${clazzName}Mapper">
+    <resultMap type="${doReference}.${clazzName}" id="${clazzName}Result">
+    #foreach ($column in $columns)
+        <result property="${column.fieldName}"    column="${column.columnName}"    />
+    #end
+    </resultMap>
+
+    <sql id="select${clazzName}Vo">
+        select#foreach($column in $columns) $column.columnName#if($foreach.count != ${columns.size()}),#end#end from ${tableName}
+    </sql>
+
+    <!--查询单个-->
+    #foreach ($column in $columns)
+        #if(${column.extra}=='auto_increment')
+    <select id="select${clazzName}ById" parameterType="${column.fieldType}" resultMap="${clazzName}Result">
+        <include refid="select${clazzName}Vo"/>
+        where ${column.columnName} = #{${column.fieldName}}
+    </select>
+        #end
+    #end
+
+    <!--查询列表-->
+    <select id="select${clazzName}List" parameterType="${doReference}.${clazzName}" resultMap="${clazzName}Result">
+        <include refid="select${clazzName}Vo"/>
+        <where>
+            #foreach($column in $columns)
+        #if($column.queryType == "EQ")
+            <if test="$column.fieldName != null #if($column.fieldType == 'String' ) and $column.fieldName.trim() != ''#end"> and $column.columnName = #{$column.fieldName}</if>
+        #elseif($queryType == "NE")
+            <if test="$column.fieldName != null #if($column.fieldType == 'String' ) and $column.fieldName.trim() != ''#end"> and $column.columnName != #{$column.fieldName}</if>
+        #elseif($queryType == "GT")
+            <if test="$column.fieldName != null #if($column.fieldType == 'String' ) and $column.fieldName.trim() != ''#end"> and $column.columnName &gt; #{$column.fieldName}</if>
+        #elseif($queryType == "GTE")
+            <if test="$column.fieldName != null #if($column.fieldType == 'String' ) and $column.fieldName.trim() != ''#end"> and $column.columnName &gt;= #{$column.fieldName}</if>
+        #elseif($queryType == "LT")
+            <if test="$column.fieldName != null #if($column.fieldType == 'String' ) and $column.fieldName.trim() != ''#end"> and $column.columnName &lt; #{$column.fieldName}</if>
+        #elseif($queryType == "LTE")
+            <if test="$column.fieldName != null #if($column.fieldType == 'String' ) and $column.fieldName.trim() != ''#end"> and $column.columnName &lt;= #{$column.fieldName}</if>
+        #elseif($queryType == "LIKE")
+            <if test="$column.fieldName != null #if($column.fieldType == 'String' ) and $column.fieldName.trim() != ''#end"> and $column.columnName like concat('%', #{$column.fieldName}, '%')</if>
+        #end
+            #end
+        </where>
+    </select>
+
+    <!--新增-->
+    <insert id="insert${clazzName}" parameterType="${doReference}.${clazzName}"#if($pkColumn) useGeneratedKeys="true" keyProperty="$pkColumn.fieldName"#end>
+        insert into ${tableName}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+    #foreach($column in $columns)
+        #if($column.columnName != $pkColumn.columnName || !$pkColumn.extra)
+            <if test="$column.fieldName != null #if($column.fieldType == 'String' ) and $column.fieldName != ''#end">$column.columnName,</if>
+        #end
+    #end
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+    #foreach($column in $columns)
+        #if($column.columnName != $pkColumn.columnName || !$pkColumn.extra)
+            <if test="$column.fieldName != null #if($column.fieldType == 'String' ) and $column.fieldName != ''#end">#{$column.fieldName},</if>
+        #end
+    #end
+        </trim>
+    </insert>
+
+#if($!pkColumn)
+    <!--修改-->
+    <update id="update${clazzName}" parameterType="${doReference}.${clazzName}">
+        update ${tableName}
+        <trim prefix="SET" suffixOverrides=",">
+    #foreach($column in $columns)
+        #if($column.columnName != $pkColumn.columnName)
+            <if test="$column.fieldName != null #if($column.fieldType == 'String' ) and $column.fieldName != ''#end">$column.columnName = #{$column.fieldName},</if>
+        #end
+    #end
+        </trim>
+        where ${pkColumn.columnName} = #{${pkColumn.fieldName}}
+    </update>
+
+    <!--删除-->
+    <delete id="delete${clazzName}ById" parameterType="${pkColumn.fieldType}">
+        delete from ${tableName} where ${pkColumn.columnName} = #{${pkColumn.fieldName}}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="delete${clazzName}ByIds" parameterType="String">
+        delete from ${tableName} where ${pkColumn.columnName} in
+        <foreach item="${pkColumn.javaField}" collection="array" open="(" separator="," close=")">
+            #{${pkColumn.fieldName}}
+        </foreach>
+    </delete>
+#end
+
+</mapper>

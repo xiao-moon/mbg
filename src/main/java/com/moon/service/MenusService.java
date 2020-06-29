@@ -11,5 +11,8 @@ import java.util.List;
  * 创建时间: 2020/6/28 22:51
  **/
 public interface MenusService {
-    List<MenusVO> findAll();
+    /**
+     * 获取首页菜单
+     */
+    List<MenusVO> findIndexMenus();
 }

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moon.mapper.MenusMapper">
+    <resultMap type="com.moon.model.entity.Menus" id="MenusResult">
+        <result property="categoriesFlag"    column="categories_flag"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="icon"    column="icon"    />
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="priority"    column="priority"    />
+        <result property="status"    column="status"    />
+        <result property="target"    column="target"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="url"    column="url"    />
+        <association property="photos" javaType="com.moon.model.entity.Photos">
+            <result property="createTime"    column="create_time"    />
+            <result property="delFlag"    column="del_flag"    />
+            <result property="description"    column="description"    />
+            <result property="id"    column="id"    />
+            <result property="location"    column="location"    />
+            <result property="name"    column="pname"    />
+            <result property="status"    column="status"    />
+            <result property="updateTime"    column="update_time"    />
+            <result property="url"    column="purl"    />
+        </association>
+    </resultMap>
+
+    <resultMap type="com.moon.model.entity.Photos" id="PhotosResult">
+        <result property="createTime"    column="create_time"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="description"    column="description"    />
+        <result property="id"    column="id"    />
+        <result property="location"    column="location"    />
+        <result property="name"    column="pname"    />
+        <result property="status"    column="status"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="url"    column="purl"    />
+    </resultMap>
+
+    <sql id="selectMenusVo">
+        select categories_flag, create_time, del_flag, icon, id, name, parent_id, priority, status, target, update_time, url from menus
+    </sql>
+
+    <!--查询单个-->
+    <select id="selectMenusById" parameterType="Integer" resultMap="MenusResult">
+        <include refid="selectMenusVo"/>
+        where id = #{id}
+    </select>
+
+    <!--查询列表-->
+    <select id="selectMenusList" parameterType="com.moon.model.entity.Menus" resultMap="MenusResult">
+        <include refid="selectMenusVo"/>
+        <where>
+            <if test="categoriesFlag != null "> and categories_flag = #{categoriesFlag}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="delFlag != null "> and del_flag = #{delFlag}</if>
+            <if test="icon != null  and icon != ''"> and icon = #{icon}</if>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="name != null  and name != ''"> and name = #{name}</if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="priority != null "> and priority = #{priority}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="target != null  and target != ''"> and target = #{target}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+        </where>
+    </select>
+
+    <!--新增-->
+    <insert id="insertMenus" parameterType="com.moon.model.entity.Menus" useGeneratedKeys="true" keyProperty="id">
+        insert into menus
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoriesFlag != null ">categories_flag,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="delFlag != null ">del_flag,</if>
+            <if test="icon != null  and icon != ''">icon,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="parentId != null ">parent_id,</if>
+            <if test="priority != null ">priority,</if>
+            <if test="status != null ">status,</if>
+            <if test="target != null  and target != ''">target,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="url != null  and url != ''">url,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoriesFlag != null ">#{categoriesFlag},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="delFlag != null ">#{delFlag},</if>
+            <if test="icon != null  and icon != ''">#{icon},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="parentId != null ">#{parentId},</if>
+            <if test="priority != null ">#{priority},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="target != null  and target != ''">#{target},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="url != null  and url != ''">#{url},</if>
+        </trim>
+    </insert>
+
+    <!--修改-->
+    <update id="updateMenus" parameterType="com.moon.model.entity.Menus">
+        update menus
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="categoriesFlag != null ">categories_flag = #{categoriesFlag},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="delFlag != null ">del_flag = #{delFlag},</if>
+            <if test="icon != null  and icon != ''">icon = #{icon},</if>
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="parentId != null ">parent_id = #{parentId},</if>
+            <if test="priority != null ">priority = #{priority},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="target != null  and target != ''">target = #{target},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="url != null  and url != ''">url = #{url},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <!--删除-->
+    <delete id="deleteMenusById" parameterType="Integer">
+        delete from menus where id = #{id}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="deleteMenusByIds" parameterType="String">
+        delete from menus where id in
+        <foreach item="${pkColumn.javaField}" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--查询首页菜单-->
+    <select id="selectIndexMenus" resultMap="MenusResult">
+        select
+            m.id,
+            m.icon,
+            m.name,
+            m.url,
+            m.parent_id,
+            m.priority,
+            m.target,
+            p.name pname,
+            p.description,
+            p.url purl
+        from
+            menus m
+            left join photo_other_categories poc on m.id = poc.other_id
+            and poc.type = 2
+            left join photos p on p.id = poc.photo_id
+        where
+            m.del_flag = 0
+            and m.status = 0
+    </select>
+
+
+</mapper>
