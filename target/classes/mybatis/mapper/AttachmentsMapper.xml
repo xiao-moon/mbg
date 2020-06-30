@@ -11,17 +11,16 @@
         <result property="id"    column="id"    />
         <result property="mediaType"    column="media_type"    />
         <result property="name"    column="name"    />
-        <result property="relativeFilePath"    column="relative_file_path"    />
         <result property="size"    column="size"    />
         <result property="status"    column="status"    />
         <result property="suffix"    column="suffix"    />
-        <result property="type"    column="type"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="url"    column="url"    />
         <result property="width"    column="width"    />
     </resultMap>
 
     <sql id="selectAttachmentsVo">
-        select absolute_file_path, create_time, del_flag, height, id, media_type, name, relative_file_path, size, status, suffix, type, update_time, width from attachments
+        select absolute_file_path, create_time, del_flag, height, id, media_type, name, size, status, suffix, update_time, url, width from attachments
     </sql>
 
     <!--查询单个-->
@@ -41,12 +40,11 @@
             <if test="id != null "> and id = #{id}</if>
             <if test="mediaType != null  and mediaType != ''"> and media_type = #{mediaType}</if>
             <if test="name != null  and name != ''"> and name = #{name}</if>
-            <if test="relativeFilePath != null  and relativeFilePath != ''"> and relative_file_path = #{relativeFilePath}</if>
             <if test="size != null "> and size = #{size}</if>
             <if test="status != null "> and status = #{status}</if>
             <if test="suffix != null  and suffix != ''"> and suffix = #{suffix}</if>
-            <if test="type != null "> and type = #{type}</if>
             <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
             <if test="width != null "> and width = #{width}</if>
         </where>
     </select>
@@ -61,12 +59,11 @@
             <if test="height != null ">height,</if>
             <if test="mediaType != null  and mediaType != ''">media_type,</if>
             <if test="name != null  and name != ''">name,</if>
-            <if test="relativeFilePath != null  and relativeFilePath != ''">relative_file_path,</if>
             <if test="size != null ">size,</if>
             <if test="status != null ">status,</if>
             <if test="suffix != null  and suffix != ''">suffix,</if>
-            <if test="type != null ">type,</if>
             <if test="updateTime != null ">update_time,</if>
+            <if test="url != null  and url != ''">url,</if>
             <if test="width != null ">width,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -76,12 +73,11 @@
             <if test="height != null ">#{height},</if>
             <if test="mediaType != null  and mediaType != ''">#{mediaType},</if>
             <if test="name != null  and name != ''">#{name},</if>
-            <if test="relativeFilePath != null  and relativeFilePath != ''">#{relativeFilePath},</if>
             <if test="size != null ">#{size},</if>
             <if test="status != null ">#{status},</if>
             <if test="suffix != null  and suffix != ''">#{suffix},</if>
-            <if test="type != null ">#{type},</if>
             <if test="updateTime != null ">#{updateTime},</if>
+            <if test="url != null  and url != ''">#{url},</if>
             <if test="width != null ">#{width},</if>
         </trim>
     </insert>
@@ -96,12 +92,11 @@
             <if test="height != null ">height = #{height},</if>
             <if test="mediaType != null  and mediaType != ''">media_type = #{mediaType},</if>
             <if test="name != null  and name != ''">name = #{name},</if>
-            <if test="relativeFilePath != null  and relativeFilePath != ''">relative_file_path = #{relativeFilePath},</if>
             <if test="size != null ">size = #{size},</if>
             <if test="status != null ">status = #{status},</if>
             <if test="suffix != null  and suffix != ''">suffix = #{suffix},</if>
-            <if test="type != null ">type = #{type},</if>
             <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="url != null  and url != ''">url = #{url},</if>
             <if test="width != null ">width = #{width},</if>
         </trim>
         where id = #{id}

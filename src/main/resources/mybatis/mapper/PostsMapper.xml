@@ -18,16 +18,31 @@
         <result property="metaKeywords"    column="meta_keywords"    />
         <result property="originalContent"    column="original_content"    />
         <result property="password"    column="password"    />
+        <result property="priority"    column="priority"    />
+        <result property="showContent"    column="show_content"    />
         <result property="status"    column="status"    />
         <result property="title"    column="title"    />
         <result property="topFlag"    column="top_flag"    />
         <result property="topPriority"    column="top_priority"    />
         <result property="updateTime"    column="update_time"    />
         <result property="visits"    column="visits"    />
+        <association property="category" javaType="com.moon.model.entity.Categories" >
+            <result property="name"    column="c_name"    />
+            <result property="id"    column="c_id"    />
+        </association>
+        <association property="attachment" javaType="com.moon.model.entity.Attachments">
+            <result property="url"    column="a_url"    />
+            <result property="name"    column="a_name"    />
+        </association>
+        <collection property="tags" ofType="com.moon.model.entity.Tags">
+            <result property="id"    column="t_id"    />
+            <result property="name"    column="t_name"    />
+            <result property="priority"    column="pt_priority"  />
+        </collection>
     </resultMap>
 
     <sql id="selectPostsVo">
-        select create_time, del_flag, disallow_comment, edit_time, editor_type, export_priority, export_title, format_content, id, likes, meta_description, meta_keywords, original_content, password, status, title, top_flag, top_priority, update_time, visits from posts
+        select create_time, del_flag, disallow_comment, edit_time, editor_type, export_priority, export_title, format_content, id, likes, meta_description, meta_keywords, original_content, password, priority, show_content, status, title, top_flag, top_priority, update_time, visits from posts
     </sql>
 
     <!--查询单个-->
@@ -54,6 +69,8 @@
             <if test="metaKeywords != null  and metaKeywords != ''"> and meta_keywords = #{metaKeywords}</if>
             <if test="originalContent != null  and originalContent != ''"> and original_content = #{originalContent}</if>
             <if test="password != null  and password != ''"> and password = #{password}</if>
+            <if test="priority != null "> and priority = #{priority}</if>
+            <if test="showContent != null  and showContent != ''"> and show_content = #{showContent}</if>
             <if test="status != null "> and status = #{status}</if>
             <if test="title != null  and title != ''"> and title = #{title}</if>
             <if test="topFlag != null "> and top_flag = #{topFlag}</if>
@@ -80,6 +97,8 @@
             <if test="metaKeywords != null  and metaKeywords != ''">meta_keywords,</if>
             <if test="originalContent != null  and originalContent != ''">original_content,</if>
             <if test="password != null  and password != ''">password,</if>
+            <if test="priority != null ">priority,</if>
+            <if test="showContent != null  and showContent != ''">show_content,</if>
             <if test="status != null ">status,</if>
             <if test="title != null  and title != ''">title,</if>
             <if test="topFlag != null ">top_flag,</if>
@@ -101,6 +120,8 @@
             <if test="metaKeywords != null  and metaKeywords != ''">#{metaKeywords},</if>
             <if test="originalContent != null  and originalContent != ''">#{originalContent},</if>
             <if test="password != null  and password != ''">#{password},</if>
+            <if test="priority != null ">#{priority},</if>
+            <if test="showContent != null  and showContent != ''">#{showContent},</if>
             <if test="status != null ">#{status},</if>
             <if test="title != null  and title != ''">#{title},</if>
             <if test="topFlag != null ">#{topFlag},</if>
@@ -127,6 +148,8 @@
             <if test="metaKeywords != null  and metaKeywords != ''">meta_keywords = #{metaKeywords},</if>
             <if test="originalContent != null  and originalContent != ''">original_content = #{originalContent},</if>
             <if test="password != null  and password != ''">password = #{password},</if>
+            <if test="priority != null ">priority = #{priority},</if>
+            <if test="showContent != null  and showContent != ''">show_content = #{showContent},</if>
             <if test="status != null ">status = #{status},</if>
             <if test="title != null  and title != ''">title = #{title},</if>
             <if test="topFlag != null ">top_flag = #{topFlag},</if>
@@ -150,4 +173,40 @@
         </foreach>
     </delete>
 
+    <select id="selectIndexPosts" resultMap="PostsResult">
+        SELECT
+            p.id,
+            p.format_content,
+            p.show_content,
+            p.likes,
+            p.priority,
+            p.meta_description,
+            p.meta_keywords,
+            p.title,
+            p.top_flag,
+            p.top_priority,
+            p.create_time,
+            c.id c_id,
+            c.NAME c_name,
+            t.id t_id,
+            t.NAME t_name,
+            pt.priority pt_priority,
+            a.NAME a_name,
+            a.url a_url
+        FROM
+            `posts` p
+            LEFT JOIN posts_categories pc ON pc.post_id = p.id
+            LEFT JOIN categories c ON pc.category_id = c.id
+            LEFT JOIN posts_tags pt ON p.id = pt.post_id
+            LEFT JOIN tags t ON t.id = pt.tag_id
+            LEFT JOIN attachments_posts ap ON ap.post_id = p.id
+            LEFT JOIN attachments a ON a.id = ap.attachment_id
+        WHERE
+            p.del_flag = 0
+            AND p.STATUS = 0
+        ORDER BY
+            p.top_flag DESC,
+            p.top_priority DESC,
+            p.create_time DESC
+    </select>
 </mapper>

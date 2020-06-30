@@ -1,22 +1,24 @@
 package com.moon.model.entity;
 
 import lombok.*;
+
 import java.util.Date;
 import java.util.Date;
 import java.util.Date;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
-* 描述: Posts
-* 创建人: 小月
-* 创建时间: 2020-06-29 20:23:44
-**/
+ * 描述: Posts
+ * 创建人: 小月
+ * 创建时间: 2020-07-01 01:56:46
+ **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Posts implements Serializable{
+public class Posts implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -91,6 +93,16 @@ public class Posts implements Serializable{
     private String password;
 
     /**
+     * 排序，数值越小位置越靠前，0表示不排序
+     */
+    private Integer priority;
+
+    /**
+     * 缩略展示最多70文字
+     */
+    private String showContent;
+
+    /**
      * 状态:0正常;1草稿,2停用
      */
     private Integer status;
@@ -106,7 +118,7 @@ public class Posts implements Serializable{
     private Integer topFlag;
 
     /**
-     * 置顶位置编号:越小排序位置越靠前
+     * 置顶位置排序，数值越小位置越靠前，0表示不排序
      */
     private Integer topPriority;
 
@@ -120,45 +132,20 @@ public class Posts implements Serializable{
      */
     private Integer visits;
 
+    /**
+     * 关联附件表
+     */
+    private Attachments attachment;
 
+    /**
+     * 关联文章分类表
+     */
+    private Categories category;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 关联标签表
+     */
+    private List<Tags> tags;
 
 
 }

@@ -46,17 +46,17 @@ public class MenusServiceImpl implements MenusService {
                 menusVO.setId(String.valueOf(menu.getId()));
                 menusVO.setIcon(menu.getIcon());
                 menusVO.setName(menu.getName());
+                menusVO.setDesc(menu.getDesc());
                 menusVO.setUrl(menu.getUrl());
                 menusVO.setPriority(String.valueOf(menu.getPriority()));
                 menusVO.setTarget(menu.getTarget());
-                menusVO.setPhotoUrl(menu.getPhotos().getUrl());
-                menusVO.setPhotoName(menu.getPhotos().getName());
-                menusVO.setPhotoDesc(menu.getPhotos().getDescription());
+                menusVO.setPhotoUrl(menu.getAttachments().getUrl());
+                menusVO.setPhotoName(menu.getAttachments().getName());
                 subMenus(menus, menu, menusVO);
                 menusVOList.add(menusVO);
             }
         }
-        if(CollectionUtils.isNotEmpty(menusVOList)){
+        if (CollectionUtils.isNotEmpty(menusVOList)) {
             this.sort(menusVOList);
         }
     }
@@ -73,12 +73,12 @@ public class MenusServiceImpl implements MenusService {
                 subMenusVO.setId(String.valueOf(subMenu.getId()));
                 subMenusVO.setIcon(subMenu.getIcon());
                 subMenusVO.setName(subMenu.getName());
+                subMenusVO.setDesc(subMenu.getDesc());
                 subMenusVO.setUrl(subMenu.getUrl());
                 subMenusVO.setPriority(String.valueOf(subMenu.getPriority()));
                 subMenusVO.setTarget(subMenu.getTarget());
-                subMenusVO.setPhotoUrl(subMenu.getPhotos().getUrl());
-                subMenusVO.setPhotoName(subMenu.getPhotos().getName());
-                subMenusVO.setPhotoDesc(subMenu.getPhotos().getDescription());
+                subMenusVO.setPhotoUrl(subMenu.getAttachments().getUrl());
+                subMenusVO.setPhotoName(subMenu.getAttachments().getName());
                 subMenus(menus, subMenu, subMenusVO);
                 subMenusVOList.add(subMenusVO);
             }

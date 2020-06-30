@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
 * 描述: Photos
 * 创建人: 小月
-* 创建时间: 2020-06-29 20:23:44
+* 创建时间: 2020-07-01 01:56:46
 **/
 @Data
 @AllArgsConstructor
@@ -50,9 +50,19 @@ public class Photos implements Serializable{
     private String name;
 
     /**
+     * 排序，数值越小位置越靠前，0表示不排序
+     */
+    private Integer priority;
+
+    /**
      * 状态:0正常;1停用
      */
     private Integer status;
+
+    /**
+     * 图片分类ID
+     */
+    private Integer type;
 
     /**
      * 更新时间
@@ -63,6 +73,10 @@ public class Photos implements Serializable{
      * 地址
      */
     private String url;
+
+
+
+
 
 
 

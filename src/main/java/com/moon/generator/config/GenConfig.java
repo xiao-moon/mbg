@@ -20,17 +20,34 @@ public class GenConfig {
 
     /*全局配置*/
     public static boolean isMybatisPlus = false;//是否使用mybatis-plus 否表示使用原生mybatis
-    public static String[] excludeTable = {"flyway_schema_history"};//排除的表
+    public static String[] excludeTable = {
+            "flyway_schema_history",
+            "attachments",
+            "attachments_categories",
+            "attachments_menus",
+            "attachments_posts",
+            "categories",
+            "comments",
+            "journals",
+            "menus",
+            "photos",
+            "photos_type",
+            "posts_categories",
+            "posts_tags",
+            "posts",
+            "tags",
+            "users"
+            };//排除的表
 
     /*DO配置*/
     public static boolean genDo = true;//是否生成DO层
     public static boolean lombokData = true;//是否生成lombok data all no 三个注解
     public static boolean lombokBuilder = true;//是否生成lombok builder注解
-    public static boolean coverDo = false;//是否覆盖原DO层
+    public static boolean coverDo = true;//是否覆盖原DO层
 
     /*Mapper配置*/
     public static boolean genMapper = true;//是否生成Mapper层
-    public static boolean coverMapper = false;//是否覆盖原Mapper层
+    public static boolean coverMapper = true;//是否覆盖原Mapper层
 
     /*DTO配置*/
     public static boolean genDto = false;//是否生成DTO层
@@ -39,7 +56,7 @@ public class GenConfig {
     /*VO配置*/
     public static boolean genVo = true;//是否生成VO层
     public static boolean swagger2 = true;//是否生成swagger2注解
-    public static boolean coverVo = false;//是否覆盖原VO层
+    public static boolean coverVo = true;//是否覆盖原VO层
 
     /*Service配置*/
     public static boolean genService = false;//是否生成Service层
@@ -47,12 +64,12 @@ public class GenConfig {
 
     /*Controller配置*/
     public static boolean genController = false;//是否生成Controller层
-    public static boolean isRestController = true;//是否生成RestController
+    public static boolean isRestController = false;//是否生成RestController
     public static boolean coverController = false;//是否覆盖原DTO层
 
     /*Mapper.xml配置*/
     public static boolean genMapperXML = true;//是否生成mapper.xml
-    public static boolean coverMapperXML = false;//是否覆盖原Mapper.xml
+    public static boolean coverMapperXML = true;//是否覆盖原Mapper.xml
 
     /*其他配置*/
     private static String rootPath = System.getProperty("user.dir").replace("\\\\", "/");

@@ -3,8 +3,12 @@ package com.moon.controller.content;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.moon.model.supports.SimpleView;
 import com.moon.model.vo.MenusVO;
+import com.moon.model.vo.PostsVO;
+import com.moon.model.vo.UsersVO;
 import com.moon.service.MenusService;
+import com.moon.service.PostService;
 import com.moon.service.UsersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,17 +35,29 @@ public class IndexController {
     @Autowired
     private MenusService menusService;
 
+    @Autowired
+    private PostService postService;
 
-    @GetMapping("/indexInfo")
-    @JsonView(MenusVO.IndexMenusVIew.class)
-    @ApiOperation(value = "获取基础信息", notes="获取菜单及用户信息")
-    public Object indexInfo() {
-//        usersService.findUser();
-//        PageHelper.startPage(2,2);
+
+    @GetMapping("/menus")
+    @JsonView(SimpleView.IndexMenusVIew.class)
+    @ApiOperation(value = "获取基础信息", notes = "获取菜单及用户信息")
+    public Object menuInfo() {
         List<MenusVO> all = menusService.findIndexMenus();
-//        PageInfo<MenusVO> pageInfo = new PageInfo<>(all);
-//        List<MenusVO> list = pageInfo.getList();
         return all;
+    }
+
+    @GetMapping("/info")
+    @JsonView(SimpleView.IndexMenusVIew.class)
+    @ApiOperation(value = "获取基础信息", notes = "获取菜单及用户信息")
+    public Object indexInfo() {
+        usersService.findUser();
+        UsersVO user = usersService.findUser();
+        PageHelper.startPage(2,2);
+        List<PostsVO> indexPosts = postService.findIndexPosts();
+        PageInfo<PostsVO> pageInfo = new PageInfo<PostsVO>(indexPosts);
+        List<PostsVO> list = pageInfo.getList();
+        return list;
     }
 
 }

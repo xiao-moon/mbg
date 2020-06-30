@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
 * 描述: CategoriesVO
 * 创建人: 小月
-* 创建时间: 2020-06-28 23:12:34
+* 创建时间: 2020-07-01 01:56:46
 **/
 @Data
 @AllArgsConstructor
@@ -21,28 +21,10 @@ public class CategoriesVO implements Serializable{
 
 
     /**
-    * ID主键自增
+    * 创建时间
     */
-    @ApiModelProperty("ID主键自增")
-    private String id;
-
-    /**
-    * 父ID
-    */
-    @ApiModelProperty("父ID")
-    private String parentId;
-
-    /**
-    * 分类名称
-    */
-    @ApiModelProperty("分类名称")
-    private String name;
-
-    /**
-    * 状态:0正常;1停用
-    */
-    @ApiModelProperty("状态:0正常;1停用")
-    private String status;
+    @ApiModelProperty("创建时间")
+    private String createTime;
 
     /**
     * 删除标志:0正常;1删除
@@ -51,16 +33,41 @@ public class CategoriesVO implements Serializable{
     private String delFlag;
 
     /**
-    * 创建时间
+    * ID主键自增
     */
-    @ApiModelProperty("创建时间")
-    private String createTime;
+    @ApiModelProperty("ID主键自增")
+    private String id;
+
+    /**
+    * 分类名称
+    */
+    @ApiModelProperty("分类名称")
+    private String name;
+
+    /**
+    * 父ID
+    */
+    @ApiModelProperty("父ID")
+    private String parentId;
+
+    /**
+    * 排序，数值越大位置越靠前，0表示不排序
+    */
+    @ApiModelProperty("排序，数值越大位置越靠前，0表示不排序")
+    private String priority;
+
+    /**
+    * 状态:0正常;1停用
+    */
+    @ApiModelProperty("状态:0正常;1停用")
+    private String status;
 
     /**
     * 更新时间
     */
     @ApiModelProperty("更新时间")
     private String updateTime;
+
 
 
 

@@ -2,12 +2,14 @@ package com.moon.mapper;
 
 import com.moon.model.entity.Menus;
 import java.util.List;
+
+import com.moon.model.vo.MenusVO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
 * 描述: MenusMapper
 * 创建人: 小月
-* 创建时间: 2020-06-29 20:23:44
+* 创建时间: 2020-07-01 01:56:46
 **/
 @Mapper
 public interface MenusMapper{

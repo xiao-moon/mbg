@@ -7,6 +7,7 @@
         <result property="categoriesFlag"    column="categories_flag"    />
         <result property="createTime"    column="create_time"    />
         <result property="delFlag"    column="del_flag"    />
+        <result property="desc"    column="desc"    />
         <result property="icon"    column="icon"    />
         <result property="id"    column="id"    />
         <result property="name"    column="name"    />
@@ -16,33 +17,25 @@
         <result property="target"    column="target"    />
         <result property="updateTime"    column="update_time"    />
         <result property="url"    column="url"    />
-        <association property="photos" javaType="com.moon.model.entity.Photos">
+        <association property="attachments" javaType="com.moon.model.entity.Attachments" >
+            <result property="absoluteFilePath"    column="absolute_file_path"    />
             <result property="createTime"    column="create_time"    />
             <result property="delFlag"    column="del_flag"    />
-            <result property="description"    column="description"    />
+            <result property="height"    column="height"    />
             <result property="id"    column="id"    />
-            <result property="location"    column="location"    />
-            <result property="name"    column="pname"    />
+            <result property="mediaType"    column="media_type"    />
+            <result property="name"    column="a_name"    />
+            <result property="size"    column="size"    />
             <result property="status"    column="status"    />
+            <result property="suffix"    column="suffix"    />
             <result property="updateTime"    column="update_time"    />
-            <result property="url"    column="purl"    />
+            <result property="url"    column="a_url"    />
+            <result property="width"    column="width"    />
         </association>
     </resultMap>
 
-    <resultMap type="com.moon.model.entity.Photos" id="PhotosResult">
-        <result property="createTime"    column="create_time"    />
-        <result property="delFlag"    column="del_flag"    />
-        <result property="description"    column="description"    />
-        <result property="id"    column="id"    />
-        <result property="location"    column="location"    />
-        <result property="name"    column="pname"    />
-        <result property="status"    column="status"    />
-        <result property="updateTime"    column="update_time"    />
-        <result property="url"    column="purl"    />
-    </resultMap>
-
     <sql id="selectMenusVo">
-        select categories_flag, create_time, del_flag, icon, id, name, parent_id, priority, status, target, update_time, url from menus
+        select categories_flag, create_time, del_flag, desc, icon, id, name, parent_id, priority, status, target, update_time, url from menus
     </sql>
 
     <!--查询单个-->
@@ -58,6 +51,7 @@
             <if test="categoriesFlag != null "> and categories_flag = #{categoriesFlag}</if>
             <if test="createTime != null "> and create_time = #{createTime}</if>
             <if test="delFlag != null "> and del_flag = #{delFlag}</if>
+            <if test="desc != null  and desc != ''"> and desc = #{desc}</if>
             <if test="icon != null  and icon != ''"> and icon = #{icon}</if>
             <if test="id != null "> and id = #{id}</if>
             <if test="name != null  and name != ''"> and name = #{name}</if>
@@ -77,6 +71,7 @@
             <if test="categoriesFlag != null ">categories_flag,</if>
             <if test="createTime != null ">create_time,</if>
             <if test="delFlag != null ">del_flag,</if>
+            <if test="desc != null  and desc != ''">desc,</if>
             <if test="icon != null  and icon != ''">icon,</if>
             <if test="name != null  and name != ''">name,</if>
             <if test="parentId != null ">parent_id,</if>
@@ -90,6 +85,7 @@
             <if test="categoriesFlag != null ">#{categoriesFlag},</if>
             <if test="createTime != null ">#{createTime},</if>
             <if test="delFlag != null ">#{delFlag},</if>
+            <if test="desc != null  and desc != ''">#{desc},</if>
             <if test="icon != null  and icon != ''">#{icon},</if>
             <if test="name != null  and name != ''">#{name},</if>
             <if test="parentId != null ">#{parentId},</if>
@@ -108,6 +104,7 @@
             <if test="categoriesFlag != null ">categories_flag = #{categoriesFlag},</if>
             <if test="createTime != null ">create_time = #{createTime},</if>
             <if test="delFlag != null ">del_flag = #{delFlag},</if>
+            <if test="desc != null  and desc != ''">desc = #{desc},</if>
             <if test="icon != null  and icon != ''">icon = #{icon},</if>
             <if test="name != null  and name != ''">name = #{name},</if>
             <if test="parentId != null ">parent_id = #{parentId},</if>
@@ -133,28 +130,26 @@
         </foreach>
     </delete>
 
+
     <!--查询首页菜单-->
     <select id="selectIndexMenus" resultMap="MenusResult">
         select
             m.id,
             m.icon,
             m.name,
+            m.desc,
             m.url,
             m.parent_id,
             m.priority,
             m.target,
-            p.name pname,
-            p.description,
-            p.url purl
+            a.name a_name,
+            a.url a_url
         from
             menus m
-            left join photo_other_categories poc on m.id = poc.other_id
-            and poc.type = 2
-            left join photos p on p.id = poc.photo_id
+            left join attachments_menus am on m.id = am.menu_id
+            left join attachments a on a.id = am.attachment_id
         where
             m.del_flag = 0
             and m.status = 0
-    </select>
-
-
+</select>
 </mapper>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moon.mapper.AttachmentsPostsMapper">
+    <resultMap type="com.moon.model.entity.AttachmentsPosts" id="AttachmentsPostsResult">
+        <result property="attachmentId"    column="attachment_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="id"    column="id"    />
+        <result property="postId"    column="post_id"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectAttachmentsPostsVo">
+        select attachment_id, create_time, id, post_id, update_time from attachments_posts
+    </sql>
+
+    <!--查询单个-->
+    <select id="selectAttachmentsPostsById" parameterType="Integer" resultMap="AttachmentsPostsResult">
+        <include refid="selectAttachmentsPostsVo"/>
+        where id = #{id}
+    </select>
+
+    <!--查询列表-->
+    <select id="selectAttachmentsPostsList" parameterType="com.moon.model.entity.AttachmentsPosts" resultMap="AttachmentsPostsResult">
+        <include refid="selectAttachmentsPostsVo"/>
+        <where>
+            <if test="attachmentId != null "> and attachment_id = #{attachmentId}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="postId != null "> and post_id = #{postId}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+        </where>
+    </select>
+
+    <!--新增-->
+    <insert id="insertAttachmentsPosts" parameterType="com.moon.model.entity.AttachmentsPosts" useGeneratedKeys="true" keyProperty="id">
+        insert into attachments_posts
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="attachmentId != null ">attachment_id,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="postId != null ">post_id,</if>
+            <if test="updateTime != null ">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="attachmentId != null ">#{attachmentId},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="postId != null ">#{postId},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <!--修改-->
+    <update id="updateAttachmentsPosts" parameterType="com.moon.model.entity.AttachmentsPosts">
+        update attachments_posts
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="attachmentId != null ">attachment_id = #{attachmentId},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="postId != null ">post_id = #{postId},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <!--删除-->
+    <delete id="deleteAttachmentsPostsById" parameterType="Integer">
+        delete from attachments_posts where id = #{id}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="deleteAttachmentsPostsByIds" parameterType="String">
+        delete from attachments_posts where id in
+        <foreach item="${pkColumn.javaField}" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

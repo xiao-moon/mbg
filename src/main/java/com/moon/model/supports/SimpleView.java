@@ -9,4 +9,8 @@ public class SimpleView {
 
     public interface CommonView{}
     public interface ReturnDataView extends CommonView{}
+    /**
+     * 首页返回展示
+     */
+    public interface IndexMenusVIew extends ReturnDataView{}
 }

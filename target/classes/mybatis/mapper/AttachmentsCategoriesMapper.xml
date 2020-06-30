@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moon.mapper.AttachmentsCategoriesMapper">
+    <resultMap type="com.moon.model.entity.AttachmentsCategories" id="AttachmentsCategoriesResult">
+        <result property="attachmentId"    column="attachment_id"    />
+        <result property="categoryId"    column="category_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="id"    column="id"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectAttachmentsCategoriesVo">
+        select attachment_id, category_id, create_time, id, update_time from attachments_categories
+    </sql>
+
+    <!--查询单个-->
+    <select id="selectAttachmentsCategoriesById" parameterType="Integer" resultMap="AttachmentsCategoriesResult">
+        <include refid="selectAttachmentsCategoriesVo"/>
+        where id = #{id}
+    </select>
+
+    <!--查询列表-->
+    <select id="selectAttachmentsCategoriesList" parameterType="com.moon.model.entity.AttachmentsCategories" resultMap="AttachmentsCategoriesResult">
+        <include refid="selectAttachmentsCategoriesVo"/>
+        <where>
+            <if test="attachmentId != null "> and attachment_id = #{attachmentId}</if>
+            <if test="categoryId != null "> and category_id = #{categoryId}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+        </where>
+    </select>
+
+    <!--新增-->
+    <insert id="insertAttachmentsCategories" parameterType="com.moon.model.entity.AttachmentsCategories" useGeneratedKeys="true" keyProperty="id">
+        insert into attachments_categories
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="attachmentId != null ">attachment_id,</if>
+            <if test="categoryId != null ">category_id,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="attachmentId != null ">#{attachmentId},</if>
+            <if test="categoryId != null ">#{categoryId},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <!--修改-->
+    <update id="updateAttachmentsCategories" parameterType="com.moon.model.entity.AttachmentsCategories">
+        update attachments_categories
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="attachmentId != null ">attachment_id = #{attachmentId},</if>
+            <if test="categoryId != null ">category_id = #{categoryId},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <!--删除-->
+    <delete id="deleteAttachmentsCategoriesById" parameterType="Integer">
+        delete from attachments_categories where id = #{id}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="deleteAttachmentsCategoriesByIds" parameterType="String">
+        delete from attachments_categories where id in
+        <foreach item="${pkColumn.javaField}" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

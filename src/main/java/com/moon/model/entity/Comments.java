@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
 * 描述: Comments
 * 创建人: 小月
-* 创建时间: 2020-06-29 20:23:44
+* 创建时间: 2020-07-01 01:56:46
 **/
 @Data
 @AllArgsConstructor
@@ -85,7 +85,12 @@ public class Comments implements Serializable{
     private Integer responseId;
 
     /**
-     * 置顶,值越小越靠前
+     * 是否置顶:0不置顶;1置顶
+     */
+    private Integer topFlag;
+
+    /**
+     * 置顶位置排序，数值越小位置越靠前，0表示不排序
      */
     private Integer topPriority;
 
@@ -98,6 +103,8 @@ public class Comments implements Serializable{
      * 浏览器信息
      */
     private String userAgent;
+
+
 
 
 

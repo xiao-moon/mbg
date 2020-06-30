@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
 * 描述: Attachments
 * 创建人: 小月
-* 创建时间: 2020-06-29 20:23:44
+* 创建时间: 2020-07-01 01:56:46
 **/
 @Data
 @AllArgsConstructor
@@ -55,11 +55,6 @@ public class Attachments implements Serializable{
     private String name;
 
     /**
-     * 文件相对路径--访问路径
-     */
-    private String relativeFilePath;
-
-    /**
      * 文件大小;单位KB
      */
     private Integer size;
@@ -75,21 +70,19 @@ public class Attachments implements Serializable{
     private String suffix;
 
     /**
-     * 文件类型:0图片,1其他
-     */
-    private Integer type;
-
-    /**
      * 更新时间
      */
     private Date updateTime;
 
     /**
+     * 访问路径
+     */
+    private String url;
+
+    /**
      * 宽度:只有图片才有
      */
     private Integer width;
-
-
 
 
 

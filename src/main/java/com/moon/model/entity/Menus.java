@@ -1,24 +1,21 @@
 package com.moon.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import java.util.Date;
+import java.util.Date;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
 /**
- * 描述: Menus
- * 创建人: 小月
- * 创建时间: 2020-06-29 20:23:44
- **/
+* 描述: Menus
+* 创建人: 小月
+* 创建时间: 2020-07-01 01:56:46
+**/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Menus implements Serializable {
+public class Menus implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -36,6 +33,11 @@ public class Menus implements Serializable {
      * 删除标志:0正常;1删除
      */
     private Integer delFlag;
+
+    /**
+     * 描述
+     */
+    private String desc;
 
     /**
      * 图标
@@ -58,7 +60,7 @@ public class Menus implements Serializable {
     private Integer parentId;
 
     /**
-     * 位置
+     * 排序，数值越小位置越靠前，0表示不排序
      */
     private Integer priority;
 
@@ -83,14 +85,33 @@ public class Menus implements Serializable {
     private String url;
 
     /**
-     * 关联图片表
+     * 关联附件表
      */
-    private Photos photos;
+    private Attachments attachments;
 
-    /**
-     * 关联子菜单
-     */
-    private List<Menus> subMenus;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
