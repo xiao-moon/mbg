@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 03/07/2020 01:14:20
+ Date: 03/07/2020 02:41:56
 */
 
 SET NAMES utf8mb4;
@@ -168,6 +168,7 @@ CREATE TABLE `comments`  (
 -- ----------------------------
 INSERT INTO `comments` VALUES (1, 0, 0, 'moon', NULL, '第一条回复', '1234567@email.com', '127.0.0.1', 0, 1, 0, 1, NULL, 0, 0, '2020-06-25 00:31:27', '2020-06-25 00:31:29');
 INSERT INTO `comments` VALUES (2, 0, 1, 'tom', NULL, '回复第一条回复', '122121212', '127.0.0.1', 1, 1, 0, 2, NULL, 0, 0, '2020-06-25 00:33:54', '2020-06-25 00:33:56');
+INSERT INTO `comments` VALUES (3, 0, 0, 'moon', NULL, '第一条回复', '1234567@email.com', '127.0.0.1', 0, 1, 0, 1, NULL, 0, 1, '2020-06-25 00:31:27', '2020-06-25 00:31:29');
 
 -- ----------------------------
 -- Table structure for journals
@@ -187,7 +188,10 @@ CREATE TABLE `journals`  (
 -- ----------------------------
 -- Records of journals
 -- ----------------------------
-INSERT INTO `journals` VALUES (1, '<p>日记01</p>\n',0 ,0 , '2020-05-25 16:45:09', '2020-05-25 16:45:09', 11);
+INSERT INTO `journals` VALUES (1, '<p>日记01</p>\n', 0, 0, '2020-05-25 16:45:09', '2020-05-25 16:45:09', 11);
+INSERT INTO `journals` VALUES (2, '<p>日记02</p>\n', 0, 0, '2020-06-01 16:45:09', '2020-06-01 16:45:09', 14);
+INSERT INTO `journals` VALUES (3, '<p>日记03</p>\n', 1, 0, '2020-05-14 16:45:09', '2020-05-14 16:45:09', 34);
+INSERT INTO `journals` VALUES (4, '<p>日记04</p>\n', 0, 0, '2020-05-22 16:45:09', '2020-05-22 16:45:09', 22);
 
 -- ----------------------------
 -- Table structure for menus

@@ -1,0 +1,174 @@
+{
+	"info": {
+		"_postman_id": "418f01d1-75f9-4588-b653-269b955e5fa5",
+		"name": "MBG接口测试",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "前台",
+			"item": [
+				{
+					"name": "首页",
+					"item": [
+						{
+							"name": "获取菜单",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{mbg_addr}}/index/menus",
+									"host": [
+										"{{mbg_addr}}"
+									],
+									"path": [
+										"index",
+										"menus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取用户信息",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{mbg_addr}}/index/user",
+									"host": [
+										"{{mbg_addr}}"
+									],
+									"path": [
+										"index",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取首页文章信息",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{mbg_addr}}/index/posts?pageNum=1&pageSize=4",
+									"host": [
+										"{{mbg_addr}}"
+									],
+									"path": [
+										"index",
+										"posts"
+									],
+									"query": [
+										{
+											"key": "pageNum",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "时间轴",
+					"item": [
+						{
+							"name": "获取时间轴信息",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{mbg_addr}}/time",
+									"host": [
+										"{{mbg_addr}}"
+									],
+									"path": [
+										"time"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "随笔",
+					"item": [
+						{
+							"name": "获取时间轴信息 Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{mbg_addr}}/journal",
+									"host": [
+										"{{mbg_addr}}"
+									],
+									"path": [
+										"journal"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "获取首页文章信息 Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{mbg_addr}}/index/userinfo",
+					"host": [
+						"{{mbg_addr}}"
+					],
+					"path": [
+						"index",
+						"userinfo"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
