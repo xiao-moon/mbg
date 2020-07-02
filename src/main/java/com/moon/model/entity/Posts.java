@@ -147,5 +147,10 @@ public class Posts implements Serializable {
      */
     private List<Tags> tags;
 
+    /**
+     * 关联标签表
+     */
+    private Tags tag;
+
 
 }

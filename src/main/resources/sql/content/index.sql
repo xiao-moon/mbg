@@ -23,6 +23,12 @@ SELECT u.nickname,u.description FROM `users` u
 
 --查询首页文章
 SELECT
+	mm.*,
+	t.id t_id,
+	t.NAME t_name
+FROM
+	(
+SELECT
 	p.id,
 	p.format_content,
 	p.show_content,
@@ -36,26 +42,26 @@ SELECT
 	p.create_time,
 	c.id c_id,
 	c.NAME c_name,
-	t.id t_id,
-	t.NAME t_name,
-	pt.priority pt_priority,
 	a.NAME a_name,
 	a.url a_url
 FROM
 	`posts` p
 	LEFT JOIN posts_categories pc ON pc.post_id = p.id
 	LEFT JOIN categories c ON pc.category_id = c.id
-	LEFT JOIN posts_tags pt ON p.id = pt.post_id
-	LEFT JOIN tags t ON t.id = pt.tag_id
 	LEFT JOIN attachments_posts ap ON ap.post_id = p.id
 	LEFT JOIN attachments a ON a.id = ap.attachment_id
 WHERE
 	p.del_flag = 0
 	AND p.STATUS = 0
+	) mm
+	LEFT JOIN ( SELECT max( pt.priority ) pptt, pt.post_id FROM posts_tags pt GROUP BY pt.post_id ) pts ON pts.post_id = mm.id
+	LEFT JOIN posts_tags pt ON pt.post_id = pts.post_id
+	AND pt.priority = pts.pptt
+	LEFT JOIN tags t ON pt.tag_id = t.id
 ORDER BY
-	p.top_flag DESC,
-	p.top_priority DESC,
-	p.create_time DESC
+	mm.top_flag DESC,
+	mm.top_priority DESC,
+	mm.create_time DESC
 
 
 --查询文章所有信息
