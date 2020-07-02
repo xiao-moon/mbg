@@ -12,4 +12,6 @@ import java.util.List;
 public interface PostService {
 
     List<PostsVO> findIndexPosts();
+
+    List<PostsVO> findAllPostsByTime();
 }

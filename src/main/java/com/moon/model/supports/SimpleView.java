@@ -13,4 +13,14 @@ public class SimpleView {
      * 首页返回展示
      */
     public interface IndexMenusVIew extends ReturnDataView{}
+
+    /**
+     * 时间轴
+     */
+    public interface TimeAxisView extends ReturnDataView{}
+
+    /**
+     * 日记随笔
+     */
+    public interface JournalsView extends ReturnDataView{}
 }

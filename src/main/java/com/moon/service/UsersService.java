@@ -1,5 +1,6 @@
 package com.moon.service;
 
+import com.moon.model.entity.Users;
 import com.moon.model.vo.UsersVO;
 
 /**
@@ -11,6 +12,11 @@ public interface UsersService{
     /**
      * 查询用户
      */
-    UsersVO findUser();
+    UsersVO findUserVO();
+
+    /**
+     * 查询用户
+     */
+    Users findUser();
 
 }

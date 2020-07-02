@@ -1,5 +1,7 @@
 package com.moon.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.moon.model.supports.SimpleView;
 import lombok.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -122,7 +124,11 @@ public class CommentsVO implements Serializable{
     @ApiModelProperty("浏览器信息")
     private String userAgent;
 
-
+    /**
+     * 评价数量
+     */
+    @JsonView(SimpleView.IndexMenusVIew.class)
+    private String count;
 
 
 

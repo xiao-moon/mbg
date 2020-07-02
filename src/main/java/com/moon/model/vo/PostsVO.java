@@ -27,7 +27,7 @@ public class PostsVO implements Serializable {
     /**
      * 创建发布时间
      */
-    @JsonView(SimpleView.IndexMenusVIew.class)
+    @JsonView({SimpleView.IndexMenusVIew.class})
     @ApiModelProperty("创建发布时间")
     private String createTime;
 
@@ -77,7 +77,7 @@ public class PostsVO implements Serializable {
     /**
      * ID主键自增
      */
-    @JsonView(SimpleView.IndexMenusVIew.class)
+    @JsonView({SimpleView.IndexMenusVIew.class})
     @ApiModelProperty("ID主键自增")
     private String id;
 
@@ -199,5 +199,26 @@ public class PostsVO implements Serializable {
     @JsonView(SimpleView.IndexMenusVIew.class)
     private String tagName;
 
+    /**
+     * 月份
+     */
+    @JsonView(SimpleView.TimeAxisView.class)
+    private String monthData;
+
+    /**
+     * 按月份进行排序
+     */
+    @JsonView(SimpleView.TimeAxisView.class)
+    private List<SubPostsVO> subPostsVOS;
+
+    /**
+     * 评价表
+     */
+    @JsonView(SimpleView.IndexMenusVIew.class)
+    private String commentCount;
+    /**
+     * 临时使用
+     */
+    private Object temp;
 
 }

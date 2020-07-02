@@ -1,5 +1,7 @@
 package com.moon.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.moon.model.supports.SimpleView;
 import lombok.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -35,6 +37,7 @@ public class UsersVO implements Serializable{
     /**
     * 描述
     */
+    @JsonView(SimpleView.IndexMenusVIew.class)
     @ApiModelProperty("描述")
     private String description;
 
@@ -59,6 +62,7 @@ public class UsersVO implements Serializable{
     /**
     * 昵称
     */
+    @JsonView(SimpleView.IndexMenusVIew.class)
     @ApiModelProperty("昵称")
     private String nickname;
 

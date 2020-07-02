@@ -1,21 +1,24 @@
 package com.moon.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.moon.model.supports.SimpleView;
 import lombok.*;
+
 import java.util.Date;
 import java.util.Date;
 
 import java.io.Serializable;
 
 /**
-* 描述: Comments
-* 创建人: 小月
-* 创建时间: 2020-07-01 01:56:46
-**/
+ * 描述: Comments
+ * 创建人: 小月
+ * 创建时间: 2020-07-01 01:56:46
+ **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Comments implements Serializable{
+public class Comments implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -104,39 +107,10 @@ public class Comments implements Serializable{
      */
     private String userAgent;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 评价数量
+     */
+    private Integer count;
 
 
 }

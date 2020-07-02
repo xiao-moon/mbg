@@ -25,7 +25,8 @@ SELECT u.nickname,u.description FROM `users` u
 SELECT
 	mm.*,
 	t.id t_id,
-	t.NAME t_name
+	t.NAME t_name,
+	cms.comments_count
 FROM
 	(
 SELECT
@@ -58,6 +59,7 @@ WHERE
 	LEFT JOIN posts_tags pt ON pt.post_id = pts.post_id
 	AND pt.priority = pts.pptt
 	LEFT JOIN tags t ON pt.tag_id = t.id
+	LEFT JOIN ( SELECT count( 1 ) comments_count, cs.post_id FROM comments cs WHERE cs.del_flag = 0 GROUP BY cs.post_id ) cms ON cms.post_id = mm.id
 ORDER BY
 	mm.top_flag DESC,
 	mm.top_priority DESC,

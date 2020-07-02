@@ -43,5 +43,13 @@ public interface PostsMapper{
     */
     int deletePostsByIds(String[] ids);
 
+    /**
+     * 查询首页展示信息
+     */
     List<Posts> selectIndexPosts();
+
+    /**
+     * 查询简单文章信息
+     */
+    List<Posts> selectSimplePostsList();
 }

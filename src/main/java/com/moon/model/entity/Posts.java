@@ -152,5 +152,10 @@ public class Posts implements Serializable {
      */
     private Tags tag;
 
+    /**
+     * 关联评价表
+     */
+    private Comments comments;
+
 
 }

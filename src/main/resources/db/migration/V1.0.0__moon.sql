@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 30/06/2020 23:57:56
+ Date: 03/07/2020 01:14:20
 */
 
 SET NAMES utf8mb4;
@@ -43,6 +43,71 @@ CREATE TABLE `attachments`  (
 -- ----------------------------
 INSERT INTO `attachments` VALUES (1, '测试附件1', 'img', 'png', '/static/img/测试附件1.png', '/static/img/测试附件1.png', 1024, 1024, 1920, 0, 0, '2020-06-25 00:25:18', '2020-06-25 00:25:21');
 INSERT INTO `attachments` VALUES (2, '测试附件2', 'img', 'png', '/static/img/测试附件2.png', '/static/img/测试附件2.png', 1024, 1024, 1920, 0, 0, '2020-06-25 00:25:18', '2020-06-25 00:25:21');
+
+-- ----------------------------
+-- Table structure for attachments_categories
+-- ----------------------------
+DROP TABLE IF EXISTS `attachments_categories`;
+CREATE TABLE `attachments_categories`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
+  `attachment_id` int(11) NOT NULL COMMENT '附件ID',
+  `category_id` int(11) NOT NULL COMMENT '菜单ID',
+  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `attachments_categories_attachment_id`(`attachment_id`) USING BTREE,
+  INDEX `attachments_categories_category_id`(`category_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件-文章分类关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of attachments_categories
+-- ----------------------------
+INSERT INTO `attachments_categories` VALUES (1, 1, 1, '2020-06-25 00:37:35', '2020-06-25 00:37:38');
+
+-- ----------------------------
+-- Table structure for attachments_menus
+-- ----------------------------
+DROP TABLE IF EXISTS `attachments_menus`;
+CREATE TABLE `attachments_menus`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
+  `attachment_id` int(11) NOT NULL COMMENT '附件ID',
+  `menu_id` int(11) NOT NULL COMMENT '菜单ID',
+  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `attachments_menus_attachment_id`(`attachment_id`) USING BTREE,
+  INDEX `attachments_menus_menu_id`(`menu_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件-菜单关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of attachments_menus
+-- ----------------------------
+INSERT INTO `attachments_menus` VALUES (1, 1, 1, '2020-06-25 00:37:35', '2020-06-25 00:37:38');
+INSERT INTO `attachments_menus` VALUES (2, 1, 1, '2020-06-25 00:38:17', '2020-06-25 00:38:20');
+INSERT INTO `attachments_menus` VALUES (3, 1, 1, '2020-06-29 20:42:34', '2020-06-29 20:42:36');
+INSERT INTO `attachments_menus` VALUES (4, 1, 9, '2020-06-29 23:52:20', '2020-06-29 23:52:24');
+
+-- ----------------------------
+-- Table structure for attachments_posts
+-- ----------------------------
+DROP TABLE IF EXISTS `attachments_posts`;
+CREATE TABLE `attachments_posts`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
+  `attachment_id` int(11) NOT NULL COMMENT '附件ID',
+  `post_id` int(11) NOT NULL COMMENT '菜单ID',
+  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `attachments_posts_attachment_id`(`attachment_id`) USING BTREE,
+  INDEX `attachments_posts_post_id`(`post_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件-文章关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of attachments_posts
+-- ----------------------------
+INSERT INTO `attachments_posts` VALUES (1, 1, 1, '2020-06-25 00:37:35', '2020-06-25 00:37:38');
+INSERT INTO `attachments_posts` VALUES (2, 1, 2, '2020-06-25 00:38:17', '2020-06-25 00:38:20');
+INSERT INTO `attachments_posts` VALUES (3, 1, 3, '2020-06-29 20:42:34', '2020-06-29 20:42:36');
 
 -- ----------------------------
 -- Table structure for categories
@@ -101,9 +166,8 @@ CREATE TABLE `comments`  (
 -- ----------------------------
 -- Records of comments
 -- ----------------------------
-INSERT INTO `comments` VALUES (1, 0, 0, 'moon', NULL, '第一条回复', '1234567@email.com', '127.0.0.1', 0, 1 ,0 , 1, NULL, 0, 0, '2020-06-25 00:31:27', '2020-06-25 00:31:29');
-INSERT INTO `comments` VALUES (2, 0, 1, 'tom', NULL, '回复第一条回复', '122121212', '127.0.0.1', 1, 1 ,0, 2, NULL, 0, 0, '2020-06-25 00:33:54', '2020-06-25 00:33:56');
-
+INSERT INTO `comments` VALUES (1, 0, 0, 'moon', NULL, '第一条回复', '1234567@email.com', '127.0.0.1', 0, 1, 0, 1, NULL, 0, 0, '2020-06-25 00:31:27', '2020-06-25 00:31:29');
+INSERT INTO `comments` VALUES (2, 0, 1, 'tom', NULL, '回复第一条回复', '122121212', '127.0.0.1', 1, 1, 0, 2, NULL, 0, 0, '2020-06-25 00:33:54', '2020-06-25 00:33:56');
 
 -- ----------------------------
 -- Table structure for journals
@@ -112,6 +176,8 @@ DROP TABLE IF EXISTS `journals`;
 CREATE TABLE `journals`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
   `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '内容',
+  `status` int(1) NOT NULL DEFAULT 0 COMMENT '状态:0正常;1停用',
+  `del_flag` int(1) NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
   `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   `likes` int(11) DEFAULT 0 COMMENT '点赞数量',
@@ -121,7 +187,7 @@ CREATE TABLE `journals`  (
 -- ----------------------------
 -- Records of journals
 -- ----------------------------
-INSERT INTO `journals` VALUES (1, '<p>日记01</p>\n', '2020-05-25 16:45:09', '2020-05-25 16:45:09', 11);
+INSERT INTO `journals` VALUES (1, '<p>日记01</p>\n',0 ,0 , '2020-05-25 16:45:09', '2020-05-25 16:45:09', 11);
 
 -- ----------------------------
 -- Table structure for menus
@@ -160,94 +226,6 @@ INSERT INTO `menus` VALUES (8, NULL, '测试2', '测试2描述', 4, 2, '_self', 
 INSERT INTO `menus` VALUES (9, NULL, '测试3', '测试3描述', 7, 0, '_self', '/ceshi3', 0, 0, 1, '2020-06-29 22:31:46', '2020-06-29 22:31:50');
 
 -- ----------------------------
--- Table structure for photos_type
--- ----------------------------
-DROP TABLE IF EXISTS `photos_type`;
-CREATE TABLE `photos_type`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
-  `name` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '分类名称',
-  `priority` int(11) NOT NULL DEFAULT 0 COMMENT '排序，数值越大位置越靠前，0表示不排序',
-  `status` int(1) NOT NULL DEFAULT 0 COMMENT '状态:0正常;1停用',
-  `del_flag` int(1) NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `photos_type_flag_status`(`del_flag`, `status`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '图片分类表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of photos_type
--- ----------------------------
-INSERT INTO `photos_type` VALUES (1, '测试图片分类1' ,0 , 0, 0, '2020-05-17 14:05:32', '2020-05-17 14:05:32');
-INSERT INTO `photos_type` VALUES (2, '测试图片分类2',0 , 0, 0, '2020-06-25 00:35:32', '2020-06-25 00:35:34');
-
--- ----------------------------
--- Table structure for attachments_menus
--- ----------------------------
-DROP TABLE IF EXISTS `attachments_menus`;
-CREATE TABLE `attachments_menus`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
-  `attachment_id` int(11) NOT NULL COMMENT '附件ID',
-  `menu_id` int(11) NOT NULL COMMENT '菜单ID',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `attachments_menus_attachment_id`(`attachment_id`) USING BTREE,
-  INDEX `attachments_menus_menu_id`(`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件-菜单关联表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of attachments_menus
--- ----------------------------
-INSERT INTO `attachments_menus` VALUES (1, 1, 1, '2020-06-25 00:37:35', '2020-06-25 00:37:38');
-INSERT INTO `attachments_menus` VALUES (2, 1, 1, '2020-06-25 00:38:17', '2020-06-25 00:38:20');
-INSERT INTO `attachments_menus` VALUES (3, 1, 1, '2020-06-29 20:42:34', '2020-06-29 20:42:36');
-INSERT INTO `attachments_menus` VALUES (4, 1, 9, '2020-06-29 23:52:20', '2020-06-29 23:52:24');
-
--- ----------------------------
--- Table structure for attachments_categories
--- ----------------------------
-DROP TABLE IF EXISTS `attachments_categories`;
-CREATE TABLE `attachments_categories`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
-  `attachment_id` int(11) NOT NULL COMMENT '附件ID',
-  `category_id` int(11) NOT NULL COMMENT '菜单ID',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `attachments_categories_attachment_id`(`attachment_id`) USING BTREE,
-  INDEX `attachments_categories_category_id`(`category_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件-文章分类关联表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of attachments_categories
--- ----------------------------
-INSERT INTO `attachments_categories` VALUES (1, 1, 1, '2020-06-25 00:37:35', '2020-06-25 00:37:38');
-
--- ----------------------------
--- Table structure for attachments_posts
--- ----------------------------
-DROP TABLE IF EXISTS `attachments_posts`;
-CREATE TABLE `attachments_posts`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
-  `attachment_id` int(11) NOT NULL COMMENT '附件ID',
-  `post_id` int(11) NOT NULL COMMENT '菜单ID',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `attachments_posts_attachment_id`(`attachment_id`) USING BTREE,
-  INDEX `attachments_posts_post_id`(`post_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件-文章关联表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of attachments_posts
--- ----------------------------
-INSERT INTO `attachments_posts` VALUES (1, 1, 1, '2020-06-25 00:37:35', '2020-06-25 00:37:38');
-INSERT INTO `attachments_posts` VALUES (2, 1, 2, '2020-06-25 00:38:17', '2020-06-25 00:38:20');
-INSERT INTO `attachments_posts` VALUES (3, 1, 3, '2020-06-29 20:42:34', '2020-06-29 20:42:36');
-
-
--- ----------------------------
 -- Table structure for photos
 -- ----------------------------
 DROP TABLE IF EXISTS `photos`;
@@ -270,52 +248,30 @@ CREATE TABLE `photos`  (
 -- ----------------------------
 -- Records of photos
 -- ----------------------------
-INSERT INTO `photos` VALUES (1, '测试图1', '测试图片1', 'LOCAL', '/ceshi',1 ,0 , 0, 0, '2020-06-17 22:49:26', '2020-06-01 22:49:45');
-INSERT INTO `photos` VALUES (2, '测试图2', '测试图片2', 'LOCAL', '/ceshi2',1 ,0 , 0, 0, '2020-06-25 00:39:19', '2020-06-25 00:39:22');
+INSERT INTO `photos` VALUES (1, '测试图1', '测试图片1', 'LOCAL', '/ceshi', 1, 0, 0, 0, '2020-06-17 22:49:26', '2020-06-01 22:49:45');
+INSERT INTO `photos` VALUES (2, '测试图2', '测试图片2', 'LOCAL', '/ceshi2', 1, 0, 0, 0, '2020-06-25 00:39:19', '2020-06-25 00:39:22');
 
 -- ----------------------------
--- Table structure for posts_categories
+-- Table structure for photos_type
 -- ----------------------------
-DROP TABLE IF EXISTS `posts_categories`;
-CREATE TABLE `posts_categories`  (
+DROP TABLE IF EXISTS `photos_type`;
+CREATE TABLE `photos_type`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
-  `category_id` int(11) NOT NULL COMMENT '文章分类ID',
-  `post_id` int(11) NOT NULL COMMENT '文章ID',
-  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `posts_categories_post_id`(`post_id`) USING BTREE,
-  INDEX `posts_categories_category_id`(`category_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单文章关联表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of posts_categories
--- ----------------------------
-INSERT INTO `posts_categories` VALUES (1, 1, 1, '2020-06-25 00:39:39', '2020-06-25 00:39:43');
-INSERT INTO `posts_categories` VALUES (2, 2, 2, '2020-06-25 00:40:32', '2020-06-25 00:40:34');
-
--- ----------------------------
--- Table structure for posts_tags
--- ----------------------------
-DROP TABLE IF EXISTS `posts_tags`;
-CREATE TABLE `posts_tags`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
-  `post_id` int(11) NOT NULL COMMENT '文章ID',
-  `tag_id` int(11) NOT NULL COMMENT '标签ID',
+  `name` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '分类名称',
   `priority` int(11) NOT NULL DEFAULT 0 COMMENT '排序，数值越大位置越靠前，0表示不排序',
+  `status` int(1) NOT NULL DEFAULT 0 COMMENT '状态:0正常;1停用',
+  `del_flag` int(1) NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
   `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `posts_tags_post_id`(`post_id`) USING BTREE,
-  INDEX `posts_tags_tag_id`(`tag_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '文章标签关联表' ROW_FORMAT = Dynamic;
+  INDEX `photos_type_flag_status`(`del_flag`, `status`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '图片分类表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of posts_tags
+-- Records of photos_type
 -- ----------------------------
-INSERT INTO `posts_tags` VALUES (1, 1, 1, 1, '2020-05-17 14:05:32', '2020-05-17 14:05:32');
-INSERT INTO `posts_tags` VALUES (2, 1, 2, 2, '2020-06-07 15:36:37', '2020-06-07 15:36:37');
-INSERT INTO `posts_tags` VALUES (3, 2, 1, 3, '2020-06-07 15:36:37', '2020-06-07 15:36:37');
+INSERT INTO `photos_type` VALUES (1, '测试图片分类1', 0, 0, 0, '2020-05-17 14:05:32', '2020-05-17 14:05:32');
+INSERT INTO `photos_type` VALUES (2, '测试图片分类2', 0, 0, 0, '2020-06-25 00:35:32', '2020-06-25 00:35:34');
 
 -- ----------------------------
 -- Table structure for posts
@@ -354,8 +310,53 @@ CREATE TABLE `posts`  (
 -- ----------------------------
 INSERT INTO `posts` VALUES (1, '<h2 id=\"hello-halo\">Hello Halo</h2>\n<p>如果你看到了这一篇文章，那么证明你已经安装成功了，感谢使用 <a href=\"https://halo.run\">Halo</a> 进行创作，希望能够使用愉快。</p>\n<h2 id=\"相关链接\">相关链接</h2>\n<ul>\n<li>官网：<a href=\"https://halo.run\">https://halo.run</a></li>\n<li>社区：<a href=\"https://bbs.halo.run\">https://bbs.halo.run</a></li>\n<li>主题仓库：<a href=\"https://halo.run/s/themes\">https://halo.run/s/themes</a></li>\n<li>开源地址：<a href=\"https://github.com/halo-dev/halo\">https://github.com/halo-dev/halo</a></li>\n</ul>\n<p>在使用过程中，有任何问题都可以通过以上链接找寻答案，或者联系我们。</p>\n<blockquote>\n<p>这是一篇自动生成的文章，请删除这篇文章之后开始你的创作吧！</p>\n</blockquote>\n', '## Hello Halo\n\n如果你看到了这一篇文章，那么证明你已经安装成功了，感谢使用 [Halo](https://halo.run) 进行创作，希望能够使用愉快。\n\n## 相关链接\n\n- 官网：[https://halo.run](https://halo.run)\n- 社区：[https://bbs.halo.run](https://bbs.halo.run)\n- 主题仓库：[https://halo.run/s/themes](https://halo.run/s/themes)\n- 开源地址：[https://github.com/halo-dev/halo](https://github.com/halo-dev/halo)\n\n在使用过程中，有任何问题都可以通过以上链接找寻答案，或者联系我们。\n\n> 这是一篇自动生成的文章，请删除这篇文章之后开始你的创作吧！\n\n', '最多展示70个字', 20, 0, 'DDDDD', 'KKKKK', NULL, 'HELLO MBG', NULL, 0, 20, 0, 0, 0, 0, 0, 0, '2020-06-02 00:33:02', '2020-06-02 00:33:10', '2020-06-02 00:33:17');
 INSERT INTO `posts` VALUES (2, '<h2 id=\"关于页面\">关于页面</h2>\n<p>这是一个自定义页面，你可以在后台的 <code>页面</code> -&gt; <code>所有页面</code> -&gt; <code>自定义页面</code> 找到它，你可以用于新建关于页面、留言板页面等等。发挥你自己的想象力！</p>\n<blockquote>\n<p>这是一篇自动生成的页面，你可以在后台删除它。</p>\n</blockquote>\n', '## 关于页面\n\n这是一个自定义页面，你可以在后台的 `页面` -> `所有页面` -> `自定义页面` 找到它，你可以用于新建关于页面、留言板页面等等。发挥你自己的想象力！\n\n> 这是一篇自动生成的页面，你可以在后台删除它。', '最多展示70个字', 0, 0, 'DDDDD', 'KKKKK', NULL, '关于页面', NULL, 0, 0, 0, 0, 0, 0, 0, 0, '2020-06-03 00:33:02', '2020-06-03 00:33:10', '2020-06-03 00:33:17');
-INSERT INTO `posts` VALUES (3, '<h1 id=\"我是一级标题\">我是一级标题</h1>\n<h2 id=\"我是二级标题\">我是二级标题</h2>\n<h3 id=\"我是三级标题\">我是三级标题</h3>\n<h4 id=\"我是四级标题\">我是四级标题</h4>\n', '# 我是一级标题\n## 我是二级标题\n### 我是三级标题\n#### 我是四级标题', '最多展示70个字', 0, 0, 'DDDDD', 'KKKKK', NULL, '这是小月的第一篇文章', NULL, 0, 0, 0, 0, 0, 0, 0, 0, '2020-06-01 00:33:02', '2020-06-01 00:33:10', '2020-06-01 00:33:17');
-INSERT INTO `posts` VALUES (4, '<h1 id=\"moon-first-blog\">MOON_FIRST_BLOG</h1>\n<p>123456789</p>\n', '# MOON_FIRST_BLOG\n123456789', '最多展示70个字', 0, 0, 'DDDDD', 'KKKKK', NULL, 'MOON_FIRST_BLOG', NULL, 0, 0, 0, 0, 0, 0, 0, 0, '2020-06-05 00:33:02', '2020-06-05 00:33:10', '2020-06-05 00:33:17');
+INSERT INTO `posts` VALUES (3, '<h1 id=\"我是一级标题\">我是一级标题</h1>\n<h2 id=\"我是二级标题\">我是二级标题</h2>\n<h3 id=\"我是三级标题\">我是三级标题</h3>\n<h4 id=\"我是四级标题\">我是四级标题</h4>\n', '# 我是一级标题\n## 我是二级标题\n### 我是三级标题\n#### 我是四级标题', '最多展示70个字', 0, 0, 'DDDDD', 'KKKKK', NULL, '这是小月的第一篇文章', NULL, 0, 0, 1, 2, 0, 0, 0, 0, '2020-06-01 00:33:02', '2020-06-01 00:33:10', '2020-06-01 00:33:17');
+INSERT INTO `posts` VALUES (4, '<h1 id=\"moon-first-blog\">MOON_FIRST_BLOG</h1>\n<p>123456789</p>\n', '# MOON_FIRST_BLOG\n123456789', '最多展示70个字', 0, 0, 'DDDDD', 'KKKKK', NULL, 'MOON_FIRST_BLOG', NULL, 0, 0, 0, 0, 0, 0, 0, 0, '2020-06-05 00:33:02', '2020-05-01 00:33:10', '2020-05-01 00:33:17');
+
+-- ----------------------------
+-- Table structure for posts_categories
+-- ----------------------------
+DROP TABLE IF EXISTS `posts_categories`;
+CREATE TABLE `posts_categories`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
+  `category_id` int(11) NOT NULL COMMENT '文章分类ID',
+  `post_id` int(11) NOT NULL COMMENT '文章ID',
+  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `posts_categories_post_id`(`post_id`) USING BTREE,
+  INDEX `posts_categories_category_id`(`category_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单文章关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of posts_categories
+-- ----------------------------
+INSERT INTO `posts_categories` VALUES (1, 1, 1, '2020-06-25 00:39:39', '2020-06-25 00:39:43');
+INSERT INTO `posts_categories` VALUES (2, 2, 2, '2020-06-25 00:40:32', '2020-06-25 00:40:34');
+
+-- ----------------------------
+-- Table structure for posts_tags
+-- ----------------------------
+DROP TABLE IF EXISTS `posts_tags`;
+CREATE TABLE `posts_tags`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
+  `post_id` int(11) NOT NULL COMMENT '文章ID',
+  `tag_id` int(11) NOT NULL COMMENT '标签ID',
+  `priority` int(11) NOT NULL DEFAULT 0 COMMENT '排序，数值越大位置越靠前，0表示不排序',
+  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `posts_tags_post_id`(`post_id`) USING BTREE,
+  INDEX `posts_tags_tag_id`(`tag_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '文章标签关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of posts_tags
+-- ----------------------------
+INSERT INTO `posts_tags` VALUES (1, 1, 1, 1, '2020-05-17 14:05:32', '2020-05-17 14:05:32');
+INSERT INTO `posts_tags` VALUES (2, 1, 2, 2, '2020-06-07 15:36:37', '2020-06-07 15:36:37');
+INSERT INTO `posts_tags` VALUES (3, 2, 1, 4, '2020-06-07 15:36:37', '2020-06-07 15:36:37');
+INSERT INTO `posts_tags` VALUES (4, 1, 3, 3, '2020-07-02 00:10:04', '2020-07-02 00:10:07');
 
 -- ----------------------------
 -- Table structure for tags
@@ -372,13 +373,14 @@ CREATE TABLE `tags`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `tags_flag_status`(`del_flag`, `status`) USING BTREE,
   INDEX `tags_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tags
 -- ----------------------------
 INSERT INTO `tags` VALUES (1, 'spring', 0, 0, 0, '2020-05-17 13:42:56', '2020-05-17 13:42:56');
 INSERT INTO `tags` VALUES (2, 'java', 0, 0, 0, '2020-06-07 15:07:10', '2020-06-07 15:07:10');
+INSERT INTO `tags` VALUES (3, 'netty', 0, 0, 0, '2020-07-02 00:10:37', '2020-07-02 00:10:40');
 
 -- ----------------------------
 -- Table structure for users

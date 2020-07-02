@@ -34,10 +34,13 @@
             <result property="url"    column="a_url"    />
             <result property="name"    column="a_name"    />
         </association>
-        <association property="tags" javaType="com.moon.model.entity.Tags">
+        <association property="tag" javaType="com.moon.model.entity.Tags">
             <result property="id"    column="t_id"    />
             <result property="name"    column="t_name"    />
             <result property="priority"    column="pt_priority"  />
+        </association>
+        <association property="comments" javaType="com.moon.model.entity.Comments">
+            <result property="count"    column="comments_count"    />
         </association>
     </resultMap>
 
@@ -173,11 +176,14 @@
         </foreach>
     </delete>
 
+
+
     <select id="selectIndexPosts" resultMap="PostsResult">
         SELECT
             mm.*,
             t.id t_id,
-            t.NAME t_name
+            t.NAME t_name,
+            cms.comments_count
         FROM
             (
         SELECT
@@ -210,9 +216,21 @@
             LEFT JOIN posts_tags pt ON pt.post_id = pts.post_id
             AND pt.priority = pts.pptt
             LEFT JOIN tags t ON pt.tag_id = t.id
+            LEFT JOIN ( SELECT count( 1 ) comments_count, cs.post_id FROM comments cs WHERE cs.del_flag = 0 GROUP BY cs.post_id ) cms ON cms.post_id = mm.id
         ORDER BY
             mm.top_flag DESC,
             mm.top_priority DESC,
             mm.create_time DESC
     </select>
+
+
+    <select id="selectSimplePostsList" resultMap="PostsResult">
+        SELECT
+            p.id,
+            p.create_time,
+            p.title
+        FROM
+            posts p
+    </select>
+
 </mapper>
