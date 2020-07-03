@@ -23,4 +23,10 @@ public class SimpleView {
      * 日记随笔
      */
     public interface JournalsView extends ReturnDataView{}
+
+    /**
+     * 标签
+     */
+    public interface TagsView extends ReturnDataView{}
+
 }

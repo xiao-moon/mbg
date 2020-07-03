@@ -1,5 +1,7 @@
 package com.moon.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.moon.model.supports.SimpleView;
 import lombok.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,6 +25,7 @@ public class TagsVO implements Serializable{
     /**
     * 创建时间
     */
+    @JsonView(SimpleView.TagsView.class)
     @ApiModelProperty("创建时间")
     private String createTime;
 
@@ -35,12 +38,14 @@ public class TagsVO implements Serializable{
     /**
     * ID主键自增
     */
+    @JsonView(SimpleView.TagsView.class)
     @ApiModelProperty("ID主键自增")
     private String id;
 
     /**
     * 标签名称
     */
+    @JsonView(SimpleView.TagsView.class)
     @ApiModelProperty("标签名称")
     private String name;
 

@@ -32,11 +32,11 @@ public class BeanCopierUtil {
             if (value instanceof Boolean) {
                 return booleanToString(value, target);
             }
-            if (value instanceof PhotosVO) {
-                PhotosVO photosVO = new PhotosVO();
-                transDOToVO(value, photosVO);
-                return photosVO;
-            }
+//            if (value instanceof PhotosVO) {
+//                PhotosVO photosVO = new PhotosVO();
+//                transDOToVO(value, photosVO);
+//                return photosVO;
+//            }
 
             // 未匹配上的字段，原值返回
             return value;
@@ -93,26 +93,5 @@ public class BeanCopierUtil {
         return null;
     }
 
-//    public static Object objToEntity(Object value, Class target) {
-//        if ("AttachmentsDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "CategoriesDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "CommentBlackListDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "CommentsDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "JournalsDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "LinksDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "LogsDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "MenusDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "MetasDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "OptionsDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "PhotosDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "PostCategoriesDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "PostsDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "PostTagsDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "TagsDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "ThemeSettingsDO".equalsIgnoreCase(target.getSimpleName()) ||
-//                "UsersDO".equalsIgnoreCase(target.getSimpleName())) {
-//        }
-//        return null;
-//    }
 
 }

@@ -42,4 +42,11 @@ public interface TagsMapper{
     * 批量删除
     */
     int deleteTagsByIds(String[] ids);
+
+
+    /**
+     * 按照时间和位置排序
+     */
+    List<Tags> selectTagsOrderByPriorityAndTime();
+
 }
