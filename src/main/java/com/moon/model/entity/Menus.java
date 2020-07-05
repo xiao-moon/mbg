@@ -30,6 +30,11 @@ public class Menus implements Serializable{
     private Date createTime;
 
     /**
+     * 状态:0正常;1停用
+     */
+    private Integer status;
+
+    /**
      * 删除标志:0正常;1删除
      */
     private Integer delFlag;
@@ -63,11 +68,6 @@ public class Menus implements Serializable{
      * 排序，数值越小位置越靠前，0表示不排序
      */
     private Integer priority;
-
-    /**
-     * 状态:0正常;1停用
-     */
-    private Integer status;
 
     /**
      * 打开方式

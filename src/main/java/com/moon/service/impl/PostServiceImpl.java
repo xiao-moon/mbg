@@ -4,12 +4,16 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.moon.mapper.PostsMapper;
 import com.moon.model.entity.Posts;
+import com.moon.model.properties.BlogProperties;
 import com.moon.model.vo.PostsVO;
 import com.moon.model.vo.SubPostsVO;
 import com.moon.service.PostService;
+import com.moon.utils.BlogUtils;
 import com.moon.utils.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
@@ -25,6 +29,9 @@ public class PostServiceImpl implements PostService {
 
     @Resource
     private PostsMapper postsMapper;
+
+    @Autowired
+    private BlogProperties blogProperties;
 
     @Override
     public PageInfo findIndexPosts(int pageNum, int pageSize) {
@@ -118,10 +125,59 @@ public class PostServiceImpl implements PostService {
         return pageInfo;
     }
 
+    @Override
+    @Transactional
+    public PageInfo findSearchPosts(String search, int pageNum, int pageSize) {
+        //1.查询所有的文章信息
+        List<Posts> posts = postsMapper.selectIndexPosts();
+        List<Posts> tempTitles = new ArrayList<>();
+        List<Posts> tempContents = new ArrayList<>();
+
+        //2.将html解析成纯文本
+        for (Posts post : posts) {
+            //检查标题中是否包含search
+            if (StringUtils.containsIgnoreCase(post.getTitle(), search)) {
+                tempTitles.add(post);
+                continue;
+            }
+            //检查内容中是否包含
+            String formatContent = post.getFormatContent();
+            String content = BlogUtils.htmlToTxt(formatContent);
+            if (StringUtils.containsIgnoreCase(content, search)) {
+                tempContents.add(post);
+                continue;
+            }
+        }
+        tempTitles.addAll(tempContents);
+        List<PostsVO> postsVO = new ArrayList<>();
+        //领域模型转换
+        doToVo(tempTitles, postsVO);
+        //分页
+        int currIndex = pageNum * pageSize;
+        PageInfo pageInfo = new PageInfo();
+        if (postsVO.size() <= currIndex) {
+            pageInfo.setList(postsVO);
+            pageInfo.setTotal(postsVO.size());
+            pageInfo.setSize(postsVO.size());
+            return pageInfo;
+        } else {
+            List<PostsVO> postsVOS = null;
+            if (pageNum == 1) {
+                postsVOS = postsVO.subList(0, currIndex);
+            } else {
+                postsVOS = postsVO.subList(((pageNum - 1) * pageSize), currIndex);
+            }
+            pageInfo.setList(postsVOS);
+            pageInfo.setTotal(postsVO.size());
+            pageInfo.setSize(postsVOS.size());
+        }
+        return pageInfo;
+    }
+
     /**
      * 领域模型转换
      */
-    private void doToVo(List<Posts> posts, List<PostsVO> postsVO) {
+     void doToVo(List<Posts> posts, List<PostsVO> postsVO) {
         if (CollectionUtils.isNotEmpty(posts)) {
             for (Posts post : posts) {
                 PostsVO postVO = new PostsVO();
@@ -129,9 +185,16 @@ public class PostServiceImpl implements PostService {
                 postVO.setFormatContent(post.getFormatContent());
                 //如果没有就为展示文字赋值
                 if (StringUtils.isBlank(post.getShowContent())) {
-
+                    String formatContent = post.getFormatContent();
+                    String content = BlogUtils.htmlToTxt(formatContent);
+                    if (content.length() > blogProperties.getShowContentSize()) {
+                        content = content.substring(0, blogProperties.getShowContentSize());
+                    }
+                    content = content + "...";
+                    postVO.setShowContent(content);
+                } else {
+                    postVO.setShowContent(post.getShowContent());
                 }
-                postVO.setShowContent(post.getShowContent());
                 if (post.getLikes() != null) {
                     postVO.setLikes(String.valueOf(post.getLikes()));
                 }

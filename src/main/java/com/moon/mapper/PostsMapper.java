@@ -54,7 +54,12 @@ public interface PostsMapper{
     List<Posts> selectSimplePostsList();
 
     /**
-     * 查询文章信息，按标签分类
+     * 查询文章信息，按标签查询
      */
     List<Posts> selectSimplePostsByTags(Integer id);
+
+    /**
+     * 查询文章信息，按分类查询
+     */
+    List<Posts> selectPostsByCategory(Integer id);
 }

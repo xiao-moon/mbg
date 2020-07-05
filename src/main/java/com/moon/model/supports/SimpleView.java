@@ -16,7 +16,7 @@ public class SimpleView {
     /**
      * 首页返回展示
      */
-    public interface IndexVIew extends ReturnDataView {
+    public interface PostsView extends ReturnDataView {
     }
 
     /**
@@ -41,6 +41,12 @@ public class SimpleView {
      * 图片及分类
      */
     public interface PhotosView extends ReturnDataView {
+    }
+
+    /**
+     * 文章分类
+     */
+    public interface CategoriesView extends PostsView {
     }
 
 }

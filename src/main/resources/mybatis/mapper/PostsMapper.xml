@@ -182,12 +182,12 @@
         SELECT
             mm.*,
             t.id t_id,
-            t.NAME t_name,
-            cms.comments_count
+            t.NAME t_name
         FROM
             (
         SELECT
             p.id,
+            p.format_content,
             p.show_content,
             p.likes,
             p.priority,
@@ -207,16 +207,34 @@
             LEFT JOIN posts_categories pc ON pc.post_id = p.id
             LEFT JOIN categories c ON pc.category_id = c.id
             LEFT JOIN attachments_posts ap ON ap.post_id = p.id
-            LEFT JOIN attachments a ON a.id = ap.attachment_id
+            LEFT JOIN attachments a ON a.id = ap.attachment_id AND a.del_flag = 0 AND a.status = 0
         WHERE
             p.del_flag = 0
             AND p.STATUS = 0
+            AND c.del_flag = 0
+            AND c.status = 0
             ) mm
-            LEFT JOIN ( SELECT max( pt.priority ) pptt, pt.post_id FROM posts_tags pt GROUP BY pt.post_id ) pts ON pts.post_id = mm.id
+            LEFT JOIN (
+        SELECT
+            max( pt.priority ) pptt,
+            pt.post_id
+        FROM
+            (
+        SELECT
+            pt.*
+        FROM
+            posts_tags pt
+            LEFT JOIN tags t ON pt.tag_id = t.id
+        WHERE
+            t.del_flag = 0
+            AND t.STATUS = 0
+            ) pt
+        GROUP BY
+            pt.post_id
+            ) pts ON pts.post_id = mm.id
             LEFT JOIN posts_tags pt ON pt.post_id = pts.post_id
             AND pt.priority = pts.pptt
             LEFT JOIN tags t ON pt.tag_id = t.id
-            LEFT JOIN ( SELECT count( 1 ) comments_count, cs.post_id FROM comments cs WHERE cs.del_flag = 0 GROUP BY cs.post_id ) cms ON cms.post_id = mm.id
         ORDER BY
             mm.top_flag DESC,
             mm.top_priority DESC,
@@ -236,6 +254,7 @@
     <select id="selectSimplePostsByTags" resultMap="PostsResult">
         SELECT
             mm.id,
+            mm.format_content,
             mm.show_content,
             mm.likes,
             mm.priority,
@@ -249,11 +268,12 @@
             mm.a_name,
             mm.a_url,
             t.id t_id,
-            t.name t_name
+            t.NAME t_name
         FROM
             (
         SELECT
             p.id,
+            p.format_content,
             p.show_content,
             p.likes,
             p.priority,
@@ -273,16 +293,80 @@
             LEFT JOIN posts_categories pc ON pc.post_id = p.id
             LEFT JOIN categories c ON pc.category_id = c.id
             LEFT JOIN attachments_posts ap ON ap.post_id = p.id
-            LEFT JOIN attachments a ON a.id = ap.attachment_id
+            LEFT JOIN attachments a ON a.id = ap.attachment_id AND a.del_flag = 0 AND a.status = 0
         WHERE
             p.del_flag = 0
             AND p.STATUS = 0
+            AND c.del_flag = 0
+            AND c.status = 0
             ) mm
             LEFT JOIN posts_tags pt ON pt.post_id = mm.id
             LEFT JOIN tags t ON t.id = pt.tag_id
         WHERE
-            t.id = #{id}
+            t.del_flag = 0
+            AND t.STATUS = 0
+            AND t.id = #{id}
+    </select>
+
+    <select id="selectPostsByCategory" resultMap="PostsResult">
+                SELECT
+            mm.*,
+            t.id t_id,
+            t.NAME t_name
+        FROM
+            (
+        SELECT
+            p.id,
+            p.format_content,
+            p.show_content,
+            p.likes,
+            p.priority,
+            p.meta_description,
+            p.meta_keywords,
+            p.title,
+            p.visits,
+            p.top_flag,
+            p.top_priority,
+            p.create_time,
+            c.id c_id,
+            c.NAME c_name,
+            a.NAME a_name,
+            a.url a_url
+        FROM
+            `posts` p
+            LEFT JOIN posts_categories pc ON pc.post_id = p.id
+            LEFT JOIN categories c ON pc.category_id = c.id
+            LEFT JOIN attachments_posts ap ON ap.post_id = p.id
+            LEFT JOIN attachments a ON a.id = ap.attachment_id AND a.del_flag = 0 AND a.status = 0
+        WHERE
+            p.del_flag = 0
+            AND p.STATUS = 0
+						AND c.id = #{id}
+            ) mm
+            LEFT JOIN (
+        SELECT
+            max( pt.priority ) pptt,
+            pt.post_id
+        FROM
+            (
+        SELECT
+            pt.*
+        FROM
+            posts_tags pt
+            LEFT JOIN tags t ON pt.tag_id = t.id
+        WHERE
+            t.del_flag = 0
+            AND t.STATUS = 0
+            ) pt
+        GROUP BY
+            pt.post_id
+            ) pts ON pts.post_id = mm.id
+            LEFT JOIN posts_tags pt ON pt.post_id = pts.post_id
+            AND pt.priority = pts.pptt
+            LEFT JOIN tags t ON pt.tag_id = t.id
         ORDER BY
+            mm.top_flag DESC,
+            mm.top_priority DESC,
             mm.create_time DESC
     </select>
 

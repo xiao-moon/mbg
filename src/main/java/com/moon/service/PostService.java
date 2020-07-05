@@ -24,4 +24,10 @@ public interface PostService {
      */
     PageInfo findSimplePostsByTags(Integer id, int pageNum, int pageSize);
 
+    /**
+     * 搜索文章
+     */
+    PageInfo findSearchPosts(String search, int pageNum, int pageSize);
+
+
 }

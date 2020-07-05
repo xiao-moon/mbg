@@ -10,6 +10,7 @@ import com.moon.service.UsersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,18 +33,19 @@ public class IndexController {
     private MenusService menusService;
 
     @Autowired
+    @Qualifier("postServiceImpl")
     private PostService postService;
 
 
     @GetMapping("/menus")
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiOperation(value = "获取基础信息", notes = "获取菜单及用户信息")
     public Object menuInfo() {
         return menusService.findIndexMenus();
     }
 
     @GetMapping("/user")
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiOperation(value = "获取用户信息", notes = "获取用户展示信息")
     public Object indexUserInfo() {
         usersService.findUserVO();
@@ -52,7 +54,7 @@ public class IndexController {
     }
 
     @GetMapping("/posts")
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiOperation(value = "获取首页文章", notes = "按照优先级及时间排序")
     public Object indexInfo(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "9") int pageSize) {
         PageInfo indexPosts = postService.findIndexPosts(pageNum, pageSize);

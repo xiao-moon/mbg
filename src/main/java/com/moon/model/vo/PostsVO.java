@@ -30,7 +30,7 @@ public class PostsVO implements Serializable {
     /**
      * 创建发布时间
      */
-    @JsonView({SimpleView.IndexVIew.class})
+    @JsonView({SimpleView.PostsView.class})
     @ApiModelProperty("创建发布时间")
     private String createTime;
 
@@ -79,14 +79,14 @@ public class PostsVO implements Serializable {
     /**
      * ID主键自增
      */
-    @JsonView({SimpleView.IndexVIew.class})
+    @JsonView({SimpleView.PostsView.class})
     @ApiModelProperty("ID主键自增")
     private String id;
 
     /**
      * 点赞数量
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiModelProperty("点赞数量")
     private String likes;
 
@@ -123,7 +123,7 @@ public class PostsVO implements Serializable {
     /**
      * 缩略展示最多70文字
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiModelProperty("缩略展示最多70文字")
     private String showContent;
 
@@ -136,7 +136,7 @@ public class PostsVO implements Serializable {
     /**
      * SEO优化:文章标题
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiModelProperty("SEO优化:文章标题")
     private String title;
 
@@ -161,44 +161,44 @@ public class PostsVO implements Serializable {
     /**
      * 访客数量
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiModelProperty("访客数量")
     private String visits;
 
     /**
      * 分类id
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     private String categoryId;
 
     /**
      * 分类名称
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     private String categoryName;
 
     /**
      * 图片地址
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     private String attachmentUrl;
 
     /**
      * 图片名称
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     private String attachmentName;
 
     /**
      * 标签id
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     private String tagId;
 
     /**
      * 主标签名称
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     private String tagName;
 
     /**
@@ -216,7 +216,7 @@ public class PostsVO implements Serializable {
     /**
      * 评价表
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     private String commentCount;
     /**
      * 临时使用

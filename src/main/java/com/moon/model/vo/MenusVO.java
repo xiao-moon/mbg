@@ -27,14 +27,14 @@ public class MenusVO implements Serializable{
     /**
      * ID主键自增
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiModelProperty("ID主键自增")
     private String id;
 
     /**
      * 图标
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiModelProperty("图标")
     private String icon;
 
@@ -42,14 +42,14 @@ public class MenusVO implements Serializable{
     /**
      * 名称
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiModelProperty("名称")
     private String name;
 
     /**
      * 描述
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiModelProperty("描述")
     private String desc;
 
@@ -62,21 +62,21 @@ public class MenusVO implements Serializable{
     /**
      * 排序，数值越大位置越靠前，0表示不排序
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiModelProperty("排序，数值越大位置越靠前，0表示不排序")
     private String priority;
 
     /**
      * 打开方式
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiModelProperty("打开方式")
     private String target;
 
     /**
      * 地址
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiModelProperty("地址")
     private String url;
 
@@ -119,7 +119,7 @@ public class MenusVO implements Serializable{
     /**
      * 图片名称
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiModelProperty("图片名称")
     private String photoName;
 
@@ -127,14 +127,14 @@ public class MenusVO implements Serializable{
      * 图片地址
      */
 
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     @ApiModelProperty("图片地址")
     private  String photoUrl;
 
     /**
      * 子菜单
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     private List<MenusVO> subMenusVO;
 
 

@@ -60,7 +60,7 @@
 									"formdata": []
 								},
 								"url": {
-									"raw": "{{mbg_addr}}/index/posts?pageNum=1&pageSize=4",
+									"raw": "{{mbg_addr}}/index/posts?pageNum=1&pageSize=3",
 									"host": [
 										"{{mbg_addr}}"
 									],
@@ -75,7 +75,7 @@
 										},
 										{
 											"key": "pageSize",
-											"value": "4"
+											"value": "3"
 										}
 									]
 								}
@@ -121,7 +121,7 @@
 					"name": "随笔",
 					"item": [
 						{
-							"name": "获取时间轴信息 Copy",
+							"name": "随笔列表信息",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -147,27 +147,201 @@
 					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "标签",
+					"item": [
+						{
+							"name": "标签信息",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{mbg_addr}}/tag",
+									"host": [
+										"{{mbg_addr}}"
+									],
+									"path": [
+										"tag"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "标签对应的文章列表",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{mbg_addr}}/tag/1?pageNum=1&pageSize=2",
+									"host": [
+										"{{mbg_addr}}"
+									],
+									"path": [
+										"tag",
+										"1"
+									],
+									"query": [
+										{
+											"key": "pageNum",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "图片",
+					"item": [
+						{
+							"name": "获取图片及分类信息",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{mbg_addr}}/photo",
+									"host": [
+										"{{mbg_addr}}"
+									],
+									"path": [
+										"photo"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "搜索",
+					"item": [
+						{
+							"name": "查询搜索结果",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{mbg_addr}}/search/?search=MOON_FIRST_BLOG&pageNum=1&pageSize=9",
+									"host": [
+										"{{mbg_addr}}"
+									],
+									"path": [
+										"search",
+										""
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "MOON_FIRST_BLOG"
+										},
+										{
+											"key": "pageNum",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "9"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "文章分类",
+					"item": [
+						{
+							"name": "文章分类列表",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{mbg_addr}}/category",
+									"host": [
+										"{{mbg_addr}}"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "文章分类id查询分页信息",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{mbg_addr}}/category/1?pageNum=2&pageSize=1",
+									"host": [
+										"{{mbg_addr}}"
+									],
+									"path": [
+										"category",
+										"1"
+									],
+									"query": [
+										{
+											"key": "pageNum",
+											"value": "2"
+										},
+										{
+											"key": "pageSize",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "文章",
+					"item": [
+						{
+							"name": "查询文章详情",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{mbg_addr}}/post/1",
+									"host": [
+										"{{mbg_addr}}"
+									],
+									"path": [
+										"post",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				}
 			],
 			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "获取首页文章信息 Copy",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "{{mbg_addr}}/index/userinfo",
-					"host": [
-						"{{mbg_addr}}"
-					],
-					"path": [
-						"index",
-						"userinfo"
-					]
-				}
-			},
-			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}

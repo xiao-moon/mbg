@@ -147,7 +147,7 @@
         from
             menus m
             left join attachments_menus am on m.id = am.menu_id
-            left join attachments a on a.id = am.attachment_id
+            left join attachments a on a.id = am.attachment_id AND a.del_flag=0 AND a.status = 0
         where
             m.del_flag = 0
             and m.status = 0

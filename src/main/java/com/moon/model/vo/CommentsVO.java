@@ -127,7 +127,7 @@ public class CommentsVO implements Serializable{
     /**
      * 评价数量
      */
-    @JsonView(SimpleView.IndexVIew.class)
+    @JsonView(SimpleView.PostsView.class)
     private String count;
 
 
