@@ -27,7 +27,7 @@ public class BlogApplication {
         Environment env = SpringUtils.getBean(Environment.class);
         String[] activeProfiles = env.getActiveProfiles();
         String port = env.getProperty("server.port");
-        log.info("当前开发环境是:{}", activeProfiles);
+        log.info("当前开发环境是:{}", (Object) activeProfiles);
         log.info("swagger2地址:{}", "http://localhost:" + port + "/swagger-ui.html");
     }
 }

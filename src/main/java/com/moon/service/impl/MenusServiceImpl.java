@@ -1,5 +1,6 @@
 package com.moon.service.impl;
 
+import com.github.pagehelper.PageInfo;
 import com.moon.mapper.MenusMapper;
 import com.moon.model.entity.Menus;
 import com.moon.model.vo.MenusVO;
@@ -27,11 +28,15 @@ public class MenusServiceImpl implements MenusService {
     private MenusMapper menusMapper;
 
     @Override
-    public List<MenusVO> findIndexMenus() {
+    public PageInfo findIndexMenus() {
         List<Menus> menus = menusMapper.selectIndexMenus();
+        PageInfo pageInfo = new PageInfo(menus);
         List<MenusVO> menusVOList = new ArrayList<>();
         menuTree(menus, menusVOList);
-        return menusVOList;
+        pageInfo.setList(menusVOList);
+        pageInfo.setTotal(menusVOList.size());
+        pageInfo.setSize(menusVOList.size());
+        return pageInfo;
     }
 
     /**

@@ -16,7 +16,6 @@ import java.io.Serializable;
  * 创建时间: 2020-06-15 01:38
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @ApiModel("响应模型")
 public class SimpleResponse implements Serializable {
@@ -35,6 +34,15 @@ public class SimpleResponse implements Serializable {
     @ApiModelProperty("返回信息详解")
     private String details;
 
+    //详解
+    @JsonView(SimpleView.CommonView.class)
+    @ApiModelProperty("总记录数")
+    private Integer total;
+
+    //详解
+    @JsonView(SimpleView.CommonView.class)
+    @ApiModelProperty("查询结果数")
+    private Integer size;
 
     //返回体
     @JsonView(SimpleView.ReturnDataView.class)
@@ -42,9 +50,18 @@ public class SimpleResponse implements Serializable {
     private Object data;
 
 
-    public SimpleResponse(Integer status, String message, Object data) {
+    public SimpleResponse(Integer status, String message, String details, Object data) {
         this.status = status;
         this.message = message;
+        this.details = details;
+        this.data = data;
+    }
+
+    public SimpleResponse(Integer status, String message, Integer total, Integer size, Object data) {
+        this.status = status;
+        this.message = message;
+        this.total = total;
+        this.size = size;
         this.data = data;
     }
 }

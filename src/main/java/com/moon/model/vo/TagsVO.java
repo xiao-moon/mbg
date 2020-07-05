@@ -49,6 +49,16 @@ public class TagsVO implements Serializable{
     @ApiModelProperty("标签名称")
     private String name;
 
+
+    /**
+     * 描述
+     */
+    @JsonView(SimpleView.TagsView.class)
+    @ApiModelProperty("标签名称")
+    private String desc;
+
+
+
     /**
     * 排序，数值越大位置越靠前，0表示不排序
     */

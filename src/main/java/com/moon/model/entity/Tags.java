@@ -40,6 +40,11 @@ public class Tags implements Serializable{
     private String name;
 
     /**
+     * 描述
+     */
+    private String desc;
+
+    /**
      * 排序，数值越小位置越靠前，0表示不排序
      */
     private Integer priority;

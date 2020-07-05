@@ -42,4 +42,6 @@ public interface PhotosTypeMapper{
     * 批量删除
     */
     int deletePhotosTypeByIds(String[] ids);
+
+    List<PhotosType> selectPhotoByPhotoType();
 }

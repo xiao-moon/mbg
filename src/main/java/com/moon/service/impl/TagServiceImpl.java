@@ -1,5 +1,6 @@
 package com.moon.service.impl;
 
+import com.github.pagehelper.PageInfo;
 import com.moon.mapper.TagsMapper;
 import com.moon.model.entity.Tags;
 import com.moon.model.vo.TagsVO;
@@ -22,9 +23,11 @@ public class TagServiceImpl implements TagService {
     @Autowired
     private TagsMapper tagsMapper;
 
+
     @Override
-    public List<TagsVO> findTagsOrderByPriorityAndTime() {
+    public PageInfo findTagsOrderByPriorityAndTime() {
         List<Tags> tags = tagsMapper.selectTagsOrderByPriorityAndTime();
+        PageInfo pageInfo = new PageInfo(tags);
         List<TagsVO> list = new ArrayList<>();
 
         //领域模型转换
@@ -33,7 +36,8 @@ public class TagServiceImpl implements TagService {
             BeanCopierUtil.transDOToVO(t, tagsVO);
             list.add(tagsVO);
         }
-
-        return list;
+        pageInfo.setList(list);
+        return pageInfo;
     }
+
 }

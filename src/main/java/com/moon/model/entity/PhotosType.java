@@ -1,21 +1,24 @@
 package com.moon.model.entity;
 
-import lombok.*;
-import java.util.Date;
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
-* 描述: PhotosType
-* 创建人: 小月
-* 创建时间: 2020-07-01 01:56:46
-**/
+ * 描述: PhotosType
+ * 创建人: 小月
+ * 创建时间: 2020-07-01 01:56:46
+ **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PhotosType implements Serializable{
+public class PhotosType implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -54,19 +57,10 @@ public class PhotosType implements Serializable{
      */
     private Date updateTime;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 分类对应的图片
+     */
+    private List<Photos> photos;
 
 
 }

@@ -10,7 +10,7 @@
     </resultMap>
 
     <sql id="select${clazzName}Vo">
-        select#foreach($column in $columns) $column.columnName#if($foreach.count != ${columns.size()}),#end#end from ${tableName}
+        select#foreach`($column in $columns)` $column.columnName#if($foreach.count != ${columns.size()}),#end#end from ${tableName}
     </sql>
 
     <!--查询单个-->

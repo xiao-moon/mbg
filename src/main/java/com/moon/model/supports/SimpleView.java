@@ -7,26 +7,40 @@ package com.moon.model.supports;
  */
 public class SimpleView {
 
-    public interface CommonView{}
-    public interface ReturnDataView extends CommonView{}
+    public interface CommonView {
+    }
+
+    public interface ReturnDataView extends CommonView {
+    }
+
     /**
      * 首页返回展示
      */
-    public interface IndexMenusVIew extends ReturnDataView{}
+    public interface IndexVIew extends ReturnDataView {
+    }
 
     /**
      * 时间轴
      */
-    public interface TimeAxisView extends ReturnDataView{}
+    public interface TimeAxisView extends ReturnDataView {
+    }
 
     /**
      * 日记随笔
      */
-    public interface JournalsView extends ReturnDataView{}
+    public interface JournalsView extends ReturnDataView {
+    }
 
     /**
      * 标签
      */
-    public interface TagsView extends ReturnDataView{}
+    public interface TagsView extends ReturnDataView {
+    }
+
+    /**
+     * 图片及分类
+     */
+    public interface PhotosView extends ReturnDataView {
+    }
 
 }

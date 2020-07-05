@@ -26,7 +26,7 @@ public class InitializingMBG implements InitializingBean {
         /**
          * 初始化加载用户信息
          */
-        //InitializeCache.users = usersService.findUser();
+        InitializeCache.users = usersService.findUser();
 
         log.info("初始化信息结束...");
     }

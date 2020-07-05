@@ -1,5 +1,6 @@
 package com.moon.service;
 
+import com.github.pagehelper.PageInfo;
 import com.moon.model.dto.MenusDTO;
 import com.moon.model.vo.MenusVO;
 
@@ -14,5 +15,5 @@ public interface MenusService {
     /**
      * 获取首页菜单
      */
-    List<MenusVO> findIndexMenus();
+    PageInfo findIndexMenus();
 }

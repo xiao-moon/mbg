@@ -1,8 +1,6 @@
 package com.moon.service;
 
-import com.moon.model.vo.TagsVO;
-
-import java.util.List;
+import com.github.pagehelper.PageInfo;
 
 /**
  * 描述:
@@ -14,5 +12,7 @@ public interface TagService {
     /**
      * 查找所有的标签，并按照时间排序
      */
-    List<TagsVO> findTagsOrderByPriorityAndTime();
+    PageInfo findTagsOrderByPriorityAndTime();
+
+
 }

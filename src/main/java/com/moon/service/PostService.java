@@ -1,8 +1,6 @@
 package com.moon.service;
 
-import com.moon.model.vo.PostsVO;
-
-import java.util.List;
+import com.github.pagehelper.PageInfo;
 
 /**
  * 描述:
@@ -11,7 +9,19 @@ import java.util.List;
  */
 public interface PostService {
 
-    List<PostsVO> findIndexPosts();
+    /**
+     * 查询首页文章
+     */
+    PageInfo findIndexPosts(int pageNum, int pageSize);
 
-    List<PostsVO> findAllPostsByTime();
+    /**
+     * 查询所有文章简略信息，按照时间排序
+     */
+    PageInfo findAllPostsByTime();
+
+    /**
+     * 查看详情
+     */
+    PageInfo findSimplePostsByTags(Integer id, int pageNum, int pageSize);
+
 }

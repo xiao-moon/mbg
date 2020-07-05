@@ -1,5 +1,7 @@
 package com.moon.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.moon.mapper.JournalsMapper;
 import com.moon.model.entity.Journals;
 import com.moon.model.vo.JournalsVO;
@@ -23,11 +25,13 @@ public class JournalServiceImpl implements JournalService {
     private JournalsMapper journalsMapper;
 
     @Override
-    public List<JournalsVO> findJournals() {
+    public PageInfo findJournals() {
         Journals journals = new Journals();
         journals.setStatus(0);
         journals.setDelFlag(0);
         List<Journals> journalsList = journalsMapper.selectJournalsList(journals);
+        PageInfo pageInfo = new PageInfo(journalsList);
+
         List<JournalsVO> journalsVOList = new ArrayList<>();
         for (Journals j : journalsList) {
             JournalsVO journalsVO = new JournalsVO();
@@ -49,6 +53,7 @@ public class JournalServiceImpl implements JournalService {
             }
             return 0;
         });
-        return journalsVOList;
+        pageInfo.setList(journalsVOList);
+        return pageInfo;
     }
 }

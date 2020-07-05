@@ -1,9 +1,12 @@
 package com.moon.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.moon.model.supports.SimpleView;
 import lombok.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import java.util.List;
 
 /**
 * 描述: PhotosTypeVO
@@ -35,12 +38,14 @@ public class PhotosTypeVO implements Serializable{
     /**
     * ID主键自增
     */
+    @JsonView(SimpleView.PhotosView.class)
     @ApiModelProperty("ID主键自增")
     private String id;
 
     /**
     * 分类名称
     */
+    @JsonView(SimpleView.PhotosView.class)
     @ApiModelProperty("分类名称")
     private String name;
 
@@ -62,7 +67,8 @@ public class PhotosTypeVO implements Serializable{
     @ApiModelProperty("更新时间")
     private String updateTime;
 
-
+    @JsonView(SimpleView.PhotosView.class)
+    private List<PhotosVO> photos;
 
 
 

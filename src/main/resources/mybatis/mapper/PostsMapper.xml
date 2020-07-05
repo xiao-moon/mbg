@@ -188,13 +188,13 @@
             (
         SELECT
             p.id,
-            p.format_content,
             p.show_content,
             p.likes,
             p.priority,
             p.meta_description,
             p.meta_keywords,
             p.title,
+            p.visits,
             p.top_flag,
             p.top_priority,
             p.create_time,
@@ -231,6 +231,59 @@
             p.title
         FROM
             posts p
+    </select>
+
+    <select id="selectSimplePostsByTags" resultMap="PostsResult">
+        SELECT
+            mm.id,
+            mm.show_content,
+            mm.likes,
+            mm.priority,
+            mm.meta_description,
+            mm.meta_keywords,
+            mm.title,
+            mm.visits,
+            mm.create_time,
+            mm.c_id,
+            mm.c_name,
+            mm.a_name,
+            mm.a_url,
+            t.id t_id,
+            t.name t_name
+        FROM
+            (
+        SELECT
+            p.id,
+            p.show_content,
+            p.likes,
+            p.priority,
+            p.visits,
+            p.meta_description,
+            p.meta_keywords,
+            p.title,
+            p.top_flag,
+            p.top_priority,
+            p.create_time,
+            c.id c_id,
+            c.NAME c_name,
+            a.NAME a_name,
+            a.url a_url
+        FROM
+            `posts` p
+            LEFT JOIN posts_categories pc ON pc.post_id = p.id
+            LEFT JOIN categories c ON pc.category_id = c.id
+            LEFT JOIN attachments_posts ap ON ap.post_id = p.id
+            LEFT JOIN attachments a ON a.id = ap.attachment_id
+        WHERE
+            p.del_flag = 0
+            AND p.STATUS = 0
+            ) mm
+            LEFT JOIN posts_tags pt ON pt.post_id = mm.id
+            LEFT JOIN tags t ON t.id = pt.tag_id
+        WHERE
+            t.id = #{id}
+        ORDER BY
+            mm.create_time DESC
     </select>
 
 </mapper>

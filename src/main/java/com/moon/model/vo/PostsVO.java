@@ -2,9 +2,12 @@ package com.moon.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.moon.model.supports.SimpleView;
-import lombok.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
@@ -27,7 +30,7 @@ public class PostsVO implements Serializable {
     /**
      * 创建发布时间
      */
-    @JsonView({SimpleView.IndexMenusVIew.class})
+    @JsonView({SimpleView.IndexVIew.class})
     @ApiModelProperty("创建发布时间")
     private String createTime;
 
@@ -70,21 +73,20 @@ public class PostsVO implements Serializable {
     /**
      * 格式化后的文章
      */
-    @JsonView(SimpleView.IndexMenusVIew.class)
     @ApiModelProperty("格式化后的文章")
     private String formatContent;
 
     /**
      * ID主键自增
      */
-    @JsonView({SimpleView.IndexMenusVIew.class})
+    @JsonView({SimpleView.IndexVIew.class})
     @ApiModelProperty("ID主键自增")
     private String id;
 
     /**
      * 点赞数量
      */
-    @JsonView(SimpleView.IndexMenusVIew.class)
+    @JsonView(SimpleView.IndexVIew.class)
     @ApiModelProperty("点赞数量")
     private String likes;
 
@@ -121,7 +123,7 @@ public class PostsVO implements Serializable {
     /**
      * 缩略展示最多70文字
      */
-    @JsonView(SimpleView.IndexMenusVIew.class)
+    @JsonView(SimpleView.IndexVIew.class)
     @ApiModelProperty("缩略展示最多70文字")
     private String showContent;
 
@@ -134,7 +136,7 @@ public class PostsVO implements Serializable {
     /**
      * SEO优化:文章标题
      */
-    @JsonView(SimpleView.IndexMenusVIew.class)
+    @JsonView(SimpleView.IndexVIew.class)
     @ApiModelProperty("SEO优化:文章标题")
     private String title;
 
@@ -159,44 +161,44 @@ public class PostsVO implements Serializable {
     /**
      * 访客数量
      */
-    @JsonView(SimpleView.IndexMenusVIew.class)
+    @JsonView(SimpleView.IndexVIew.class)
     @ApiModelProperty("访客数量")
     private String visits;
 
     /**
      * 分类id
      */
-    @JsonView(SimpleView.IndexMenusVIew.class)
+    @JsonView(SimpleView.IndexVIew.class)
     private String categoryId;
 
     /**
      * 分类名称
      */
-    @JsonView(SimpleView.IndexMenusVIew.class)
+    @JsonView(SimpleView.IndexVIew.class)
     private String categoryName;
 
     /**
      * 图片地址
      */
-    @JsonView(SimpleView.IndexMenusVIew.class)
+    @JsonView(SimpleView.IndexVIew.class)
     private String attachmentUrl;
 
     /**
      * 图片名称
      */
-    @JsonView(SimpleView.IndexMenusVIew.class)
+    @JsonView(SimpleView.IndexVIew.class)
     private String attachmentName;
 
     /**
      * 标签id
      */
-    @JsonView(SimpleView.IndexMenusVIew.class)
+    @JsonView(SimpleView.IndexVIew.class)
     private String tagId;
 
     /**
      * 主标签名称
      */
-    @JsonView(SimpleView.IndexMenusVIew.class)
+    @JsonView(SimpleView.IndexVIew.class)
     private String tagName;
 
     /**
@@ -209,12 +211,12 @@ public class PostsVO implements Serializable {
      * 按月份进行排序
      */
     @JsonView(SimpleView.TimeAxisView.class)
-    private List<SubPostsVO> subPostsVOS;
+    private List<SubPostsVO> posts;
 
     /**
      * 评价表
      */
-    @JsonView(SimpleView.IndexMenusVIew.class)
+    @JsonView(SimpleView.IndexVIew.class)
     private String commentCount;
     /**
      * 临时使用

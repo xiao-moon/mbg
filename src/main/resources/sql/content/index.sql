@@ -31,7 +31,6 @@ FROM
 	(
 SELECT
 	p.id,
-	p.format_content,
 	p.show_content,
 	p.likes,
 	p.priority,

@@ -1,18 +1,15 @@
 package com.moon.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.moon.mapper.PostsMapper;
 import com.moon.model.entity.Posts;
-import com.moon.model.entity.Tags;
 import com.moon.model.vo.PostsVO;
 import com.moon.model.vo.SubPostsVO;
 import com.moon.service.PostService;
 import com.moon.utils.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Service;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
@@ -30,16 +27,24 @@ public class PostServiceImpl implements PostService {
     private PostsMapper postsMapper;
 
     @Override
-    public List<PostsVO> findIndexPosts() {
+    public PageInfo findIndexPosts(int pageNum, int pageSize) {
+        //分页查询
+        PageHelper.startPage(pageNum, pageSize);
         List<Posts> posts = postsMapper.selectIndexPosts();
+        PageInfo postsPageInfo = new PageInfo(posts);
+
+        //转换领域模型
         List<PostsVO> postsVO = new ArrayList<>();
         doToVo(posts, postsVO);
-        return postsVO;
+        postsPageInfo.setList(postsVO);
+        return postsPageInfo;
     }
 
     @Override
-    public List<PostsVO> findAllPostsByTime() {
+    public PageInfo findAllPostsByTime() {
         List<Posts> posts = postsMapper.selectSimplePostsList();
+        PageInfo pageInfo = new PageInfo(posts);
+
         List<PostsVO> postsVOS = new ArrayList<>();
         Map<String, List<SubPostsVO>> map = new HashMap<>();
         //转换领域模型
@@ -56,7 +61,7 @@ public class PostServiceImpl implements PostService {
             postsVO.setTemp(createTime);
             postsVO.setId(String.valueOf(post.getId()));
             postsVO.setTitle(post.getTitle());
-            List<SubPostsVO> subPostsVOS = null;
+            List<SubPostsVO> subPostsVOS;
             if (map.containsKey(monthDate)) {
                 subPostsVOS = map.get(monthDate);
             } else {
@@ -82,7 +87,7 @@ public class PostServiceImpl implements PostService {
             PostsVO postsVO = new PostsVO();
             postsVO.setMonthData(month);
             postsVO.setTemp(subPostsVOS.get(0).getTemp());
-            postsVO.setSubPostsVOS(subPostsVOS);
+            postsVO.setPosts(subPostsVOS);
             postsVOS.add(postsVO);
         }
         postsVOS.sort((postsVO1, postsVO2) -> {
@@ -96,11 +101,25 @@ public class PostServiceImpl implements PostService {
             }
             return 0;
         });
-        return postsVOS;
+
+        pageInfo.setList(postsVOS);
+        return pageInfo;
+    }
+
+    @Override
+    public PageInfo findSimplePostsByTags(Integer id, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Posts> posts = postsMapper.selectSimplePostsByTags(id);
+        PageInfo pageInfo = new PageInfo(posts);
+        List<PostsVO> list = new ArrayList<>();
+        doToVo(posts, list);
+        pageInfo.setList(list);
+        pageInfo.setSize(list.size());
+        return pageInfo;
     }
 
     /**
-     * 生成菜单树
+     * 领域模型转换
      */
     private void doToVo(List<Posts> posts, List<PostsVO> postsVO) {
         if (CollectionUtils.isNotEmpty(posts)) {
@@ -127,6 +146,9 @@ public class PostServiceImpl implements PostService {
                 }
                 if (post.getTitle() != null) {
                     postVO.setTitle(post.getTitle());
+                }
+                if (post.getVisits() != null) {
+                    postVO.setVisits(String.valueOf(post.getVisits()));
                 }
                 if (post.getTopFlag() != null) {
                     postVO.setTopFlag(String.valueOf(post.getTopFlag()));
@@ -160,24 +182,24 @@ public class PostServiceImpl implements PostService {
         }
     }
 
-    /**
-     * 按照位置排序
-     */
-    private void sort(List<Tags> tags) {
-        Collections.sort(tags, new Comparator<Tags>() {
-            @Override
-            public int compare(Tags tag1, Tags tag2) {
-                int m1 = tag1.getPriority();
-                int m2 = tag2.getPriority();
-
-                if (m1 > m2) {
-                    return -1;
-                }
-                if (m1 < m2) {
-                    return 1;
-                }
-                return 0;
-            }
-        });
-    }
+//    /**
+//     * 按照位置排序
+//     */
+//    private void sort(List<Tags> tags) {
+//        Collections.sort(tags, new Comparator<Tags>() {
+//            @Override
+//            public int compare(Tags tag1, Tags tag2) {
+//                int m1 = tag1.getPriority();
+//                int m2 = tag2.getPriority();
+//
+//                if (m1 > m2) {
+//                    return -1;
+//                }
+//                if (m1 < m2) {
+//                    return 1;
+//                }
+//                return 0;
+//            }
+//        });
+//    }
 }
