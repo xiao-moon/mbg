@@ -1,5 +1,7 @@
 package com.moon.controller.content;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.moon.model.supports.SimpleView;
 import com.moon.service.PostService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/post")
 @Api(value = "post", description = "文章详情")
-public class PostsController {
+public class PostController {
 
     @Autowired
     @Qualifier("postServiceImpl")
@@ -25,7 +27,7 @@ public class PostsController {
 
 
     @GetMapping("/{id:\\d+}")
-//    @JsonView(SimpleView.PostsView.class)
+    @JsonView(SimpleView.PostDetailView.class)
     public Object getPageInfo(@PathVariable int id) {
         return postService.findPostDetailById(id);
     }

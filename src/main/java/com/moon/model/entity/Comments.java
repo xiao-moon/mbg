@@ -1,13 +1,13 @@
 package com.moon.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.moon.model.supports.SimpleView;
-import lombok.*;
-
-import java.util.Date;
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 描述: Comments
@@ -88,6 +88,11 @@ public class Comments implements Serializable {
     private Integer responseId;
 
     /**
+     * 回复给的人的名称
+     */
+    private String responseAuthor;
+
+    /**
      * 是否置顶:0不置顶;1置顶
      */
     private Integer topFlag;
@@ -111,6 +116,11 @@ public class Comments implements Serializable {
      * 评价数量
      */
     private Integer count;
+
+    /**
+     * 子评价
+     */
+    private List<Comments> subCList;
 
 
 }

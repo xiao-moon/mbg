@@ -1,8 +1,10 @@
 package com.moon.utils;
 
 import com.moon.exception.BeanCopierException;
+import com.moon.model.entity.Comments;
 import com.moon.model.entity.Photos;
 import com.moon.model.entity.Tags;
+import com.moon.model.vo.CommentsVO;
 import com.moon.model.vo.PhotosVO;
 import com.moon.model.vo.TagsVO;
 import org.springframework.cglib.beans.BeanCopier;
@@ -19,41 +21,48 @@ import java.util.List;
  */
 public class BeanCopierUtil {
 
-    public static void transDOToVO(Object DO, Object DTO) {
+    public static void transDOToVO(Object DO, Object VO) {
         // 构造转换器对象，最后的参数表示是否需要自定义转换器
-        BeanCopier beanCopier = BeanCopier.create(DO.getClass(), DTO.getClass(), true);
-        // 转换对象，自定义转换器处理特殊字段
-        beanCopier.copy(DO, DTO, (value, target, context) -> {
-            // 原始数据value是Date类型，目标类型target是String
-            if (value == null) {
-                return "";
-            }
-            System.out.println("----------:" + value);
-            if (value instanceof Date) {
-                return dateToString(value, target);
-            }
-            if (value instanceof Long) {
-                return longToString(value, target);
-            }
-            if (value instanceof Integer) {
-                return integerToString(value, target);
-            }
-            if (value instanceof Boolean) {
-                return booleanToString(value, target);
-            }
-//            if (value instanceof Photos) {
-//                PhotosVO photosVO = new PhotosVO();
-//                transDOToVO(value, photosVO);
-//                return photosVO;
-//            }
-            if (value instanceof List) {
-                return dealList(value, target);
-            }
+        BeanCopier beanCopier = BeanCopier.create(DO.getClass(), VO.getClass(), true);
+        try {
+            // 转换对象，自定义转换器处理特殊字段
+            beanCopier.copy(DO, VO, (value, target, context) -> {
+                // 原始数据value是Date类型，目标类型target是String
+                if (value instanceof String) {
+                    if (value == null || value.equals("")) {
+                        return "";
+                    }
+                } else if (value == null) {
+                    return null;
+                }
+                if (value instanceof Date) {
+                    return dateToString(value, target);
+                }
+                if (value instanceof Long) {
+                    return longToString(value, target);
+                }
+                if (value instanceof Integer) {
+                    return integerToString(value, target);
+                }
+                if (value instanceof Boolean) {
+                    return booleanToString(value, target);
+                }
+                //            if (value instanceof Photos) {
+                //                PhotosVO photosVO = new PhotosVO();
+                //                transDOToVO(value, photosVO);
+                //                return photosVO;
+                //            }
+                if (value instanceof List) {
+                    return dealList(value, target);
+                }
 
-            // 未匹配上的字段，原值返回
-            return value;
+                // 未匹配上的字段，原值返回
+                return value;
 
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -139,6 +148,19 @@ public class BeanCopierUtil {
                 return tsvo;
             }
         }
+        if (o instanceof Comments) {
+            if ("List".equals(target.getSimpleName())) {
+                List<Comments> cList = (List<Comments>) value;
+                List<CommentsVO> cvoList = new ArrayList<>();
+                for (Comments c : cList) {
+                    CommentsVO commentsVO = new CommentsVO();
+                    transDOToVO(c, commentsVO);
+                    cvoList.add(commentsVO);
+                }
+                return cvoList;
+            }
+        }
+
         try {
             throw new BeanCopierException("dealList:转换异常");
         } catch (BeanCopierException e) {

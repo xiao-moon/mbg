@@ -30,7 +30,7 @@ public class PostsVO implements Serializable {
     /**
      * 创建发布时间
      */
-    @JsonView({SimpleView.PostsView.class})
+    @JsonView({SimpleView.PostsView.class, SimpleView.PostDetailView.class})
     @ApiModelProperty("创建发布时间")
     private String createTime;
 
@@ -43,6 +43,7 @@ public class PostsVO implements Serializable {
     /**
      * 不允许评论:0允许;1不允许
      */
+    @JsonView({SimpleView.PostDetailView.class})
     @ApiModelProperty("不允许评论:0允许;1不允许")
     private String disallowComment;
 
@@ -73,32 +74,35 @@ public class PostsVO implements Serializable {
     /**
      * 格式化后的文章
      */
+    @JsonView(SimpleView.PostDetailView.class)
     @ApiModelProperty("格式化后的文章")
     private String formatContent;
 
     /**
      * ID主键自增
      */
-    @JsonView({SimpleView.PostsView.class})
+    @JsonView({SimpleView.PostsView.class, SimpleView.PostDetailView.class})
     @ApiModelProperty("ID主键自增")
     private String id;
 
     /**
      * 点赞数量
      */
-    @JsonView(SimpleView.PostsView.class)
+    @JsonView({SimpleView.PostsView.class, SimpleView.PostDetailView.class})
     @ApiModelProperty("点赞数量")
     private String likes;
 
     /**
      * SEO优化:meta_description
      */
+    @JsonView(SimpleView.PostDetailView.class)
     @ApiModelProperty("SEO优化:meta_description")
     private String metaDescription;
 
     /**
      * SEO优化:meta_keywords
      */
+    @JsonView(SimpleView.PostDetailView.class)
     @ApiModelProperty("SEO优化:meta_keywords")
     private String metaKeywords;
 
@@ -123,7 +127,7 @@ public class PostsVO implements Serializable {
     /**
      * 缩略展示最多70文字
      */
-    @JsonView(SimpleView.PostsView.class)
+    @JsonView({SimpleView.PostsView.class, SimpleView.PostDetailView.class})
     @ApiModelProperty("缩略展示最多70文字")
     private String showContent;
 
@@ -136,7 +140,7 @@ public class PostsVO implements Serializable {
     /**
      * SEO优化:文章标题
      */
-    @JsonView(SimpleView.PostsView.class)
+    @JsonView({SimpleView.PostsView.class, SimpleView.PostDetailView.class})
     @ApiModelProperty("SEO优化:文章标题")
     private String title;
 
@@ -161,32 +165,32 @@ public class PostsVO implements Serializable {
     /**
      * 访客数量
      */
-    @JsonView(SimpleView.PostsView.class)
+    @JsonView({SimpleView.PostsView.class, SimpleView.PostDetailView.class})
     @ApiModelProperty("访客数量")
     private String visits;
 
     /**
      * 分类id
      */
-    @JsonView(SimpleView.PostsView.class)
+    @JsonView({SimpleView.PostsView.class, SimpleView.PostDetailView.class})
     private String categoryId;
 
     /**
      * 分类名称
      */
-    @JsonView(SimpleView.PostsView.class)
+    @JsonView({SimpleView.PostsView.class, SimpleView.PostDetailView.class})
     private String categoryName;
 
     /**
      * 图片地址
      */
-    @JsonView(SimpleView.PostsView.class)
+    @JsonView({SimpleView.PostsView.class, SimpleView.PostDetailView.class})
     private String attachmentUrl;
 
     /**
      * 图片名称
      */
-    @JsonView(SimpleView.PostsView.class)
+    @JsonView({SimpleView.PostsView.class, SimpleView.PostDetailView.class})
     private String attachmentName;
 
     /**
@@ -226,6 +230,7 @@ public class PostsVO implements Serializable {
     /**
      * 关联标签表
      */
+    @JsonView(SimpleView.PostDetailView.class)
     private List<TagsVO> tags;
 
     /**

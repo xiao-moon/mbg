@@ -374,6 +374,7 @@
         SELECT
             p.id,
             p.format_content,
+            p.disallow_comment,
             p.show_content,
             p.likes,
             p.priority,

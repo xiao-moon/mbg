@@ -38,14 +38,14 @@ public class TagsVO implements Serializable{
     /**
     * ID主键自增
     */
-    @JsonView(SimpleView.TagsView.class)
+    @JsonView({SimpleView.TagsView.class ,SimpleView.PostDetailView.class})
     @ApiModelProperty("ID主键自增")
     private String id;
 
     /**
     * 标签名称
     */
-    @JsonView(SimpleView.TagsView.class)
+    @JsonView({SimpleView.TagsView.class ,SimpleView.PostDetailView.class})
     @ApiModelProperty("标签名称")
     private String name;
 
@@ -53,7 +53,7 @@ public class TagsVO implements Serializable{
     /**
      * 描述
      */
-    @JsonView(SimpleView.TagsView.class)
+    @JsonView({SimpleView.TagsView.class ,SimpleView.PostDetailView.class})
     @ApiModelProperty("标签名称")
     private String desc;
 

@@ -49,4 +49,14 @@ public class SimpleView {
     public interface CategoriesView extends PostsView {
     }
 
+    /**
+     * 文章详情
+     */
+    public interface PostDetailView extends ReturnDataView{}
+
+    /**
+     * 评论
+     */
+    public interface CommentsView extends ReturnDataView{}
+
 }
