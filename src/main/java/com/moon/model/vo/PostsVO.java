@@ -223,4 +223,14 @@ public class PostsVO implements Serializable {
      */
     private Object temp;
 
+    /**
+     * 关联标签表
+     */
+    private List<TagsVO> tags;
+
+    /**
+     * 关联标签表
+     */
+    private TagsVO tag;
+
 }

@@ -1,6 +1,7 @@
 package com.moon.service;
 
 import com.github.pagehelper.PageInfo;
+import com.moon.model.vo.PostsVO;
 
 /**
  * 描述:
@@ -29,5 +30,8 @@ public interface PostService {
      */
     PageInfo findSearchPosts(String search, int pageNum, int pageSize);
 
-
+    /**
+     * 根据文章id查询文章详情
+     */
+    PostsVO findPostDetailById(Integer id);
 }

@@ -96,4 +96,17 @@
         where del_flag = 0 and status = 0 order by priority desc , create_time desc
     </select>
 
+
+    <select id="selectTagsByPostId" resultMap="TagsResult" >
+        SELECT
+            DISTINCT t.*
+        FROM
+            tags t
+            LEFT JOIN posts_tags pt ON pt.tag_id = t.id
+        WHERE
+            pt.post_id = #{id}
+            AND t.del_flag = 0
+            AND t.STATUS =0
+    </select>
+
 </mapper>

@@ -3,11 +3,14 @@ package com.moon.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.moon.mapper.PostsMapper;
+import com.moon.mapper.TagsMapper;
 import com.moon.model.entity.Posts;
+import com.moon.model.entity.Tags;
 import com.moon.model.properties.BlogProperties;
 import com.moon.model.vo.PostsVO;
 import com.moon.model.vo.SubPostsVO;
 import com.moon.service.PostService;
+import com.moon.utils.BeanCopierUtil;
 import com.moon.utils.BlogUtils;
 import com.moon.utils.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -29,6 +32,9 @@ public class PostServiceImpl implements PostService {
 
     @Resource
     private PostsMapper postsMapper;
+
+    @Autowired
+    private TagsMapper tagsMapper;
 
     @Autowired
     private BlogProperties blogProperties;
@@ -174,10 +180,21 @@ public class PostServiceImpl implements PostService {
         return pageInfo;
     }
 
+    @Override
+    @Transactional
+    public PostsVO findPostDetailById(Integer id) {
+        Posts posts = postsMapper.selectDetailPostById(id);
+        List<Tags> tags = tagsMapper.selectTagsByPostId(id);
+        posts.setTags(tags);
+        PostsVO postsVO = new PostsVO();
+        BeanCopierUtil.transDOToVO(posts, postsVO);
+        return postsVO;
+    }
+
     /**
      * 领域模型转换
      */
-     void doToVo(List<Posts> posts, List<PostsVO> postsVO) {
+    void doToVo(List<Posts> posts, List<PostsVO> postsVO) {
         if (CollectionUtils.isNotEmpty(posts)) {
             for (Posts post : posts) {
                 PostsVO postVO = new PostsVO();

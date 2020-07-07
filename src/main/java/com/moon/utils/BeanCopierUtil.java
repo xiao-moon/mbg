@@ -2,7 +2,9 @@ package com.moon.utils;
 
 import com.moon.exception.BeanCopierException;
 import com.moon.model.entity.Photos;
+import com.moon.model.entity.Tags;
 import com.moon.model.vo.PhotosVO;
+import com.moon.model.vo.TagsVO;
 import org.springframework.cglib.beans.BeanCopier;
 
 import java.text.SimpleDateFormat;
@@ -107,7 +109,7 @@ public class BeanCopierUtil {
     /**
      * 转换list
      */
-    public static List dealList(Object value, Class<?> target) {
+    private static List dealList(Object value, Class<?> target) {
         List v = (List) value;
         if (v.size() <= 0) {
             return null;
@@ -123,6 +125,18 @@ public class BeanCopierUtil {
                     pvos.add(photosVO);
                 }
                 return pvos;
+            }
+        }
+        if (o instanceof Tags) {
+            if ("List".equals(target.getSimpleName())) {
+                List<Tags> ts = (List<Tags>) value;
+                List<TagsVO> tsvo = new ArrayList<>();
+                for (Tags t : ts) {
+                    TagsVO tagsVO = new TagsVO();
+                    transDOToVO(t, tagsVO);
+                    tsvo.add(tagsVO);
+                }
+                return tsvo;
             }
         }
         try {
