@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 06/07/2020 00:43:38
+ Date: 07/07/2020 08:47:17
 */
 
 SET NAMES utf8mb4;
@@ -312,7 +312,7 @@ CREATE TABLE `posts`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `posts_flag_status`(`del_flag`, `status`) USING BTREE,
   INDEX `posts_create_time`(`create_time`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '文章表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '文章表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of posts
@@ -343,7 +343,7 @@ CREATE TABLE `posts_categories`  (
 -- Records of posts_categories
 -- ----------------------------
 INSERT INTO `posts_categories` VALUES (1, 1, 1, 0, 0, '2020-06-25 00:39:39', '2020-06-25 00:39:43');
-INSERT INTO `posts_categories` VALUES (2, 2, 2, 0, 0, '2020-06-25 00:40:32', '2020-06-25 00:40:34');
+INSERT INTO `posts_categories` VALUES (2, 1, 2, 0, 0, '2020-06-25 00:40:32', '2020-06-25 00:40:34');
 
 -- ----------------------------
 -- Table structure for posts_tags
@@ -385,7 +385,7 @@ CREATE TABLE `tags`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `tags_flag_status`(`del_flag`, `status`) USING BTREE,
   INDEX `tags_name`(`name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tags
