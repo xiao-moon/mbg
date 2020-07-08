@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,4 +45,14 @@ public class CommentServiceImpl implements CommentService {
     }
 
 
+    @Override
+    public int insertComment(CommentsVO commentsVO, HttpServletRequest request) {
+        Comments comments = new Comments();
+        BeanCopierUtil.transVOToDO(commentsVO, comments);
+        request.getRequestURI();
+        comments.setId(null);
+
+
+        return 0;
+    }
 }

@@ -1,6 +1,10 @@
 package com.moon.service;
 
 import com.github.pagehelper.PageInfo;
+import com.moon.model.vo.CommentsVO;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.stream.events.Comment;
 
 /**
  * 描述:
@@ -14,4 +18,8 @@ public interface CommentService {
      */
     PageInfo findComments(int postId, int pageNum, int pageSize);
 
+    /**
+     * 添加评论
+     */
+    int insertComment(CommentsVO commentsVO, HttpServletRequest request);
 }

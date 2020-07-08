@@ -9,6 +9,7 @@ import com.moon.model.vo.PhotosVO;
 import com.moon.model.vo.TagsVO;
 import org.springframework.cglib.beans.BeanCopier;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,6 +67,31 @@ public class BeanCopierUtil {
     }
 
 
+    public static void transVOToDO(Object VO, Object DO) {
+        // 构造转换器对象，最后的参数表示是否需要自定义转换器
+        BeanCopier beanCopier = BeanCopier.create(VO.getClass(), DO.getClass(), true);
+        beanCopier.copy(VO, DO, (value, target, context) -> {
+            if (value == null || value.equals("")) {
+                return null;
+            }
+            if (target.getSimpleName().equalsIgnoreCase("Date")) {
+                return stringToDate(value,target);
+            }
+            if(target.getSimpleName().equalsIgnoreCase("Long")){
+                return stringToLong(value,target);
+            }
+            if(target.getSimpleName().equalsIgnoreCase("Integer")
+                || target.getSimpleName().equalsIgnoreCase("int")){
+                return stringToInteger(value,target);
+            }
+            if(target.getSimpleName().equalsIgnoreCase("Boolean")){
+                return stringToBoolean(value, target);
+            }
+            return value;
+        });
+    }
+
+
     private static String dateToString(Object value, Class<?> target) {
         if ("String".equals(target.getSimpleName())) {
             return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(value);
@@ -77,6 +103,7 @@ public class BeanCopierUtil {
         }
         return null;
     }
+
 
     private static String longToString(Object value, Class<?> target) {
         if ("String".equals(target.getSimpleName())) {
@@ -168,6 +195,65 @@ public class BeanCopierUtil {
         }
         return null;
 
+    }
+
+    /*#############################VO_TO_DO######################################*/
+
+    private static Date stringToDate(Object value, Class<?> target) {
+        if ("Date".equals(target.getSimpleName())) {
+            Date parse = null;
+            try {
+                parse = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String) value);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return parse;
+        }
+        try {
+            throw new BeanCopierException("StringToDate:转换异常");
+        } catch (BeanCopierException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    private static Long stringToLong(Object value, Class<?> target) {
+        if ("Long".equalsIgnoreCase(target.getSimpleName())) {
+            return Long.parseLong((String) value);
+        }
+        try {
+            throw new BeanCopierException("stringToLong:转换异常");
+        } catch (BeanCopierException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    private static Integer stringToInteger(Object value, Class<?> target) {
+        if ("Integer".equals(target.getSimpleName())
+                || "int".equalsIgnoreCase(target.getSimpleName())) {
+            return Integer.parseInt((String) value);
+        }
+        try {
+            throw new BeanCopierException("stringToInteger:转换异常");
+        } catch (BeanCopierException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static Boolean stringToBoolean(Object value, Class<?> target) {
+        if (target.getSimpleName().equalsIgnoreCase("Boolean")) {
+            return Boolean.parseBoolean((String) value);
+        }
+        try {
+            throw new BeanCopierException("stringToBoolean:转换异常");
+        } catch (BeanCopierException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
