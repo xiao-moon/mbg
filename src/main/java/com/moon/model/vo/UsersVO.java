@@ -25,6 +25,7 @@ public class UsersVO implements Serializable{
     /**
     * 头像地址
     */
+    @JsonView(SimpleView.UserIndexView.class)
     @ApiModelProperty("头像地址")
     private String avatar;
 
@@ -37,13 +38,14 @@ public class UsersVO implements Serializable{
     /**
     * 描述
     */
-    @JsonView(SimpleView.PostsView.class)
+    @JsonView({SimpleView.PostsView.class, SimpleView.UserIndexView.class})
     @ApiModelProperty("描述")
     private String description;
 
     /**
     * email
     */
+    @JsonView(SimpleView.UserIndexView.class)
     @ApiModelProperty("email")
     private String email;
 
@@ -62,7 +64,7 @@ public class UsersVO implements Serializable{
     /**
     * 昵称
     */
-    @JsonView(SimpleView.PostsView.class)
+    @JsonView({SimpleView.PostsView.class, SimpleView.UserIndexView.class})
     @ApiModelProperty("昵称")
     private String nickname;
 

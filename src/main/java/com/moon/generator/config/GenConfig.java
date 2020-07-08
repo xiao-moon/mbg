@@ -74,5 +74,5 @@ public class GenConfig {
     /*其他配置*/
     private static String rootPath = System.getProperty("user.dir").replace("\\\\", "/");
     public static String baseJavaPath = rootPath + "/src/main/" + "java/";//获取项目java根路径
-    public static String baseResourcesPath = rootPath + "/src/main/" + "resources/";//获取项目resources根路径
+    public static String baseResourcesPath = rootPath + "/src/main/" + "static/";//获取项目resources根路径
 }

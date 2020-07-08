@@ -14,6 +14,13 @@ public class SimpleView {
     }
 
     /**
+     * 前台頁面用戶詳情
+     */
+    public interface UserIndexView extends ReturnDataView{}
+
+
+
+    /**
      * 首页返回展示
      */
     public interface PostsView extends ReturnDataView {

@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 07/07/2020 08:47:17
+ Date: 08/07/2020 23:18:37
 */
 
 SET NAMES utf8mb4;
@@ -36,13 +36,13 @@ CREATE TABLE `attachments`  (
   `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of attachments
 -- ----------------------------
-INSERT INTO `attachments` VALUES (1, '测试附件1', 'img', 'png', '/static/img/测试附件1.png', '/static/img/测试附件1.png', 1024, 1024, 1920, 0, 0, '2020-06-25 00:25:18', '2020-06-25 00:25:21');
-INSERT INTO `attachments` VALUES (2, '测试附件2', 'img', 'png', '/static/img/测试附件2.png', '/static/img/测试附件2.png', 1024, 1024, 1920, 0, 0, '2020-06-25 00:25:18', '2020-06-25 00:25:21');
+INSERT INTO `attachments` VALUES (1, '测试附件1', 'img', 'png', '/attachments/2010011600063589.jpg', '/attachments/2010011600063589.jpg', 1024, 1024, 1920, 0, 0, '2020-06-25 00:25:18', '2020-06-25 00:25:21');
+INSERT INTO `attachments` VALUES (2, '测试附件2', 'img', 'png', '/attachments/2010011600064161.jpg', '/attachments/2010011600064161.jpg', 1024, 1024, 1920, 0, 0, '2020-06-25 00:25:18', '2020-06-25 00:25:21');
 
 -- ----------------------------
 -- Table structure for attachments_categories
@@ -57,7 +57,7 @@ CREATE TABLE `attachments_categories`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `attachments_categories_attachment_id`(`attachment_id`) USING BTREE,
   INDEX `attachments_categories_category_id`(`category_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件-文章分类关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件-文章分类关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of attachments_categories
@@ -77,7 +77,7 @@ CREATE TABLE `attachments_menus`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `attachments_menus_attachment_id`(`attachment_id`) USING BTREE,
   INDEX `attachments_menus_menu_id`(`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件-菜单关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件-菜单关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of attachments_menus
@@ -100,7 +100,7 @@ CREATE TABLE `attachments_posts`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `attachments_posts_attachment_id`(`attachment_id`) USING BTREE,
   INDEX `attachments_posts_post_id`(`post_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件-文章关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '附件-文章关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of attachments_posts
@@ -125,7 +125,7 @@ CREATE TABLE `categories`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `categories_flag_status`(`del_flag`, `status`) USING BTREE,
   INDEX `categories_parent_id`(`parent_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '文章分类表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '文章分类表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of categories
@@ -161,14 +161,16 @@ CREATE TABLE `comments`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `comments_post_id`(`post_id`) USING BTREE,
   INDEX `comments_parent_id`(`parent_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comments
 -- ----------------------------
 INSERT INTO `comments` VALUES (1, 0, 0, 'moon', NULL, '第一条回复', '1234567@email.com', '127.0.0.1', 0, 1, 0, 1, NULL, 0, 0, '2020-06-25 00:31:27', '2020-06-25 00:31:29');
-INSERT INTO `comments` VALUES (2, 0, 1, 'tom', NULL, '回复第一条回复', '122121212', '127.0.0.1', 1, 1, 0, 2, NULL, 0, 0, '2020-06-25 00:33:54', '2020-06-25 00:33:56');
-INSERT INTO `comments` VALUES (3, 0, 0, 'moon', NULL, '第一条回复', '1234567@email.com', '127.0.0.1', 0, 1, 0, 1, NULL, 0, 1, '2020-06-25 00:31:27', '2020-06-25 00:31:29');
+INSERT INTO `comments` VALUES (2, 1, 1, 'tom', NULL, '回复第一条回复', '122121212', '127.0.0.1', 1, 1, 0, 2, NULL, 0, 0, '2020-06-25 00:33:54', '2020-06-25 00:33:56');
+INSERT INTO `comments` VALUES (3, 0, 0, 'moon', NULL, '第二条回复', '1234567@email.com', '127.0.0.1', 0, 1, 0, 1, NULL, 0, 1, '2020-06-25 00:31:27', '2020-06-25 00:31:29');
+INSERT INTO `comments` VALUES (4, 1, 1, 'SS', 'http://www.moon.com', '回复消息', '2947003449@qq.com', '0:0:0:0:0:0:0:1', 0, 1, 0, 0, 'PostmanRuntime/7.26.1', 0, 0, '2020-07-08 21:23:29', '2020-07-08 21:23:29');
+INSERT INTO `comments` VALUES (5, 1, 1, 'SS', 'http://www.moon.com', '回复消息', '2947003449@qq.com', '0:0:0:0:0:0:0:1', 0, 1, 0, 0, 'PostmanRuntime/7.26.1', 0, 0, '2020-07-08 21:24:06', '2020-07-08 21:24:06');
 
 -- ----------------------------
 -- Table structure for journals
@@ -183,7 +185,7 @@ CREATE TABLE `journals`  (
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   `likes` int(11) DEFAULT 0 COMMENT '点赞数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '日记表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '日记表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of journals
@@ -214,7 +216,7 @@ CREATE TABLE `menus`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `menus_parent_id`(`parent_id`) USING BTREE,
   INDEX `menus_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of menus
@@ -247,7 +249,7 @@ CREATE TABLE `photos`  (
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `photos_flag_status`(`del_flag`, `status`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '图片表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 50 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '图片表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of photos
@@ -274,7 +276,7 @@ CREATE TABLE `photos_type`  (
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `photos_type_flag_status`(`del_flag`, `status`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '图片分类表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '图片分类表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of photos_type
@@ -312,7 +314,7 @@ CREATE TABLE `posts`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `posts_flag_status`(`del_flag`, `status`) USING BTREE,
   INDEX `posts_create_time`(`create_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '文章表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '文章表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of posts
@@ -337,7 +339,7 @@ CREATE TABLE `posts_categories`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `posts_categories_post_id`(`post_id`) USING BTREE,
   INDEX `posts_categories_category_id`(`category_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单文章关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单文章关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of posts_categories
@@ -359,7 +361,7 @@ CREATE TABLE `posts_tags`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `posts_tags_post_id`(`post_id`) USING BTREE,
   INDEX `posts_tags_tag_id`(`tag_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '文章标签关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '文章标签关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of posts_tags
@@ -385,7 +387,7 @@ CREATE TABLE `tags`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `tags_flag_status`(`del_flag`, `status`) USING BTREE,
   INDEX `tags_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tags
@@ -410,11 +412,11 @@ CREATE TABLE `users`  (
   `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, '//cn.gravatar.com/avatar/fa8bafedb58d8fae8835ae10fc1e50a1?s=256&d=mm', '今宵酒醒何处杨柳岸晓风残月', '2947003449@qq.com', '2020-05-17 10:42:58.319000', '小月', '$2a$10$0/nzWRXsgpUzO9uJ45bH4uP7xx7Z10E8KR2yRWXZk67wVTgRpn8ka', 'moon', '2020-05-17 10:42:58', '2020-05-18 12:25:46');
+INSERT INTO `users` VALUES (1, '/attachments/2010011600095429.jpg', '今宵酒醒何处杨柳岸晓风残月', '2947003449@qq.com', '2020-05-17 10:42:58.319000', '小月', '$2a$10$0/nzWRXsgpUzO9uJ45bH4uP7xx7Z10E8KR2yRWXZk67wVTgRpn8ka', 'moon', '2020-05-17 10:42:58', '2020-05-18 12:25:46');
 
 SET FOREIGN_KEY_CHECKS = 1;

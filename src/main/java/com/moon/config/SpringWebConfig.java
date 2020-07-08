@@ -7,6 +7,7 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import java.nio.charset.Charset;
@@ -48,5 +49,9 @@ public class SpringWebConfig extends WebMvcConfigurationSupport {
     }
 
 
-
+    @Override
+    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static/");
+    }
 }

@@ -7,12 +7,14 @@ import com.moon.model.entity.Comments;
 import com.moon.model.vo.CommentsVO;
 import com.moon.service.CommentService;
 import com.moon.utils.BeanCopierUtil;
+import com.moon.utils.HttpUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,8 +53,19 @@ public class CommentServiceImpl implements CommentService {
         BeanCopierUtil.transVOToDO(commentsVO, comments);
         request.getRequestURI();
         comments.setId(null);
+        String ipAddress = HttpUtils.getIpAddress(request);
+        comments.setIpAddress(ipAddress);
+        comments.setIsAdmin(0);
+        comments.setTopFlag(0);
+        comments.setTopPriority(0);
+        comments.setUserAgent(request.getHeader("user-agent"));
+        comments.setAllowNotification(0);
+        comments.setDelFlag(0);
+        comments.setCreateTime(new Date());
+        comments.setUpdateTime(new Date());
 
+        int i = commentsMapper.insertComments(comments);
 
-        return 0;
+        return i;
     }
 }
