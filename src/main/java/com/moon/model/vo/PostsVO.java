@@ -147,6 +147,7 @@ public class PostsVO implements Serializable {
     /**
      * 是否置顶:0不置顶;1置顶
      */
+    @JsonView({SimpleView.PostsView.class})
     @ApiModelProperty("是否置顶:0不置顶;1置顶")
     private String topFlag;
 
