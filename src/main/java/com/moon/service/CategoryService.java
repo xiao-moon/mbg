@@ -1,21 +1,49 @@
 package com.moon.service;
 
-import com.github.pagehelper.PageInfo;
+import com.moon.model.entity.Category;
+import java.util.List;
 
 /**
- * 描述:
- * 创建人: 小月
- * 创建时间: 2020-07-06 01:16
+ * @description 文章分类表
+ * @author moon
+ * @date 2023-09-21 17:29:23
  */
 public interface CategoryService {
 
     /**
-     * 查询所有分类信息
-     */
-    PageInfo findCategoriesAndPosts(int pageNum, int pageSize);
+    * 查询单个
+    */
+    Category findById(Integer id);
 
     /**
-     * 根据分类id，查询分页信息
-     */
-    PageInfo findCategoriesAndPostsByPage(int id, int pageNum, int pageSize);
+    * 查询列表
+    */
+    List<Category> findList(Category category);
+
+    /**
+    * 新增
+    */
+    int insert(Category category);
+
+    /**
+    * 修改
+    */
+    int update(Category category);
+
+    /**
+    * 删除
+    */
+    int deleteById(Integer id);
+
+    /**
+    * 批量删除
+    */
+    int deleteByIds(Integer[] ids);
+
+    /**
+    * 条件删除
+    */
+    int delete(Category category);
+
+
 }

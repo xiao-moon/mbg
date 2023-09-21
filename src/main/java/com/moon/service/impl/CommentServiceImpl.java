@@ -1,71 +1,81 @@
 package com.moon.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.moon.mapper.CommentsMapper;
-import com.moon.model.entity.Comments;
-import com.moon.model.vo.CommentsVO;
+import com.moon.mapper.CommentMapper;
+import com.moon.model.entity.Comment;
 import com.moon.service.CommentService;
-import com.moon.utils.BeanCopierUtil;
-import com.moon.utils.HttpUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
- * 描述:
- * 创建人: 小月
- * 创建时间: 2020-07-08 00:32
+ * @author moon
+ * @description 评论表
+ * @date 2023-09-21 17:37:23
  */
 @Service
 public class CommentServiceImpl implements CommentService {
 
     @Resource
-    private CommentsMapper commentsMapper;
+    private CommentMapper mapper;
 
+    /**
+     * 查询单个
+     */
     @Override
-    @Transactional
-    public PageInfo findComments(int postId, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        List<Comments> cList = commentsMapper.selectCommentsListOrderByConditionsDesc(postId, 0);
-        PageInfo pageInfo = new PageInfo(cList);
-        List<CommentsVO> cvoList = new ArrayList<>();
-        for (Comments comments : cList) {
-            List<Comments> subCList = commentsMapper.selectCommentsListOrderByConditionsDesc(comments.getPostId(), comments.getId());
-            comments.setSubCList(subCList);
-            CommentsVO commentsVO = new CommentsVO();
-            BeanCopierUtil.transDOToVO(comments, commentsVO);
-            cvoList.add(commentsVO);
-        }
-        pageInfo.setList(cvoList);
-        return pageInfo;
+    public Comment findById(Integer id) {
+        Comment model = new Comment();
+        model.setId(id);
+        return mapper.selectOneBy(model);
+    }
+
+    /**
+     * 查询列表
+     */
+    @Override
+    public List<Comment> findList(Comment comment) {
+        return mapper.selectListBy(comment);
+    }
+
+    /**
+     * 新增
+     */
+    @Override
+    public int insert(Comment comment) {
+        return mapper.insertSelective(comment);
+    }
+
+    /**
+     * 修改
+     */
+    @Override
+    public int update(Comment comment) {
+        return mapper.updateByIdSelective(comment);
+    }
+
+    /**
+     * 删除
+     */
+    @Override
+    public int deleteById(Integer id) {
+        return mapper.deleteById(id);
+    }
+
+    /**
+     * 批量删除
+     */
+    @Override
+    public int deleteByIds(Integer[] ids) {
+        return mapper.deleteByIds(ids);
+    }
+
+    /**
+     * 条件删除
+     */
+    @Override
+    public int delete(Comment comment) {
+        return mapper.deleteBy(comment);
     }
 
 
-    @Override
-    public int insertComment(CommentsVO commentsVO, HttpServletRequest request) {
-        Comments comments = new Comments();
-        BeanCopierUtil.transVOToDO(commentsVO, comments);
-        request.getRequestURI();
-        comments.setId(null);
-        String ipAddress = HttpUtils.getIpAddress(request);
-        comments.setIpAddress(ipAddress);
-        comments.setIsAdmin(0);
-        comments.setTopFlag(0);
-        comments.setTopPriority(0);
-        comments.setUserAgent(request.getHeader("user-agent"));
-        comments.setAllowNotification(0);
-        comments.setDelFlag(0);
-        comments.setCreateTime(new Date());
-        comments.setUpdateTime(new Date());
-
-        int i = commentsMapper.insertComments(comments);
-
-        return i;
-    }
 }

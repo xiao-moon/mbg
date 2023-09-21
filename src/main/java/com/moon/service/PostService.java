@@ -1,37 +1,49 @@
 package com.moon.service;
 
-import com.github.pagehelper.PageInfo;
-import com.moon.model.vo.PostsVO;
+import com.moon.model.entity.Post;
+import java.util.List;
 
 /**
- * 描述:
- * 创建人: 小月
- * 创建时间: 2020-07-01 03:37
+ * @description 文章表
+ * @author moon
+ * @date 2023-09-21 17:29:23
  */
 public interface PostService {
 
     /**
-     * 查询首页文章
-     */
-    PageInfo findIndexPosts(int pageNum, int pageSize);
+    * 查询单个
+    */
+    Post findById(Integer id);
 
     /**
-     * 查询所有文章简略信息，按照时间排序
-     */
-    PageInfo findAllPostsByTime();
+    * 查询列表
+    */
+    List<Post> findList(Post post);
 
     /**
-     * 查看详情
-     */
-    PageInfo findSimplePostsByTags(Integer id, int pageNum, int pageSize);
+    * 新增
+    */
+    int insert(Post post);
 
     /**
-     * 搜索文章
-     */
-    PageInfo findSearchPosts(String search, int pageNum, int pageSize);
+    * 修改
+    */
+    int update(Post post);
 
     /**
-     * 根据文章id查询文章详情
-     */
-    PostsVO findPostDetailById(Integer id);
+    * 删除
+    */
+    int deleteById(Integer id);
+
+    /**
+    * 批量删除
+    */
+    int deleteByIds(Integer[] ids);
+
+    /**
+    * 条件删除
+    */
+    int delete(Post post);
+
+
 }

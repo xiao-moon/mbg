@@ -1,25 +1,49 @@
 package com.moon.service;
 
-import com.github.pagehelper.PageInfo;
-import com.moon.model.vo.CommentsVO;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.xml.stream.events.Comment;
+import com.moon.model.entity.Comment;
+import java.util.List;
 
 /**
- * 描述:
- * 创建人: 小月
- * 创建时间: 2020-07-08 00:31
+ * @description 评论表
+ * @author moon
+ * @date 2023-09-21 17:29:23
  */
 public interface CommentService {
 
     /**
-     * 查询文章评论信息
-     */
-    PageInfo findComments(int postId, int pageNum, int pageSize);
+    * 查询单个
+    */
+    Comment findById(Integer id);
 
     /**
-     * 添加评论
-     */
-    int insertComment(CommentsVO commentsVO, HttpServletRequest request);
+    * 查询列表
+    */
+    List<Comment> findList(Comment comment);
+
+    /**
+    * 新增
+    */
+    int insert(Comment comment);
+
+    /**
+    * 修改
+    */
+    int update(Comment comment);
+
+    /**
+    * 删除
+    */
+    int deleteById(Integer id);
+
+    /**
+    * 批量删除
+    */
+    int deleteByIds(Integer[] ids);
+
+    /**
+    * 条件删除
+    */
+    int delete(Comment comment);
+
+
 }

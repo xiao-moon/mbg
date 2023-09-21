@@ -1,12 +1,11 @@
 package com.moon.model;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.moon.model.supports.SimpleView;
+import com.moon.model.enums.ResponseEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.util.Assert;
 
 import java.io.Serializable;
 
@@ -15,53 +14,57 @@ import java.io.Serializable;
  * 创建人: 小月
  * 创建时间: 2020-06-15 01:38
  */
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @ApiModel("响应模型")
-public class SimpleResponse implements Serializable {
-    //返回码
-    @JsonView(SimpleView.CommonView.class)
+public class SimpleResponse<T> implements Serializable {
+    /**
+     * 返回码
+     */
     @ApiModelProperty("返回码")
-    private Integer status;
+    private Integer code;
 
-    //返回码注释
-    @JsonView(SimpleView.CommonView.class)
+    /**
+     * 返回码注释
+     */
     @ApiModelProperty("返回码注释")
     private String message;
 
-    //详解
-    @JsonView(SimpleView.CommonView.class)
-    @ApiModelProperty("返回信息详解")
-    private String details;
+    /**
+     * 返回数据
+     */
+    @ApiModelProperty("返回数据")
+    private T data;
 
-    //详解
-    @JsonView(SimpleView.CommonView.class)
-    @ApiModelProperty("总记录数")
-    private Integer total;
-
-    //详解
-    @JsonView(SimpleView.CommonView.class)
-    @ApiModelProperty("查询结果数")
-    private Integer size;
-
-    //返回体
-    @JsonView(SimpleView.ReturnDataView.class)
-    @ApiModelProperty("返回体")
-    private Object data;
-
-
-    public SimpleResponse(Integer status, String message, String details, Object data) {
-        this.status = status;
-        this.message = message;
-        this.details = details;
-        this.data = data;
+    public static <T> SimpleResponse<T> success(T data) {
+        SimpleResponse<T> response = new SimpleResponse<>();
+        response.setCode(ResponseEnum.OK.code);
+        response.setMessage(ResponseEnum.OK.msg);
+        response.setData(data);
+        return response;
     }
 
-    public SimpleResponse(Integer status, String message, Integer total, Integer size, Object data) {
-        this.status = status;
-        this.message = message;
-        this.total = total;
-        this.size = size;
-        this.data = data;
+    public static <T> SimpleResponse<T> fail(Integer code, String message) {
+        Assert.notNull(code, "code can not be null");
+        SimpleResponse<T> response = new SimpleResponse<>();
+        response.setCode(code);
+        response.setMessage(message);
+        return response;
     }
+
+    public static <T> SimpleResponse<T> fail() {
+        SimpleResponse<T> response = new SimpleResponse<>();
+        response.setCode(ResponseEnum.ERROR.code);
+        response.setMessage(ResponseEnum.ERROR.msg);
+        return response;
+    }
+
+    public static <T> SimpleResponse<T> fail(String message) {
+        SimpleResponse<T> response = new SimpleResponse<>();
+        response.setCode(ResponseEnum.ERROR.code);
+        response.setMessage(message);
+        return response;
+    }
+
+
 }
