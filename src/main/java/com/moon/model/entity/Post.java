@@ -9,7 +9,7 @@ import lombok.*;
 /**
  * @description 文章表
  * @author moon
- * @date 2023-09-21 17:28:01
+ * @date 2023-09-22 15:18:53
  */
 @Getter
 @Setter
@@ -119,16 +119,16 @@ public class Post {
     private Integer disallowComment;
 
     /**
-     * 状态:0正常;1草稿,2停用
+     * 状态:0草稿;1发布
      */
-    @ApiModelProperty("状态:0正常;1草稿,2停用")
+    @ApiModelProperty("状态:0草稿;1发布")
     private Integer status;
 
     /**
      * 删除标志:0正常;1删除
      */
     @ApiModelProperty("删除标志:0正常;1删除")
-    private Integer delFlag;
+    private Integer deleted;
 
     /**
      * 首次编辑时间

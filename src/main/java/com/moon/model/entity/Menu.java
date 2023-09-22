@@ -9,7 +9,7 @@ import lombok.*;
 /**
  * @description 菜单表
  * @author moon
- * @date 2023-09-21 17:28:01
+ * @date 2023-09-22 15:18:53
  */
 @Getter
 @Setter
@@ -74,7 +74,7 @@ public class Menu {
      * 删除标志:0正常;1删除
      */
     @ApiModelProperty("删除标志:0正常;1删除")
-    private Integer delFlag;
+    private Integer deleted;
 
     /**
      * 关联文章分类标志:0关联;1不关联

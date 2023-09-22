@@ -1,15 +1,18 @@
 package com.moon.model.entity;
 
-import java.time.LocalDateTime;
+import com.moon.model.enums.AttachmentType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 
 /**
- * @description 附件表
  * @author moon
- * @date 2023-09-21 17:28:01
+ * @description 附件表
+ * @date 2023-09-22 15:33:38
  */
 @Getter
 @Setter
@@ -71,16 +74,16 @@ public class Attachment {
     private Integer width;
 
     /**
-     * 状态:0正常;1停用
-     */
-    @ApiModelProperty("状态:0正常;1停用")
-    private Integer status;
-
-    /**
      * 删除标志:0正常;1删除
      */
     @ApiModelProperty("删除标志:0正常;1删除")
-    private Integer delFlag;
+    private Integer deleted;
+
+    /**
+     * 详见AttachmentTypeEnum类
+     */
+    @ApiModelProperty("详见AttachmentType枚举类")
+    private AttachmentType type;
 
     /**
      * 创建时间
@@ -93,19 +96,6 @@ public class Attachment {
      */
     @ApiModelProperty("更新时间")
     private LocalDateTime updateTime;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

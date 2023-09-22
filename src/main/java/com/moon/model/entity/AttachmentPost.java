@@ -9,7 +9,7 @@ import lombok.*;
 /**
  * @description 附件-文章关联表
  * @author moon
- * @date 2023-09-21 17:28:01
+ * @date 2023-09-22 15:18:53
  */
 @Getter
 @Setter

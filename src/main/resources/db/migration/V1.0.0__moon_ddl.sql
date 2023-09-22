@@ -13,8 +13,8 @@ CREATE TABLE `attachment`
     `size`               INT(11)      NOT NULL COMMENT '文件大小;单位KB',
     `height`             INT(11)               DEFAULT NULL COMMENT '高度:只有图片才有',
     `width`              INT(11)               DEFAULT 0 COMMENT '宽度:只有图片才有',
-    `status`             TINYINT(1)            DEFAULT 0 COMMENT '状态:0正常;1停用',
-    `del_flag`           TINYINT(1)            DEFAULT 0 COMMENT '删除标志:0正常;1删除',
+    `deleted`            TINYINT(1)            DEFAULT 0 COMMENT '删除标志:0正常;1删除',
+    `type`               TINYINT(1)            DEFAULT 0 COMMENT '详见AttachmentType枚举类',
     `create_time`        DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`        DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE
@@ -28,11 +28,11 @@ CREATE TABLE `attachment`
 -- ----------------------------
 INSERT INTO `attachment`
 VALUES (1, '测试附件1', 'img', 'png', '/attachments/2010011600063589.jpg',
-        '/attachments/2010011600063589.jpg', 1024, 1024, 1920, 0, 0, '2020-06-25 00:25:18',
+        '/attachments/2010011600063589.jpg', 1024, 1024, 1920, 0, '2020-06-25 00:25:18',
         '2020-06-25 00:25:21');
 INSERT INTO `attachment`
 VALUES (2, '测试附件2', 'img', 'png', '/attachments/2010011600064161.jpg',
-        '/attachments/2010011600064161.jpg', 1024, 1024, 1920, 0, 0, '2020-06-25 00:25:18',
+        '/attachments/2010011600064161.jpg', 1024, 1024, 1920, 0, '2020-06-25 00:25:18',
         '2020-06-25 00:25:21');
 
 -- ----------------------------
@@ -131,11 +131,10 @@ CREATE TABLE `category`
     `name`        VARCHAR(60) NOT NULL COMMENT '分类名称',
     `priority`    INT(11)     NOT NULL DEFAULT 0 COMMENT '排序，数值越大位置越靠前，0表示不排序',
     `status`      TINYINT(1)           DEFAULT 0 COMMENT '状态:0正常;1停用',
-    `del_flag`    TINYINT(1)  NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
+    `deleted`     TINYINT(1)  NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
     `create_time` DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time` DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX `category_flag_status` (`del_flag`, `status`) USING BTREE,
     INDEX `category_parent_id` (`parent_id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8mb4
@@ -176,7 +175,7 @@ CREATE TABLE `comment`
     `top_priority`       INT(11)       NOT NULL DEFAULT 0 COMMENT '置顶位置排序，数值越大位置越靠前，0表示不排序',
     `user_agent`         VARCHAR(511)           DEFAULT NULL COMMENT '浏览器信息',
     `allow_notification` INT(1)        NOT NULL DEFAULT 0 COMMENT '允许通知:0允许;1不允许',
-    `del_flag`           TINYINT(1)    NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
+    `deleted`            TINYINT(1)    NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
     `create_time`        DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`        DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE,
@@ -215,7 +214,7 @@ CREATE TABLE `journal`
     `id`          INT(11)    NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
     `content`     TEXT       NOT NULL COMMENT '内容',
     `status`      TINYINT(1) NOT NULL DEFAULT 0 COMMENT '状态:0正常;1停用',
-    `del_flag`    TINYINT(1) NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
+    `deleted`     TINYINT(1) NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
     `create_time` DATETIME   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time` DATETIME   NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `likes`       INT(11)             DEFAULT 0 COMMENT '点赞数量',
@@ -252,7 +251,7 @@ CREATE TABLE `menu`
     `target`          VARCHAR(20)            DEFAULT '_self' COMMENT '打开方式',
     `url`             VARCHAR(1023) NOT NULL COMMENT '地址',
     `status`          TINYINT(1)    NOT NULL DEFAULT 0 COMMENT '状态:0正常;1停用',
-    `del_flag`        TINYINT(1)    NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
+    `deleted`         TINYINT(1)    NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
     `categories_flag` TINYINT(1)             DEFAULT 1 COMMENT '关联文章分类标志:0关联;1不关联',
     `create_time`     DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`     DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -309,7 +308,7 @@ CREATE TABLE `photo`
     `type`        INT(11)                DEFAULT NULL COMMENT '图片分类ID',
     `priority`    INT(11)       NOT NULL DEFAULT 0 COMMENT '排序，数值越大位置越靠前，0表示不排序',
     `status`      TINYINT(1)    NOT NULL DEFAULT 0 COMMENT '状态:0正常;1停用',
-    `del_flag`    TINYINT(1)    NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
+    `deleted`     TINYINT(1)    NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
     `create_time` DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time` DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE
@@ -353,7 +352,7 @@ CREATE TABLE `photo_type`
     `name`        VARCHAR(60) NOT NULL COMMENT '分类名称',
     `priority`    INT(11)     NOT NULL DEFAULT 0 COMMENT '排序，数值越大位置越靠前，0表示不排序',
     `status`      TINYINT(1)  NOT NULL DEFAULT 0 COMMENT '状态:0正常;1停用',
-    `del_flag`    TINYINT(1)  NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
+    `deleted`     TINYINT(1)  NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
     `create_time` DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time` DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE
@@ -393,13 +392,12 @@ CREATE TABLE `post`
     `top_priority`     INT(11)      NOT NULL DEFAULT 0 COMMENT '置顶位置排序，数值越大位置越靠前，0表示不排序',
     `editor_type`      INT(1)                DEFAULT NULL COMMENT '编辑类型:0markdown;1富文本',
     `disallow_comment` INT(1)                DEFAULT 0 COMMENT '不允许评论:0允许;1不允许',
-    `status`           TINYINT(1)   NOT NULL DEFAULT 0 COMMENT '状态:0正常;1草稿,2停用',
-    `del_flag`         TINYINT(1)   NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
+    `status`           TINYINT(1)   NOT NULL DEFAULT 0 COMMENT '状态:0草稿;1发布',
+    `deleted`          TINYINT(1)   NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
     `edit_time`        DATETIME              DEFAULT NULL COMMENT '首次编辑时间',
     `create_time`      DATETIME              DEFAULT NULL COMMENT '创建发布时间',
     `update_time`      DATETIME              DEFAULT NULL COMMENT '最近一次更新修改时间',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX `post_flag_status` (`del_flag`, `status`) USING BTREE,
     INDEX `post_create_time` (`create_time`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8mb4
@@ -439,13 +437,11 @@ VALUES (4, '<h1 id=\"moon-first-blog\">MOON_FIRST_BLOG</h1>\n<p>123456789</p>\n'
 DROP TABLE IF EXISTS `post_category`;
 CREATE TABLE `post_category`
 (
-    `id`          INT(11)    NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
-    `category_id` INT(11)    NOT NULL COMMENT '文章分类ID',
-    `post_id`     INT(11)    NOT NULL COMMENT '文章ID',
-    `status`      TINYINT(1) NOT NULL DEFAULT 0 COMMENT '状态:0正常;1停用',
-    `del_flag`    TINYINT(1) NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
-    `create_time` DATETIME   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time` DATETIME   NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `id`          INT(11)  NOT NULL AUTO_INCREMENT COMMENT 'ID主键自增',
+    `category_id` INT(11)  NOT NULL COMMENT '文章分类ID',
+    `post_id`     INT(11)  NOT NULL COMMENT '文章ID',
+    `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE,
     INDEX `post_category_post_id` (`post_id`) USING BTREE,
     INDEX `post_category_category_id` (`category_id`) USING BTREE
@@ -458,9 +454,9 @@ CREATE TABLE `post_category`
 -- Records of posts_categories
 -- ----------------------------
 INSERT INTO `post_category`
-VALUES (1, 1, 1, 0, 0, '2020-06-25 00:39:39', '2020-06-25 00:39:43');
+VALUES (1, 1, 1, '2020-06-25 00:39:39', '2020-06-25 00:39:43');
 INSERT INTO `post_category`
-VALUES (2, 1, 2, 0, 0, '2020-06-25 00:40:32', '2020-06-25 00:40:34');
+VALUES (2, 1, 2, '2020-06-25 00:40:32', '2020-06-25 00:40:34');
 
 -- ----------------------------
 -- Table structure for post_tag
@@ -505,11 +501,10 @@ CREATE TABLE `tag`
     `desc`        VARCHAR(255)          DEFAULT NULL COMMENT '描述',
     `priority`    INT(11)      NOT NULL DEFAULT 0 COMMENT '排序，数值越大位置越靠前，0表示不排序',
     `status`      TINYINT(1)   NOT NULL DEFAULT 0 COMMENT '状态:0正常;1停用',
-    `del_flag`    TINYINT(1)   NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
+    `deleted`     TINYINT(1)   NOT NULL DEFAULT 0 COMMENT '删除标志:0正常;1删除',
     `create_time` DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time` DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX `tag_flag_status` (`del_flag`, `status`) USING BTREE,
     INDEX `tag_name` (`name`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8mb4

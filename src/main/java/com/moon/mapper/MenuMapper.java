@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.*;
 /**
  * @description 菜单表
  * @author moon
- * @date 2023-09-21 18:16:37
+ * @date 2023-09-22 15:18:53
  */
 public interface MenuMapper {
 
@@ -15,7 +15,7 @@ public interface MenuMapper {
      * 查询单个
      */
     @Select("<script>" +
-            "SELECT id, icon, name, desc, parent_id, priority, target, url, status, del_flag, categories_flag, create_time, update_time " +
+            "SELECT id, icon, name, desc, parent_id, priority, target, url, status, deleted, categories_flag, create_time, update_time " +
             "FROM menu " +
             "   <where> " +
             "        <if test=\"id != null \"> and id = #{id}</if>" +
@@ -27,7 +27,7 @@ public interface MenuMapper {
             "        <if test=\"target != null  and target != ''\"> and target = #{target}</if>" +
             "        <if test=\"url != null  and url != ''\"> and url = #{url}</if>" +
             "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
             "        <if test=\"categoriesFlag != null \"> and categories_flag = #{categoriesFlag}</if>" +
             "   </where> " +
             "LIMIT 1 " +
@@ -40,7 +40,7 @@ public interface MenuMapper {
      * 查询列表
      */
     @Select("<script>" +
-            "SELECT id, icon, name, desc, parent_id, priority, target, url, status, del_flag, categories_flag, create_time, update_time " +
+            "SELECT id, icon, name, desc, parent_id, priority, target, url, status, deleted, categories_flag, create_time, update_time " +
             "FROM menu " +
             "   <where> " +
             "        <if test=\"id != null \"> and id = #{id}</if>" +
@@ -52,7 +52,7 @@ public interface MenuMapper {
             "        <if test=\"target != null  and target != ''\"> and target = #{target}</if>" +
             "        <if test=\"url != null  and url != ''\"> and url = #{url}</if>" +
             "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
             "        <if test=\"categoriesFlag != null \"> and categories_flag = #{categoriesFlag}</if>" +
             "   </where> " +
             "</script> "
@@ -75,7 +75,7 @@ public interface MenuMapper {
             "        <if test=\"target != null  and target != ''\"> and target = #{target}</if>" +
             "        <if test=\"url != null  and url != ''\"> and url = #{url}</if>" +
             "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
             "        <if test=\"categoriesFlag != null \"> and categories_flag = #{categoriesFlag}</if>" +
     "   </where> " +
     "</script> "
@@ -97,7 +97,7 @@ public interface MenuMapper {
             "       <if test=\"target != null  and target != ''\">target,</if>" +
             "       <if test=\"url != null  and url != ''\">url,</if>" +
             "       <if test=\"status != null \">status,</if>" +
-            "       <if test=\"delFlag != null \">del_flag,</if>" +
+            "       <if test=\"deleted != null \">deleted,</if>" +
             "       <if test=\"categoriesFlag != null \">categories_flag,</if>" +
             "       <if test=\"createTime != null \">create_time,</if>" +
             "       <if test=\"updateTime != null \">update_time,</if>" +
@@ -111,7 +111,7 @@ public interface MenuMapper {
             "       <if test=\"target != null  and target != ''\">#{target},</if>" +
             "       <if test=\"url != null  and url != ''\">#{url},</if>" +
             "       <if test=\"status != null \">#{status},</if>" +
-            "       <if test=\"delFlag != null \">#{delFlag},</if>" +
+            "       <if test=\"deleted != null \">#{deleted},</if>" +
             "       <if test=\"categoriesFlag != null \">#{categoriesFlag},</if>" +
             "       <if test=\"createTime != null \">#{createTime},</if>" +
             "       <if test=\"updateTime != null \">#{updateTime},</if>" +
@@ -134,7 +134,7 @@ public interface MenuMapper {
             "        <if test=\"target != null  and target != ''\">target = #{target},</if>" +
             "        <if test=\"url != null  and url != ''\">url = #{url},</if>" +
             "        <if test=\"status != null \">status = #{status},</if>" +
-            "        <if test=\"delFlag != null \">del_flag = #{delFlag},</if>" +
+            "        <if test=\"deleted != null \">deleted = #{deleted},</if>" +
             "        <if test=\"categoriesFlag != null \">categories_flag = #{categoriesFlag},</if>" +
             "        <if test=\"createTime != null \">create_time = #{createTime},</if>" +
             "        <if test=\"updateTime != null \">update_time = #{updateTime},</if>" +
@@ -159,7 +159,7 @@ public interface MenuMapper {
             "        <if test=\"target != null  and target != ''\">and target = #{target}</if>" +
             "        <if test=\"url != null  and url != ''\">and url = #{url}</if>" +
             "        <if test=\"status != null \">and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \">and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \">and deleted = #{deleted}</if>" +
             "        <if test=\"categoriesFlag != null \">and categories_flag = #{categoriesFlag}</if>" +
             "   </where>" +
             "</script> "

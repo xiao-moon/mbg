@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.*;
 /**
  * @description 菜单文章关联表
  * @author moon
- * @date 2023-09-21 18:16:37
+ * @date 2023-09-22 15:18:53
  */
 public interface PostCategoryMapper {
 
@@ -15,14 +15,12 @@ public interface PostCategoryMapper {
      * 查询单个
      */
     @Select("<script>" +
-            "SELECT id, category_id, post_id, status, del_flag, create_time, update_time " +
+            "SELECT id, category_id, post_id, create_time, update_time " +
             "FROM post_category " +
             "   <where> " +
             "        <if test=\"id != null \"> and id = #{id}</if>" +
             "        <if test=\"categoryId != null \"> and category_id = #{categoryId}</if>" +
             "        <if test=\"postId != null \"> and post_id = #{postId}</if>" +
-            "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
             "   </where> " +
             "LIMIT 1 " +
             "</script> "
@@ -34,14 +32,12 @@ public interface PostCategoryMapper {
      * 查询列表
      */
     @Select("<script>" +
-            "SELECT id, category_id, post_id, status, del_flag, create_time, update_time " +
+            "SELECT id, category_id, post_id, create_time, update_time " +
             "FROM post_category " +
             "   <where> " +
             "        <if test=\"id != null \"> and id = #{id}</if>" +
             "        <if test=\"categoryId != null \"> and category_id = #{categoryId}</if>" +
             "        <if test=\"postId != null \"> and post_id = #{postId}</if>" +
-            "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
             "   </where> " +
             "</script> "
     )
@@ -57,8 +53,6 @@ public interface PostCategoryMapper {
             "        <if test=\"id != null \"> and id = #{id}</if>" +
             "        <if test=\"categoryId != null \"> and category_id = #{categoryId}</if>" +
             "        <if test=\"postId != null \"> and post_id = #{postId}</if>" +
-            "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
     "   </where> " +
     "</script> "
     )
@@ -73,16 +67,12 @@ public interface PostCategoryMapper {
             "   <trim prefix=\"(\" suffix=\")\" suffixOverrides=\",\">" +
             "       <if test=\"categoryId != null \">category_id,</if>" +
             "       <if test=\"postId != null \">post_id,</if>" +
-            "       <if test=\"status != null \">status,</if>" +
-            "       <if test=\"delFlag != null \">del_flag,</if>" +
             "       <if test=\"createTime != null \">create_time,</if>" +
             "       <if test=\"updateTime != null \">update_time,</if>" +
             "   </trim>" +
             "   <trim prefix=\"values (\" suffix=\")\" suffixOverrides=\",\">" +
             "       <if test=\"categoryId != null \">#{categoryId},</if>" +
             "       <if test=\"postId != null \">#{postId},</if>" +
-            "       <if test=\"status != null \">#{status},</if>" +
-            "       <if test=\"delFlag != null \">#{delFlag},</if>" +
             "       <if test=\"createTime != null \">#{createTime},</if>" +
             "       <if test=\"updateTime != null \">#{updateTime},</if>" +
             "   </trim>" +
@@ -98,8 +88,6 @@ public interface PostCategoryMapper {
             "   <trim prefix=\"SET\" suffixOverrides=\",\">" +
             "        <if test=\"categoryId != null \">category_id = #{categoryId},</if>" +
             "        <if test=\"postId != null \">post_id = #{postId},</if>" +
-            "        <if test=\"status != null \">status = #{status},</if>" +
-            "        <if test=\"delFlag != null \">del_flag = #{delFlag},</if>" +
             "        <if test=\"createTime != null \">create_time = #{createTime},</if>" +
             "        <if test=\"updateTime != null \">update_time = #{updateTime},</if>" +
             "   </trim>" +
@@ -117,8 +105,6 @@ public interface PostCategoryMapper {
             "        <if test=\"id != null \">and id = #{id}</if>" +
             "        <if test=\"categoryId != null \">and category_id = #{categoryId}</if>" +
             "        <if test=\"postId != null \">and post_id = #{postId}</if>" +
-            "        <if test=\"status != null \">and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \">and del_flag = #{delFlag}</if>" +
             "   </where>" +
             "</script> "
     )

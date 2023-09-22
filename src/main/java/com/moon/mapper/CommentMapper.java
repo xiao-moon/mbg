@@ -1,15 +1,13 @@
 package com.moon.mapper;
 
 import com.moon.model.entity.Comment;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.*;
 
 /**
- * @author moon
  * @description 评论表
- * @date 2023-09-21 18:16:37
+ * @author moon
+ * @date 2023-09-22 15:18:53
  */
 public interface CommentMapper {
 
@@ -17,7 +15,7 @@ public interface CommentMapper {
      * 查询单个
      */
     @Select("<script>" +
-            "SELECT id, parent_id, response_id, author, author_url, content, email, ip_address, is_admin, post_id, top_flag, top_priority, user_agent, allow_notification, del_flag, create_time, update_time " +
+            "SELECT id, parent_id, response_id, author, author_url, content, email, ip_address, is_admin, post_id, top_flag, top_priority, user_agent, allow_notification, deleted, create_time, update_time " +
             "FROM comment " +
             "   <where> " +
             "        <if test=\"id != null \"> and id = #{id}</if>" +
@@ -34,7 +32,7 @@ public interface CommentMapper {
             "        <if test=\"topPriority != null \"> and top_priority = #{topPriority}</if>" +
             "        <if test=\"userAgent != null  and userAgent != ''\"> and user_agent = #{userAgent}</if>" +
             "        <if test=\"allowNotification != null \"> and allow_notification = #{allowNotification}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
             "   </where> " +
             "LIMIT 1 " +
             "</script> "
@@ -46,7 +44,7 @@ public interface CommentMapper {
      * 查询列表
      */
     @Select("<script>" +
-            "SELECT id, parent_id, response_id, author, author_url, content, email, ip_address, is_admin, post_id, top_flag, top_priority, user_agent, allow_notification, del_flag, create_time, update_time " +
+            "SELECT id, parent_id, response_id, author, author_url, content, email, ip_address, is_admin, post_id, top_flag, top_priority, user_agent, allow_notification, deleted, create_time, update_time " +
             "FROM comment " +
             "   <where> " +
             "        <if test=\"id != null \"> and id = #{id}</if>" +
@@ -63,7 +61,7 @@ public interface CommentMapper {
             "        <if test=\"topPriority != null \"> and top_priority = #{topPriority}</if>" +
             "        <if test=\"userAgent != null  and userAgent != ''\"> and user_agent = #{userAgent}</if>" +
             "        <if test=\"allowNotification != null \"> and allow_notification = #{allowNotification}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
             "   </where> " +
             "</script> "
     )
@@ -73,9 +71,9 @@ public interface CommentMapper {
      * 查询总数
      */
     @Select("<script>" +
-            "SELECT count(1) " +
-            "FROM comment " +
-            "   <where> " +
+    "SELECT count(1) " +
+    "FROM comment " +
+    "   <where> " +
             "        <if test=\"id != null \"> and id = #{id}</if>" +
             "        <if test=\"parentId != null \"> and parent_id = #{parentId}</if>" +
             "        <if test=\"responseId != null \"> and response_id = #{responseId}</if>" +
@@ -90,9 +88,9 @@ public interface CommentMapper {
             "        <if test=\"topPriority != null \"> and top_priority = #{topPriority}</if>" +
             "        <if test=\"userAgent != null  and userAgent != ''\"> and user_agent = #{userAgent}</if>" +
             "        <if test=\"allowNotification != null \"> and allow_notification = #{allowNotification}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
-            "   </where> " +
-            "</script> "
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
+    "   </where> " +
+    "</script> "
     )
     int countBy(Comment comment);
 
@@ -116,7 +114,7 @@ public interface CommentMapper {
             "       <if test=\"topPriority != null \">top_priority,</if>" +
             "       <if test=\"userAgent != null  and userAgent != ''\">user_agent,</if>" +
             "       <if test=\"allowNotification != null \">allow_notification,</if>" +
-            "       <if test=\"delFlag != null \">del_flag,</if>" +
+            "       <if test=\"deleted != null \">deleted,</if>" +
             "       <if test=\"createTime != null \">create_time,</if>" +
             "       <if test=\"updateTime != null \">update_time,</if>" +
             "   </trim>" +
@@ -134,7 +132,7 @@ public interface CommentMapper {
             "       <if test=\"topPriority != null \">#{topPriority},</if>" +
             "       <if test=\"userAgent != null  and userAgent != ''\">#{userAgent},</if>" +
             "       <if test=\"allowNotification != null \">#{allowNotification},</if>" +
-            "       <if test=\"delFlag != null \">#{delFlag},</if>" +
+            "       <if test=\"deleted != null \">#{deleted},</if>" +
             "       <if test=\"createTime != null \">#{createTime},</if>" +
             "       <if test=\"updateTime != null \">#{updateTime},</if>" +
             "   </trim>" +
@@ -161,7 +159,7 @@ public interface CommentMapper {
             "        <if test=\"topPriority != null \">top_priority = #{topPriority},</if>" +
             "        <if test=\"userAgent != null  and userAgent != ''\">user_agent = #{userAgent},</if>" +
             "        <if test=\"allowNotification != null \">allow_notification = #{allowNotification},</if>" +
-            "        <if test=\"delFlag != null \">del_flag = #{delFlag},</if>" +
+            "        <if test=\"deleted != null \">deleted = #{deleted},</if>" +
             "        <if test=\"createTime != null \">create_time = #{createTime},</if>" +
             "        <if test=\"updateTime != null \">update_time = #{updateTime},</if>" +
             "   </trim>" +
@@ -190,7 +188,7 @@ public interface CommentMapper {
             "        <if test=\"topPriority != null \">and top_priority = #{topPriority}</if>" +
             "        <if test=\"userAgent != null  and userAgent != ''\">and user_agent = #{userAgent}</if>" +
             "        <if test=\"allowNotification != null \">and allow_notification = #{allowNotification}</if>" +
-            "        <if test=\"delFlag != null \">and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \">and deleted = #{deleted}</if>" +
             "   </where>" +
             "</script> "
     )

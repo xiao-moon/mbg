@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.*;
 /**
  * @description 图片表
  * @author moon
- * @date 2023-09-21 18:16:37
+ * @date 2023-09-22 15:18:53
  */
 public interface PhotoMapper {
 
@@ -15,7 +15,7 @@ public interface PhotoMapper {
      * 查询单个
      */
     @Select("<script>" +
-            "SELECT id, name, description, location, url, type, priority, status, del_flag, create_time, update_time " +
+            "SELECT id, name, description, location, url, type, priority, status, deleted, create_time, update_time " +
             "FROM photo " +
             "   <where> " +
             "        <if test=\"id != null \"> and id = #{id}</if>" +
@@ -26,7 +26,7 @@ public interface PhotoMapper {
             "        <if test=\"type != null \"> and type = #{type}</if>" +
             "        <if test=\"priority != null \"> and priority = #{priority}</if>" +
             "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
             "   </where> " +
             "LIMIT 1 " +
             "</script> "
@@ -38,7 +38,7 @@ public interface PhotoMapper {
      * 查询列表
      */
     @Select("<script>" +
-            "SELECT id, name, description, location, url, type, priority, status, del_flag, create_time, update_time " +
+            "SELECT id, name, description, location, url, type, priority, status, deleted, create_time, update_time " +
             "FROM photo " +
             "   <where> " +
             "        <if test=\"id != null \"> and id = #{id}</if>" +
@@ -49,7 +49,7 @@ public interface PhotoMapper {
             "        <if test=\"type != null \"> and type = #{type}</if>" +
             "        <if test=\"priority != null \"> and priority = #{priority}</if>" +
             "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
             "   </where> " +
             "</script> "
     )
@@ -70,7 +70,7 @@ public interface PhotoMapper {
             "        <if test=\"type != null \"> and type = #{type}</if>" +
             "        <if test=\"priority != null \"> and priority = #{priority}</if>" +
             "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
     "   </where> " +
     "</script> "
     )
@@ -90,7 +90,7 @@ public interface PhotoMapper {
             "       <if test=\"type != null \">type,</if>" +
             "       <if test=\"priority != null \">priority,</if>" +
             "       <if test=\"status != null \">status,</if>" +
-            "       <if test=\"delFlag != null \">del_flag,</if>" +
+            "       <if test=\"deleted != null \">deleted,</if>" +
             "       <if test=\"createTime != null \">create_time,</if>" +
             "       <if test=\"updateTime != null \">update_time,</if>" +
             "   </trim>" +
@@ -102,7 +102,7 @@ public interface PhotoMapper {
             "       <if test=\"type != null \">#{type},</if>" +
             "       <if test=\"priority != null \">#{priority},</if>" +
             "       <if test=\"status != null \">#{status},</if>" +
-            "       <if test=\"delFlag != null \">#{delFlag},</if>" +
+            "       <if test=\"deleted != null \">#{deleted},</if>" +
             "       <if test=\"createTime != null \">#{createTime},</if>" +
             "       <if test=\"updateTime != null \">#{updateTime},</if>" +
             "   </trim>" +
@@ -123,7 +123,7 @@ public interface PhotoMapper {
             "        <if test=\"type != null \">type = #{type},</if>" +
             "        <if test=\"priority != null \">priority = #{priority},</if>" +
             "        <if test=\"status != null \">status = #{status},</if>" +
-            "        <if test=\"delFlag != null \">del_flag = #{delFlag},</if>" +
+            "        <if test=\"deleted != null \">deleted = #{deleted},</if>" +
             "        <if test=\"createTime != null \">create_time = #{createTime},</if>" +
             "        <if test=\"updateTime != null \">update_time = #{updateTime},</if>" +
             "   </trim>" +
@@ -146,7 +146,7 @@ public interface PhotoMapper {
             "        <if test=\"type != null \">and type = #{type}</if>" +
             "        <if test=\"priority != null \">and priority = #{priority}</if>" +
             "        <if test=\"status != null \">and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \">and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \">and deleted = #{deleted}</if>" +
             "   </where>" +
             "</script> "
     )

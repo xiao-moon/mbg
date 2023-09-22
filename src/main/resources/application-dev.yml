@@ -16,8 +16,10 @@ spring:
 
 
 mybatis:
-  mapper-locations: classpath*:mybatis/mapper/*.xml
   type-aliases-package: com.moon.model.entity
+  configuration:
+    default-enum-type-handler: com.moon.config.enum_handler.MybatisEnumCodeTypeHandler
+    map-underscore-to-camel-case: true
 
 pagehelper:
   helperDialect: mysql

@@ -7,21 +7,17 @@ package com.moon.exception;
  */
 public class ServiceException extends RuntimeException {
 
-    private Object msg;
 
     public ServiceException(String message) {
         super(message);
+    }
+
+    public ServiceException(Throwable cause) {
+        super(cause);
     }
 
     public ServiceException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public Object getMsg() {
-        return msg;
-    }
-
-    public void setMsg(Object msg) {
-        this.msg = msg;
-    }
 }

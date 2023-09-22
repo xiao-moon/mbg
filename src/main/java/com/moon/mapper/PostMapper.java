@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.*;
 /**
  * @description 文章表
  * @author moon
- * @date 2023-09-21 18:16:37
+ * @date 2023-09-22 15:18:53
  */
 public interface PostMapper {
 
@@ -15,7 +15,7 @@ public interface PostMapper {
      * 查询单个
      */
     @Select("<script>" +
-            "SELECT id, format_content, original_content, show_content, likes, priority, meta_description, meta_keywords, password, title, export_title, export_priority, visits, top_flag, top_priority, editor_type, disallow_comment, status, del_flag, edit_time, create_time, update_time " +
+            "SELECT id, format_content, original_content, show_content, likes, priority, meta_description, meta_keywords, password, title, export_title, export_priority, visits, top_flag, top_priority, editor_type, disallow_comment, status, deleted, edit_time, create_time, update_time " +
             "FROM post " +
             "   <where> " +
             "        <if test=\"id != null \"> and id = #{id}</if>" +
@@ -36,7 +36,7 @@ public interface PostMapper {
             "        <if test=\"editorType != null \"> and editor_type = #{editorType}</if>" +
             "        <if test=\"disallowComment != null \"> and disallow_comment = #{disallowComment}</if>" +
             "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
             "   </where> " +
             "LIMIT 1 " +
             "</script> "
@@ -48,7 +48,7 @@ public interface PostMapper {
      * 查询列表
      */
     @Select("<script>" +
-            "SELECT id, format_content, original_content, show_content, likes, priority, meta_description, meta_keywords, password, title, export_title, export_priority, visits, top_flag, top_priority, editor_type, disallow_comment, status, del_flag, edit_time, create_time, update_time " +
+            "SELECT id, format_content, original_content, show_content, likes, priority, meta_description, meta_keywords, password, title, export_title, export_priority, visits, top_flag, top_priority, editor_type, disallow_comment, status, deleted, edit_time, create_time, update_time " +
             "FROM post " +
             "   <where> " +
             "        <if test=\"id != null \"> and id = #{id}</if>" +
@@ -69,7 +69,7 @@ public interface PostMapper {
             "        <if test=\"editorType != null \"> and editor_type = #{editorType}</if>" +
             "        <if test=\"disallowComment != null \"> and disallow_comment = #{disallowComment}</if>" +
             "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
             "   </where> " +
             "</script> "
     )
@@ -100,7 +100,7 @@ public interface PostMapper {
             "        <if test=\"editorType != null \"> and editor_type = #{editorType}</if>" +
             "        <if test=\"disallowComment != null \"> and disallow_comment = #{disallowComment}</if>" +
             "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
     "   </where> " +
     "</script> "
     )
@@ -130,7 +130,7 @@ public interface PostMapper {
             "       <if test=\"editorType != null \">editor_type,</if>" +
             "       <if test=\"disallowComment != null \">disallow_comment,</if>" +
             "       <if test=\"status != null \">status,</if>" +
-            "       <if test=\"delFlag != null \">del_flag,</if>" +
+            "       <if test=\"deleted != null \">deleted,</if>" +
             "       <if test=\"editTime != null \">edit_time,</if>" +
             "       <if test=\"createTime != null \">create_time,</if>" +
             "       <if test=\"updateTime != null \">update_time,</if>" +
@@ -153,7 +153,7 @@ public interface PostMapper {
             "       <if test=\"editorType != null \">#{editorType},</if>" +
             "       <if test=\"disallowComment != null \">#{disallowComment},</if>" +
             "       <if test=\"status != null \">#{status},</if>" +
-            "       <if test=\"delFlag != null \">#{delFlag},</if>" +
+            "       <if test=\"deleted != null \">#{deleted},</if>" +
             "       <if test=\"editTime != null \">#{editTime},</if>" +
             "       <if test=\"createTime != null \">#{createTime},</if>" +
             "       <if test=\"updateTime != null \">#{updateTime},</if>" +
@@ -185,7 +185,7 @@ public interface PostMapper {
             "        <if test=\"editorType != null \">editor_type = #{editorType},</if>" +
             "        <if test=\"disallowComment != null \">disallow_comment = #{disallowComment},</if>" +
             "        <if test=\"status != null \">status = #{status},</if>" +
-            "        <if test=\"delFlag != null \">del_flag = #{delFlag},</if>" +
+            "        <if test=\"deleted != null \">deleted = #{deleted},</if>" +
             "        <if test=\"editTime != null \">edit_time = #{editTime},</if>" +
             "        <if test=\"createTime != null \">create_time = #{createTime},</if>" +
             "        <if test=\"updateTime != null \">update_time = #{updateTime},</if>" +
@@ -219,7 +219,7 @@ public interface PostMapper {
             "        <if test=\"editorType != null \">and editor_type = #{editorType}</if>" +
             "        <if test=\"disallowComment != null \">and disallow_comment = #{disallowComment}</if>" +
             "        <if test=\"status != null \">and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \">and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \">and deleted = #{deleted}</if>" +
             "   </where>" +
             "</script> "
     )

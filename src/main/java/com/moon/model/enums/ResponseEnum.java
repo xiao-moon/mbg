@@ -17,8 +17,6 @@ public enum ResponseEnum {
     ERROR(1,"系统异常,请稍后重试","系统异常,请稍后重试");
 
 
-
-
     public Integer code;
     public String msg;
     public String desc;

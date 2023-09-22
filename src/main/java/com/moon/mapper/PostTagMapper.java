@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.*;
 /**
  * @description 文章标签关联表
  * @author moon
- * @date 2023-09-21 18:16:37
+ * @date 2023-09-22 15:18:53
  */
 public interface PostTagMapper {
 

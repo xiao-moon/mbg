@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.*;
 /**
  * @description 日记表
  * @author moon
- * @date 2023-09-21 18:16:37
+ * @date 2023-09-22 15:18:53
  */
 public interface JournalMapper {
 
@@ -15,13 +15,13 @@ public interface JournalMapper {
      * 查询单个
      */
     @Select("<script>" +
-            "SELECT id, content, status, del_flag, create_time, update_time, likes " +
+            "SELECT id, content, status, deleted, create_time, update_time, likes " +
             "FROM journal " +
             "   <where> " +
             "        <if test=\"id != null \"> and id = #{id}</if>" +
             "        <if test=\"content != null  and content != ''\"> and content = #{content}</if>" +
             "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
             "        <if test=\"likes != null \"> and likes = #{likes}</if>" +
             "   </where> " +
             "LIMIT 1 " +
@@ -34,13 +34,13 @@ public interface JournalMapper {
      * 查询列表
      */
     @Select("<script>" +
-            "SELECT id, content, status, del_flag, create_time, update_time, likes " +
+            "SELECT id, content, status, deleted, create_time, update_time, likes " +
             "FROM journal " +
             "   <where> " +
             "        <if test=\"id != null \"> and id = #{id}</if>" +
             "        <if test=\"content != null  and content != ''\"> and content = #{content}</if>" +
             "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
             "        <if test=\"likes != null \"> and likes = #{likes}</if>" +
             "   </where> " +
             "</script> "
@@ -57,7 +57,7 @@ public interface JournalMapper {
             "        <if test=\"id != null \"> and id = #{id}</if>" +
             "        <if test=\"content != null  and content != ''\"> and content = #{content}</if>" +
             "        <if test=\"status != null \"> and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \"> and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \"> and deleted = #{deleted}</if>" +
             "        <if test=\"likes != null \"> and likes = #{likes}</if>" +
     "   </where> " +
     "</script> "
@@ -73,7 +73,7 @@ public interface JournalMapper {
             "   <trim prefix=\"(\" suffix=\")\" suffixOverrides=\",\">" +
             "       <if test=\"content != null  and content != ''\">content,</if>" +
             "       <if test=\"status != null \">status,</if>" +
-            "       <if test=\"delFlag != null \">del_flag,</if>" +
+            "       <if test=\"deleted != null \">deleted,</if>" +
             "       <if test=\"createTime != null \">create_time,</if>" +
             "       <if test=\"updateTime != null \">update_time,</if>" +
             "       <if test=\"likes != null \">likes,</if>" +
@@ -81,7 +81,7 @@ public interface JournalMapper {
             "   <trim prefix=\"values (\" suffix=\")\" suffixOverrides=\",\">" +
             "       <if test=\"content != null  and content != ''\">#{content},</if>" +
             "       <if test=\"status != null \">#{status},</if>" +
-            "       <if test=\"delFlag != null \">#{delFlag},</if>" +
+            "       <if test=\"deleted != null \">#{deleted},</if>" +
             "       <if test=\"createTime != null \">#{createTime},</if>" +
             "       <if test=\"updateTime != null \">#{updateTime},</if>" +
             "       <if test=\"likes != null \">#{likes},</if>" +
@@ -98,7 +98,7 @@ public interface JournalMapper {
             "   <trim prefix=\"SET\" suffixOverrides=\",\">" +
             "        <if test=\"content != null  and content != ''\">content = #{content},</if>" +
             "        <if test=\"status != null \">status = #{status},</if>" +
-            "        <if test=\"delFlag != null \">del_flag = #{delFlag},</if>" +
+            "        <if test=\"deleted != null \">deleted = #{deleted},</if>" +
             "        <if test=\"createTime != null \">create_time = #{createTime},</if>" +
             "        <if test=\"updateTime != null \">update_time = #{updateTime},</if>" +
             "        <if test=\"likes != null \">likes = #{likes},</if>" +
@@ -117,7 +117,7 @@ public interface JournalMapper {
             "        <if test=\"id != null \">and id = #{id}</if>" +
             "        <if test=\"content != null  and content != ''\">and content = #{content}</if>" +
             "        <if test=\"status != null \">and status = #{status}</if>" +
-            "        <if test=\"delFlag != null \">and del_flag = #{delFlag}</if>" +
+            "        <if test=\"deleted != null \">and deleted = #{deleted}</if>" +
             "        <if test=\"likes != null \">and likes = #{likes}</if>" +
             "   </where>" +
             "</script> "

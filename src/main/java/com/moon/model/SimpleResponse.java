@@ -44,6 +44,13 @@ public class SimpleResponse<T> implements Serializable {
         return response;
     }
 
+    public static <T> SimpleResponse<T> success() {
+        SimpleResponse<T> response = new SimpleResponse<>();
+        response.setCode(ResponseEnum.OK.code);
+        response.setMessage(ResponseEnum.OK.msg);
+        return response;
+    }
+
     public static <T> SimpleResponse<T> fail(Integer code, String message) {
         Assert.notNull(code, "code can not be null");
         SimpleResponse<T> response = new SimpleResponse<>();
