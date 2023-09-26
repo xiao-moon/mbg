@@ -38,7 +38,6 @@ public class AttachmentController {
     public SimpleResponse<PageInfo<Attachment>> page(@RequestParam AttachmentPageRequest request) {
         Attachment attachment = new Attachment();
         BeanUtils.copyProperties(request, attachment);
-        attachment.setType(request.getType() == null ? null : request.getType().getValue());
         attachment.setDeleted(0);
         return SimpleResponse.success(attachmentService.page(attachment, request.getPageNum(), request.getPageSize()));
     }

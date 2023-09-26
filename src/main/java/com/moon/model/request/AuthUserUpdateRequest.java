@@ -1,11 +1,13 @@
-package com.moon.model.entity;
-
-import java.time.LocalDateTime;
+package com.moon.model.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 
 /**
@@ -15,12 +17,13 @@ import lombok.*;
  */
 @Getter
 @Setter
-@ApiModel("用户表")
-public class User {
+@ApiModel("更新用户")
+public class AuthUserUpdateRequest {
 
     /**
      * ID主键自增
      */
+    @NotNull(message = "id can not be null")
     @ApiModelProperty("ID主键自增")
     private Integer id;
 
@@ -43,51 +46,10 @@ public class User {
     private String email;
 
     /**
-     * 过期时间
-     */
-    @ApiModelProperty("过期时间")
-    private LocalDateTime expireTime;
-
-    /**
      * 昵称
      */
     @ApiModelProperty("昵称")
     private String nickname;
-
-    /**
-     * 密码
-     */
-    @JsonIgnore
-    @ApiModelProperty("密码")
-    private String password;
-
-    /**
-     * 登录名
-     */
-    @ApiModelProperty("登录名")
-    private String username;
-
-    /**
-     * 创建时间
-     */
-    @ApiModelProperty("创建时间")
-    private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    @ApiModelProperty("更新时间")
-    private LocalDateTime updateTime;
-
-
-
-
-
-
-
-
-
-
 
 
 }

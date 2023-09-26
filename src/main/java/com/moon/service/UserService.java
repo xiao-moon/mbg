@@ -21,6 +21,21 @@ public interface UserService {
     List<User> findList(User user);
 
     /**
+     * 根据用户名查询
+     */
+    User findByUsername(String username);
+
+    /**
+     * 查询用户是否存在
+     */
+    boolean exist();
+
+    /**
+     * 根据用户名+密码查询
+     */
+    User findByUsernameAndPassword(String username, String password);
+
+    /**
     * 新增
     */
     int insert(User user);
